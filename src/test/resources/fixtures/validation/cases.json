@@ -1,0 +1,130 @@
+[
+  {
+    "name": "requeridos y nombres de atributo",
+    "data": {"cliente": {"tipo_doc": "6"}},
+    "rules": {
+      "serie": "required|string|size:4",
+      "fecha_emision": "required|date",
+      "cliente": "required|array",
+      "cliente.tipo_doc": "required|string",
+      "cliente.num_doc": "required|string|max:15",
+      "items": "required|array|min:1",
+      "email": "nullable|email"
+    }
+  },
+  {
+    "name": "tipos sobre valores JSON",
+    "data": {"serie": 123, "cantidad": "abc", "entero": 1.5, "activo": "si", "lista": "x", "fecha": "2026-02-30", "correo": "no-es-correo"},
+    "rules": {
+      "serie": "required|string",
+      "cantidad": "required|numeric|min:0",
+      "entero": "integer",
+      "activo": "boolean",
+      "lista": "array",
+      "fecha": "date",
+      "correo": "email"
+    }
+  },
+  {
+    "name": "tamaños por tipo",
+    "data": {"texto": "abcdef", "monto": 150, "monto_str": "150", "arr": [1, 2, 3], "corto": "ab"},
+    "rules": {
+      "texto": "string|max:5",
+      "monto": "numeric|max:100",
+      "monto_str": "max:2",
+      "arr": "array|max:2",
+      "corto": "string|min:3|size:4",
+      "nada": "nullable|string|max:3"
+    }
+  },
+  {
+    "name": "comodines de items y mensajes personalizados",
+    "data": {"items": [
+      {"descripcion": "Producto", "cantidad": 0, "unidad": "XXX"},
+      {"cantidad": 2, "unidad": "NIU", "precio_unitario": -1},
+      {"descripcion": "", "cantidad": "2", "unidad": "ZZ", "precio_unitario": 5}
+    ]},
+    "rules": {
+      "items": "required|array|min:1",
+      "items.*.descripcion": "required|string|max:500",
+      "items.*.cantidad": "required|numeric|gt:0",
+      "items.*.unidad": "required|string|in:NIU,ZZ,KGM",
+      "items.*.precio_unitario": "required|numeric|min:0"
+    },
+    "messages": {
+      "items.*.cantidad.gt": "La cantidad debe ser mayor a cero."
+    }
+  },
+  {
+    "name": "regex en forma de arreglo y mensaje por regla",
+    "data": {"serie": "B001", "ruc": "2012345678X"},
+    "rules": {
+      "serie": ["required", "string", "size:4", "regex:/^F[A-Z0-9]{3}$/"],
+      "ruc": ["required", "regex:/^\\d{11}$/"]
+    },
+    "messages": {
+      "serie.regex": "La serie de factura debe empezar con F seguido de 3 caracteres alfanuméricos (ej. F001)."
+    }
+  },
+  {
+    "name": "dependientes",
+    "data": {"forma_pago": "Credito", "detraccion": {"porcentaje": 12}, "tipo_doc": "6", "moneda": "PEN"},
+    "rules": {
+      "cuotas": "required_if:forma_pago,Credito|array",
+      "detraccion.cod_bien_detraccion": "required_with:detraccion|string",
+      "detraccion.cta_banco": "required_with:detraccion.porcentaje|string",
+      "razon_social": "required_unless:tipo_doc,0,1|string",
+      "tipo_cambio": "required_without:moneda|numeric",
+      "fecha_vencimiento": "required_if:forma_pago,Credito|date"
+    }
+  },
+  {
+    "name": "sometimes y nullable",
+    "data": {"a": null, "b": "", "d": "x"},
+    "rules": {
+      "a": "nullable|string|max:3",
+      "b": "sometimes|required|string",
+      "c": "sometimes|required|string",
+      "d": "sometimes|integer"
+    }
+  },
+  {
+    "name": "between gt con campo y digits",
+    "data": {"tasa": 35, "monto": 10, "minimo": 20, "codigo": "12a", "nombre": "ab"},
+    "rules": {
+      "tasa": "numeric|between:0,30",
+      "monto": "numeric|gt:minimo",
+      "codigo": "digits:3",
+      "nombre": "string|between:3,10"
+    }
+  },
+  {
+    "name": "validated descarta claves no declaradas",
+    "data": {
+      "serie": "F001", "extra": "x", "sucursal_id": 3,
+      "cliente": {"tipo_doc": "6", "num_doc": "20123456789", "otro": 1},
+      "items": [{"descripcion": "A", "cantidad": 1, "descuento": 5}, {"descripcion": "B", "cantidad": 2}],
+      "extras": {"libre": true, "n": 2}
+    },
+    "rules": {
+      "serie": "required|string",
+      "cliente": "required|array",
+      "cliente.tipo_doc": "required|string",
+      "cliente.num_doc": "required|string",
+      "items": "required|array",
+      "items.*.descripcion": "required|string",
+      "items.*.cantidad": "required|numeric",
+      "extras": "nullable|array"
+    }
+  },
+  {
+    "name": "in con enteros y booleanos",
+    "data": {"tipo": 1, "flag": true, "codigo": "01", "lista": ["10", "20", "99"]},
+    "rules": {
+      "tipo": "in:1,6",
+      "flag": "in:1",
+      "codigo": "in:1,03",
+      "lista": "array|in:10,20,30"
+    }
+  }
+]

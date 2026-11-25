@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Secciones de la representación impresa: port de resources/views/pdf/sections de API-PRO.
+  Cada fragmento tiene la variante de ticket (is_ticket) y la de A4/A5, con los mismos textos.
+  Nuevas: settlement-info y settlement-totals (liquidación de compra).
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!-- ───────────────────────── header (solo tickets) ───────────────────────── -->
+<th:block th:fragment="header">
+<div class="header-section" th:if="${is_ticket}">
+    <th:block th:if="${h.filled(logo_base64)}"><img th:src="${logo_base64}" alt="Logo"/><br/></th:block>
+    <div class="emitter-name" th:text="${emisor.razon_social}"></div>
+    <div class="emitter-ruc" th:text="${'RUC: ' + emisor.ruc}"></div>
+    <div class="emitter-address"><span th:text="${emisor.direccion}"></span><th:block th:if="${emisor.cod_local != '0000'}"><br/><span th:text="${'Cod. Establecimiento: ' + emisor.cod_local}"></span></th:block></div>
+    <div class="emitter-address" th:if="${h.filled(telefonos)}" th:text="${'Tel: ' + h.join(telefonos, ' | ')}"></div>
+    <div class="emitter-address" th:if="${h.filled(emails)}" th:text="${h.join(emails, ' | ')}"></div>
+</div>
+</th:block>
+
+<!-- ───────────────────────── document-badge (solo tickets) ───────────────────────── -->
+<th:block th:fragment="document_badge">
+<div class="document-badge" th:if="${is_ticket}">
+    <div class="badge-title" th:text="${titulo}"></div>
+    <div class="badge-number" th:text="${numero_completo}"></div>
+    <div class="badge-date"><span th:text="${'Fecha: ' + fecha_emision}"></span><th:block th:if="${h.filled(fecha_vencimiento)}"><br/><span th:text="${'Vencimiento: ' + fecha_vencimiento}"></span></th:block></div>
+</div>
+</th:block>
+
+<!-- ───────────────────────── receiver ───────────────────────── -->
+<th:block th:fragment="receiver">
+<th:block th:if="${is_ticket}">
+<div class="info-block">
+    <div class="info-line"><span class="info-label" th:text="${receptor.titulo == 'Vendedor:' ? 'Vendedor:' : 'Cliente:'}"></span> <span th:text="${receptor.razon_social}"></span></div>
+    <div class="info-line"><span class="info-label" th:text="${receptor.label_ticket + ':'}"></span> <span th:text="${receptor.num_doc}"></span></div>
+    <div class="info-line" th:if="${h.filled(receptor.direccion)}"><span class="info-label">Dir.:</span> <span th:text="${receptor.direccion}"></span></div>
+    <div class="info-line"><span class="info-label">Moneda:</span> <span th:text="${tipo_moneda + ' (' + moneda_simbolo + ')'}"></span></div>
+</div>
+</th:block>
+<th:block th:unless="${is_ticket}">
+<table class="info-section">
+    <tr>
+        <td class="info-label" th:text="${receptor.titulo}"></td>
+        <td th:text="${receptor.razon_social}"></td>
+        <td class="info-label">Fecha Emisión:</td>
+        <td style="white-space: nowrap;" th:text="${fecha_emision}"></td>
+    </tr>
+    <tr>
+        <td class="info-label" th:text="${h.filled(receptor.num_doc) ? receptor.label + ':' : ''}"></td>
+        <td th:text="${h.s(receptor.num_doc)}"></td>
+        <td class="info-label">Moneda:</td>
+        <td th:text="${tipo_moneda}"></td>
+    </tr>
+    <tr th:if="${h.filled(receptor.direccion)}">
+        <td class="info-label">Dirección:</td>
+        <td colspan="3" th:text="${receptor.direccion}"></td>
+    </tr>
+    <tr th:if="${h.filled(fecha_vencimiento)}">
+        <td class="info-label">Fecha Vencimiento:</td>
+        <td colspan="3" th:text="${fecha_vencimiento}"></td>
+    </tr>
+</table>
+</th:block>
+</th:block>
+
+<!-- ───────────────────────── note-reference ───────────────────────── -->
+<th:block th:fragment="note_reference">
+<th:block th:if="${nota != null}">
+<div class="note-reference" th:if="${is_ticket}">
+    <div class="ref-title">Documento Afectado</div>
+    <div class="info-line" th:text="${nota.tipo_label + ': ' + nota.numero}"></div>
+    <div class="info-line" th:if="${h.filled(nota.cod_motivo)}"><span class="info-label">Motivo:</span> <span th:text="${'[' + nota.cod_motivo + '] ' + nota.des_motivo}"></span></div>
+</div>
+<div class="note-reference" th:unless="${is_ticket}">
+    <table>
+        <tr>
+            <td style="width: 140px;"><strong>Documento Afectado:</strong></td>
+            <td th:text="${nota.tipo_label + ' ' + nota.numero}"></td>
+        </tr>
+        <tr th:if="${h.filled(nota.cod_motivo)}">
+            <td><strong>Motivo:</strong></td>
+            <td th:text="${'[' + nota.cod_motivo + '] ' + nota.des_motivo}"></td>
+        </tr>
+    </table>
+</div>
+</th:block>
+</th:block>
+
+<!-- ───────────────────────── dispatch-info ───────────────────────── -->
+<th:block th:fragment="dispatch_info">
+<th:block th:if="${dispatch != null}">
+<div class="dispatch-section" th:if="${is_ticket}">
+    <div class="section-title">Datos del Traslado</div>
+    <div class="info-line"><span class="info-label">Fecha:</span> <span th:text="${dispatch.fecha_traslado}"></span></div>
+    <div class="info-line"><span class="info-label">Motivo:</span> <span th:text="${dispatch.cod_traslado}"></span></div>
+    <div class="info-line"><span class="info-label">Modalidad:</span> <span th:text="${dispatch.mod_traslado}"></span></div>
+    <div class="info-line"><span class="info-label">Peso:</span> <span th:text="${h.n(dispatch.peso_total, 3) + ' ' + dispatch.und_peso_total}"></span></div>
+    <div class="info-line" th:if="${h.filled(dispatch.num_bultos)}"><span class="info-label">Bultos:</span> <span th:text="${dispatch.num_bultos}"></span></div>
+    <div class="section-title">Partida / Llegada</div>
+    <div class="info-line"><span class="info-label">De:</span> <span th:text="${'[' + dispatch.partida_ubigeo + '] ' + dispatch.partida_direccion}"></span></div>
+    <div class="info-line"><span class="info-label">A:</span> <span th:text="${'[' + dispatch.llegada_ubigeo + '] ' + dispatch.llegada_direccion}"></span></div>
+    <th:block th:if="${h.filled(dispatch.transportista_razon_social)}">
+    <div class="section-title">Transportista</div>
+    <div class="info-line" th:text="${dispatch.transportista_razon_social}"></div>
+    <div class="info-line"><span class="info-label">Doc:</span> <span th:text="${dispatch.transportista_num_doc}"></span></div>
+    </th:block>
+    <div class="info-line" th:if="${h.filled(dispatch.placa)}"><span class="info-label">Placa:</span> <span th:text="${dispatch.placa}"></span></div>
+    <th:block th:if="${h.filled(dispatch.conductores)}">
+    <div class="section-title">Conductor(es)</div>
+    <th:block th:each="c : ${dispatch.conductores}">
+    <div class="info-line" th:text="${c.nombres + ' ' + c.apellidos + ' — ' + c.num_doc}"></div>
+    <div class="info-line" th:if="${h.filled(c.licencia)}"><span class="info-label">Lic:</span> <span th:text="${c.licencia}"></span></div>
+    </th:block>
+    </th:block>
+</div>
+<div class="dispatch-section" th:unless="${is_ticket}">
+    <div class="section-title">Datos del Traslado</div>
+    <table class="info-section">
+        <tr>
+            <td class="info-label">Fecha Traslado:</td>
+            <td th:text="${dispatch.fecha_traslado}"></td>
+            <td class="info-label">Motivo Traslado:</td>
+            <td th:text="${dispatch.cod_traslado}"></td>
+        </tr>
+        <tr>
+            <td class="info-label">Modalidad:</td>
+            <td th:text="${dispatch.mod_traslado}"></td>
+            <td class="info-label">Peso Total:</td>
+            <td th:text="${h.n(dispatch.peso_total, 3) + ' ' + dispatch.und_peso_total}"></td>
+        </tr>
+        <tr th:if="${h.filled(dispatch.num_bultos)}">
+            <td class="info-label">Num. Bultos:</td>
+            <td colspan="3" th:text="${dispatch.num_bultos}"></td>
+        </tr>
+    </table>
+    <div class="section-title">Punto de Partida / Llegada</div>
+    <table class="info-section">
+        <tr>
+            <td class="info-label">Partida:</td>
+            <td th:text="${'[' + dispatch.partida_ubigeo + '] ' + dispatch.partida_direccion}"></td>
+        </tr>
+        <tr>
+            <td class="info-label">Llegada:</td>
+            <td th:text="${'[' + dispatch.llegada_ubigeo + '] ' + dispatch.llegada_direccion}"></td>
+        </tr>
+    </table>
+    <th:block th:if="${h.filled(dispatch.transportista_razon_social)}">
+    <div class="section-title">Transportista</div>
+    <table class="info-section">
+        <tr>
+            <td class="info-label">Razón Social:</td>
+            <td th:text="${dispatch.transportista_razon_social}"></td>
+            <td class="info-label">RUC/Doc:</td>
+            <td th:text="${dispatch.transportista_num_doc}"></td>
+        </tr>
+    </table>
+    </th:block>
+    <table class="info-section" th:if="${h.filled(dispatch.placa)}">
+        <tr>
+            <td class="info-label">Placa Vehículo:</td>
+            <td th:text="${dispatch.placa}"></td>
+        </tr>
+    </table>
+    <th:block th:if="${h.filled(dispatch.conductores)}">
+    <div class="section-title">Conductor(es)</div>
+    <table class="info-section">
+        <th:block th:each="c : ${dispatch.conductores}">
+        <tr>
+            <td class="info-label" th:text="${c.first ? 'Conductor:' : ''}"></td>
+            <td th:text="${c.nombres + ' ' + c.apellidos}"></td>
+            <td class="info-label">Doc:</td>
+            <td th:text="${c.num_doc}"></td>
+        </tr>
+        <tr th:if="${h.filled(c.licencia)}">
+            <td class="info-label">Licencia:</td>
+            <td colspan="3" th:text="${c.licencia}"></td>
+        </tr>
+        </th:block>
+    </table>
+    </th:block>
+</div>
+</th:block>
+</th:block>
+
+<!-- ───────────────────────── items (A4/A5: tabla; tickets: lista) ───────────────────────── -->
+<th:block th:fragment="items">
+<th:block th:with="conPrecios=${tipo_documento != '09' and tipo_documento != '31'}">
+<table class="items-table-ticket" th:if="${is_ticket}">
+    <thead>
+        <tr>
+            <th>Descripcion</th>
+            <th class="col-right" th:if="${conPrecios}">Importe</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="item : ${items}">
+            <td>
+                <strong th:text="${item.descripcion}"></strong>
+                <th:block th:if="${h.filled(item.cod_producto_sunat)}"><br/><span class="item-qty-detail" th:text="${'Cód. SUNAT: ' + item.cod_producto_sunat}"></span></th:block>
+                <br/>
+                <span class="item-qty-detail" th:text="${h.n2(item.cantidad) + ' ' + h.coalesce(item.unidad, 'NIU') + (conPrecios ? ' x ' + h.n2(item.precio_unitario) : '')}"></span>
+                <th:block th:if="${conPrecios}"><br/><span class="item-qty-detail" th:text="${'V. Unit.: ' + h.n2(item.valor_unitario)}"></span></th:block>
+                <th:block th:if="${h.filled(item.descuento) and item.descuento > 0}"><br/><span style="color: #c0392b; font-weight: bold; font-size: 0.8em;" th:text="${'Dscto: -' + h.n2(item.descuento)}"></span></th:block>
+            </td>
+            <td class="col-right" th:if="${conPrecios}" th:text="${h.n2(item.importe_con_igv)}"></td>
+        </tr>
+    </tbody>
+</table>
+<table class="items-table" th:unless="${is_ticket}">
+    <thead>
+        <tr>
+            <th style="width: 42px;">Cant.</th>
+            <th style="width: 50px;">U. Med.</th>
+            <th>Descripción</th>
+            <th:block th:if="${conPrecios}">
+            <th style="width: 68px; text-align: right;">V. Unitario</th>
+            <th style="width: 68px; text-align: right;">P. Unitario</th>
+            <th style="width: 58px; text-align: right;">Descuento</th>
+            <th style="width: 72px; text-align: right;">Importe</th>
+            </th:block>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="item : ${items}">
+            <td class="text-center" th:text="${h.n2(item.cantidad)}"></td>
+            <td class="text-center" th:text="${item.unidad}"></td>
+            <td><span th:text="${item.descripcion}"></span><th:block th:if="${h.filled(item.cod_producto_sunat)}"><br/><span style="font-size: 8px; color: #666;" th:text="${'Cód. SUNAT: ' + item.cod_producto_sunat}"></span></th:block></td>
+            <th:block th:if="${conPrecios}">
+            <td class="text-right" th:text="${h.n2(item.valor_unitario)}"></td>
+            <td class="text-right" th:text="${h.n2(item.precio_unitario)}"></td>
+            <td class="text-right" th:text="${h.filled(item.descuento) and item.descuento > 0 ? '-' + h.n2(item.descuento) : '—'}"></td>
+            <td class="text-right" th:text="${h.n2(item.importe_con_igv)}"></td>
+            </th:block>
+        </tr>
+    </tbody>
+</table>
+</th:block>
+</th:block>
+
+<!-- ───────────────────────── totals (A4/A5: tabla; tickets: compacta) ───────────────────────── -->
+<th:block th:fragment="totals">
+<th:block th:if="${tipo_documento != '09' and tipo_documento != '31'}" th:with="t=${totales}, mp=${totales.moneda_prefix}">
+<th:block th:if="${is_ticket}">
+<div class="totals-section">
+    <table class="totals-table-ticket">
+        <tr th:if="${t.gravadas > 0}"><td class="total-label">Op. Gravadas</td><td class="total-value" th:text="${h.n2(t.grav_disp)}"></td></tr>
+        <tr th:if="${t.exoneradas > 0}"><td class="total-label">Op. Exoneradas</td><td class="total-value" th:text="${h.n2(t.exoneradas)}"></td></tr>
+        <tr th:if="${t.inafectas > 0}"><td class="total-label">Op. Inafectas</td><td class="total-value" th:text="${h.n2(t.inafectas)}"></td></tr>
+        <tr th:if="${t.gratuitas > 0}"><td class="total-label">Op. Gratuitas</td><td class="total-value" th:text="${h.n2(t.gratuitas)}"></td></tr>
+        <th:block th:if="${t.base_ivap > 0}">
+        <tr><td class="total-label">Op. IVAP</td><td class="total-value" th:text="${h.n2(t.base_ivap)}"></td></tr>
+        <tr class="total-separator"><td class="total-label">IVAP (4%)</td><td class="total-value" th:text="${h.n2(t.ivap)}"></td></tr>
+        </th:block>
+        <tr class="total-separator" th:if="${t.show_igv}"><td class="total-label" th:text="${'IGV (' + t.igv_pct + '%)'}"></td><td class="total-value" th:text="${h.n2(t.igv_disp)}"></td></tr>
+        <tr th:if="${t.isc > 0}"><td class="total-label">ISC</td><td class="total-value" th:text="${h.n2(t.isc)}"></td></tr>
+        <tr th:if="${t.icbper > 0}"><td class="total-label">ICBPER</td><td class="total-value" th:text="${h.n2(t.icbper)}"></td></tr>
+        <tr th:if="${t.descuentos > 0}"><td class="total-label">Desc. Global</td><td class="total-value" th:text="${'-' + h.n2(t.descuentos)}"></td></tr>
+        <th:block th:if="${t.percepcion != null}">
+        <tr><td class="total-label">Subtotal</td><td class="total-value" th:text="${mp + ' ' + h.n2(t.total)}"></td></tr>
+        <tr><td class="total-label" th:text="${'Percepción (' + h.num(t.percepcion.porcentaje) + '%)'}"></td><td class="total-value" th:text="${mp + ' ' + h.n2(t.percepcion.monto)}"></td></tr>
+        <tr class="total-final"><td class="total-label">TOTAL</td><td class="total-value" th:text="${mp + ' ' + h.n2(t.percepcion.mto_total)}"></td></tr>
+        </th:block>
+        <tr class="total-final" th:if="${t.percepcion == null}"><td class="total-label">TOTAL</td><td class="total-value" th:text="${mp + ' ' + h.n2(t.total)}"></td></tr>
+        <tr th:if="${t.anticipos > 0}"><td class="total-label">Anticipo aplicado</td><td class="total-value" th:text="${h.n2(t.anticipos)}"></td></tr>
+    </table>
+</div>
+</th:block>
+<th:block th:unless="${is_ticket}">
+<table class="totals-table">
+    <tr th:if="${t.gravadas > 0}"><td class="total-label">Op. Gravadas:</td><td class="total-value" th:text="${mp + ' ' + h.n2(t.grav_disp)}"></td></tr>
+    <tr th:if="${t.exoneradas > 0}"><td class="total-label">Op. Exoneradas:</td><td class="total-value" th:text="${mp + ' ' + h.n2(t.exoneradas)}"></td></tr>
+    <tr th:if="${t.inafectas > 0}"><td class="total-label">Op. Inafectas:</td><td class="total-value" th:text="${mp + ' ' + h.n2(t.inafectas)}"></td></tr>
+    <tr th:if="${t.gratuitas > 0}"><td class="total-label">Op. Gratuitas:</td><td class="total-value" th:text="${mp + ' ' + h.n2(t.gratuitas)}"></td></tr>
+    <th:block th:if="${t.base_ivap > 0}">
+    <tr><td class="total-label">Op. IVAP:</td><td class="total-value" th:text="${mp + ' ' + h.n2(t.base_ivap)}"></td></tr>
+    <tr><td class="total-label">IVAP (4%):</td><td class="total-value" th:text="${mp + ' ' + h.n2(t.ivap)}"></td></tr>
+    </th:block>
+    <tr th:if="${t.show_igv}"><td class="total-label" th:text="${'IGV (' + t.igv_pct + '%):'}"></td><td class="total-value" th:text="${mp + ' ' + h.n2(t.igv_disp)}"></td></tr>
+    <tr th:if="${t.isc > 0}"><td class="total-label">ISC:</td><td class="total-value" th:text="${mp + ' ' + h.n2(t.isc)}"></td></tr>
+    <tr th:if="${t.icbper > 0}"><td class="total-label">ICBPER:</td><td class="total-value" th:text="${mp + ' ' + h.n2(t.icbper)}"></td></tr>
+    <tr th:if="${t.descuentos > 0}"><td class="total-label">Desc. Global:</td><td class="total-value" th:text="${'-' + mp + ' ' + h.n2(t.descuentos)}"></td></tr>
+    <th:block th:if="${t.percepcion != null}">
+    <tr><td class="total-label">Importe Total:</td><td class="total-value" th:text="${mp + ' ' + h.n2(t.total)}"></td></tr>
+    <tr><td class="total-label" th:text="${'Percepción (' + h.num(t.percepcion.porcentaje) + '%):'}"></td><td class="total-value" th:text="${mp + ' ' + h.n2(t.percepcion.monto)}"></td></tr>
+    <tr class="total-final"><td class="total-label">IMPORTE TOTAL:</td><td class="total-value" th:text="${mp + ' ' + h.n2(t.percepcion.mto_total)}"></td></tr>
+    </th:block>
+    <tr class="total-final" th:if="${t.percepcion == null}"><td class="total-label">IMPORTE TOTAL:</td><td class="total-value" th:text="${mp + ' ' + h.n2(t.total)}"></td></tr>
+    <tr th:if="${t.anticipos > 0}"><td class="total-label" style="font-style: italic;">Anticipo aplicado:</td><td class="total-value" style="font-style: italic;" th:text="${mp + ' ' + h.n2(t.anticipos)}"></td></tr>
+</table>
+<div style="clear: both;"></div>
+</th:block>
+</th:block>
+</th:block>
+
+<!-- ───────────────────────── leyenda ───────────────────────── -->
+<th:block th:fragment="leyenda">
+<div class="leyenda" th:if="${h.filled(leyenda) and tipo_documento != '09' and tipo_documento != '31'}" th:text="${'SON: ' + leyenda}"></div>
+<div class="leyenda" th:each="ley : ${leyendas_sunat}" th:text="${ley}"></div>
+</th:block>
+
+<!-- ───────────────────────── payment-info ───────────────────────── -->
+<th:block th:fragment="payment_info">
+<th:block th:if="${pago != null}" th:with="p=${pago}">
+<div class="payment-section" th:if="${is_ticket and p.mostrar_ticket}">
+    <div class="payment-title" th:if="${h.filled(forma_pago)}" th:text="${'Forma de Pago: ' + forma_pago}"></div>
+    <div class="info-line" th:if="${p.adelanto != null}"><span class="info-label">Adelanto:</span> <span th:text="${moneda_simbolo + ' ' + h.n2(p.adelanto)}"></span></div>
+    <table class="payment-table-ticket" th:if="${h.filled(p.cuotas)}">
+        <tr th:each="c : ${p.cuotas}">
+            <td class="pay-label" th:text="${'Cuota ' + c.n + ':'}"></td>
+            <td class="pay-value" th:text="${c.fecha + ' - ' + moneda_simbolo + ' ' + h.n2(c.monto)}"></td>
+        </tr>
+    </table>
+    <div style="border-top: 1px solid #000; margin-top: 4px; padding-top: 3px;" th:if="${p.detraccion != null}">
+        <div class="info-line"><span class="info-label">Detraccion:</span> <span th:text="${p.detraccion.codigo + ' - ' + h.num(p.detraccion.porcentaje) + '%'}"></span></div>
+        <div class="info-line"><span class="info-label">Monto:</span> <span th:text="${moneda_simbolo + ' ' + h.n2(p.detraccion.monto)}"></span></div>
+        <div class="info-line" th:if="${h.filled(p.detraccion.cuenta)}"><span class="info-label">Cuenta:</span> <span th:text="${p.detraccion.cuenta}"></span></div>
+    </div>
+    <div style="border-top: 1px solid #000; margin-top: 4px; padding-top: 3px;" th:if="${p.percepcion != null}">
+        <div class="info-line"><span class="info-label">Percepcion:</span> <span th:text="${p.percepcion.codigo + ' - ' + h.num(p.percepcion.porcentaje) + '%'}"></span></div>
+        <div class="info-line"><span class="info-label">Monto:</span> <span th:text="${moneda_simbolo + ' ' + h.n2(p.percepcion.monto)}"></span></div>
+    </div>
+    <div style="border-top: 1px solid #000; margin-top: 4px; padding-top: 3px;" th:if="${h.filled(p.guias)}">
+        <div class="info-line" th:each="g : ${p.guias}"><span class="info-label" th:text="${g.label + ':'}"></span> <span th:text="${g.nro}"></span></div>
+    </div>
+</div>
+<div class="payment-section" th:if="${!is_ticket and p.mostrar}">
+    <table style="margin-bottom: 6px;" th:if="${h.filled(forma_pago)}">
+        <tr>
+            <td style="width: 180px;"><strong>Forma de Pago:</strong></td>
+            <td th:text="${forma_pago}"></td>
+        </tr>
+        <tr th:if="${p.adelanto != null}">
+            <td><strong>Adelanto:</strong></td>
+            <td th:text="${moneda_simbolo + ' ' + h.n2(p.adelanto)}"></td>
+        </tr>
+    </table>
+    <table style="border-top: 0.5px solid #000; padding-top: 5px; margin-top: 5px; width: 100%;" th:if="${p.detraccion != null}">
+        <tr>
+            <td style="width: 180px;"><strong>Detracción:</strong></td>
+            <td th:text="${'Código: ' + p.detraccion.codigo + (h.filled(p.detraccion.porcentaje) ? ' | ' + h.num(p.detraccion.porcentaje) + '%' : '') + ' | Monto: ' + moneda_simbolo + ' ' + h.n2(p.detraccion.monto) + (h.filled(p.detraccion.cuenta) ? ' | Cta. BN: ' + p.detraccion.cuenta : '')}"></td>
+        </tr>
+        <tr>
+            <td style="width: 180px;"><strong>Mto. Neto Pendiente de Pago:</strong></td>
+            <td><strong th:text="${moneda_simbolo + ' ' + h.n2(p.monto_neto)}"></strong></td>
+        </tr>
+    </table>
+    <th:block th:if="${p.credito_cuotas}">
+    <table style="border-top: 0.5px solid #000; padding-top: 5px; margin-top: 5px; width: 100%;">
+        <tr><td colspan="3" style="padding-bottom: 4px;"><strong>Información del Crédito</strong></td></tr>
+        <tr>
+            <td style="width: 180px;"><strong>Total de Cuotas:</strong></td>
+            <td colspan="2" th:text="${p.cuotas.size()}"></td>
+        </tr>
+    </table>
+    <table style="margin-top: 4px; width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background: #f5f5f5; border-bottom: 0.5px solid #000;">
+                <th style="padding: 3px 6px; text-align: center; font-size: 8pt; width: 60px;">Nº Cuota</th>
+                <th style="padding: 3px 6px; text-align: center; font-size: 8pt; width: 110px;">Fec. Vencimiento</th>
+                <th style="padding: 3px 6px; text-align: right; font-size: 8pt;">Monto</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="border-bottom: 0.5px solid #ddd;" th:each="c : ${p.cuotas}">
+                <td style="padding: 3px 6px; text-align: center; font-size: 8.5pt;" th:text="${c.n}"></td>
+                <td style="padding: 3px 6px; text-align: center; font-size: 8.5pt;" th:text="${c.fecha}"></td>
+                <td style="padding: 3px 6px; text-align: right; font-size: 8.5pt;" th:text="${moneda_simbolo + ' ' + h.n2(c.monto)}"></td>
+            </tr>
+        </tbody>
+    </table>
+    </th:block>
+    <table style="border-top: 0.5px solid #000; padding-top: 5px; margin-top: 5px; width: 100%;" th:if="${p.percepcion != null}">
+        <tr>
+            <td style="width: 180px;"><strong>Percepción:</strong></td>
+            <td th:text="${p.percepcion.codigo + (h.filled(p.percepcion.porcentaje) ? ' | ' + h.num(p.percepcion.porcentaje) + '%' : '') + ' | Monto: ' + moneda_simbolo + ' ' + h.n2(p.percepcion.monto)}"></td>
+        </tr>
+    </table>
+    <table style="border-top: 0.5px solid #000; padding-top: 5px; margin-top: 5px; width: 100%;" th:if="${h.filled(p.guias)}">
+        <tr th:each="g : ${p.guias}">
+            <td style="width: 180px;"><strong th:text="${g.first ? 'Guías de Remisión:' : ''}"></strong></td>
+            <td th:text="${g.label + ' — ' + g.nro}"></td>
+        </tr>
+    </table>
+</div>
+</th:block>
+</th:block>
+
+<!-- ───────────────────────── bank-accounts ───────────────────────── -->
+<th:block th:fragment="bank_accounts">
+<th:block th:if="${h.filled(cuentas_bancarias) or h.filled(billeteras_digitales)}">
+<div class="payment-section" th:if="${is_ticket}">
+    <div class="payment-title">Cuentas para depósito / transferencia</div>
+    <div class="info-line" th:each="c : ${cuentas_bancarias}" th:text="${c.banco + ' (' + c.moneda + ') ' + c.tipo_cuenta + ': ' + c.numero + (h.filled(c.cci) ? ' | CCI: ' + c.cci : '')}"></div>
+    <div class="info-line" th:each="b : ${billeteras_digitales}" th:text="${b.tipo + ': ' + b.numero + (h.filled(b.titular) ? ' (' + b.titular + ')' : '')}"></div>
+</div>
+<div class="payment-section" th:unless="${is_ticket}">
+    <div style="margin-bottom: 4px;"><strong>Cuentas para depósito / transferencia:</strong></div>
+    <table>
+        <tr th:each="c : ${cuentas_bancarias}">
+            <td style="width: 80px;" th:text="${c.banco}"></td>
+            <td th:text="${c.tipo_cuenta + ' (' + c.moneda + '): ' + c.numero}"></td>
+            <td th:text="${h.filled(c.cci) ? 'CCI: ' + c.cci : ''}"></td>
+        </tr>
+    </table>
+    <div style="margin-top: 4px;" th:if="${h.filled(billeteras_digitales)}"><th:block th:each="b : ${billeteras_digitales}"><strong th:text="${b.tipo + ':'}"></strong> <span th:text="${b.numero + (h.filled(b.titular) ? ' (' + b.titular + ')' : '')}"></span><th:block th:unless="${b.last}">&#160;|&#160;</th:block></th:block></div>
+</div>
+</th:block>
+</th:block>
+
+<!-- ───────────────────────── qr-code ───────────────────────── -->
+<th:block th:fragment="qr_code">
+<div class="qr-section" th:if="${h.filled(qr_base64)}"><img th:src="${qr_base64}" alt="QR"/></div>
+</th:block>
+
+<!-- ───────────────────────── retention-info / items / totals (20 y 40) ───────────────────────── -->
+<th:block th:fragment="retention_info">
+<th:block th:with="r=${retencion}">
+<div class="info-block" th:if="${is_ticket}">
+    <div class="info-line"><span class="info-label">Régimen:</span> <span th:text="${r.regimen_label}"></span></div>
+    <div class="info-line"><span class="info-label">Tasa:</span> <span th:text="${r.tasa + '%'}"></span></div>
+    <div class="info-line" th:if="${h.filled(observacion)}"><span class="info-label">Obs.:</span> <span th:text="${observacion}"></span></div>
+</div>
+<table class="info-section" th:unless="${is_ticket}">
+    <tr>
+        <td class="info-label">Régimen:</td>
+        <td th:text="${r.regimen_label}"></td>
+        <td class="info-label">Tasa:</td>
+        <td th:text="${r.tasa + '%'}"></td>
+    </tr>
+    <tr th:if="${h.filled(observacion)}">
+        <td class="info-label">Observación:</td>
+        <td colspan="3" th:text="${observacion}"></td>
+    </tr>
+</table>
+</th:block>
+</th:block>
+
+<th:block th:fragment="retention_items">
+<th:block th:with="r=${retencion}">
+<table class="items-table-ticket" th:if="${is_ticket}">
+    <thead>
+        <tr>
+            <th>Documento</th>
+            <th class="col-right" th:text="${r.label_monto_ticket}"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="d : ${r.documentos}">
+            <td>
+                <strong th:text="${d.tipo_label + ': ' + d.num_doc}"></strong>
+                <br/><span class="item-qty-detail" th:text="${'Emit: ' + d.fecha_emision + ' | Total: S/ ' + h.n2(d.imp_total)}"></span>
+                <br/><span class="item-qty-detail" th:text="${r.label_fecha_ticket + ': ' + d.fecha + ' | ' + r.label_neto_ticket + ': S/ ' + h.n2(d.neto)}"></span>
+            </td>
+            <td class="col-right" th:text="${'S/ ' + h.n2(d.monto)}"></td>
+        </tr>
+    </tbody>
+</table>
+<table class="items-table" th:unless="${is_ticket}">
+    <thead>
+        <tr>
+            <th>Tipo</th>
+            <th>N° Documento</th>
+            <th>F. Emisión</th>
+            <th>Moneda</th>
+            <th>Imp. Total</th>
+            <th th:text="${r.label_fecha}"></th>
+            <th th:text="${r.label_monto}"></th>
+            <th th:text="${r.label_neto}"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="d : ${r.documentos}">
+            <td class="text-center" th:text="${d.tipo_label}"></td>
+            <td class="text-center" th:text="${d.num_doc}"></td>
+            <td class="text-center" th:text="${d.fecha_emision}"></td>
+            <td class="text-center" th:text="${d.moneda}"></td>
+            <td class="text-right" th:text="${d.simbolo_total + ' ' + h.n2(d.imp_total)}"></td>
+            <td class="text-center" th:text="${d.fecha}"></td>
+            <td class="text-right" th:text="${'S/ ' + h.n2(d.monto)}"></td>
+            <td class="text-right" th:text="${'S/ ' + h.n2(d.neto)}"></td>
+        </tr>
+    </tbody>
+</table>
+</th:block>
+</th:block>
+
+<th:block th:fragment="retention_totals">
+<th:block th:with="r=${retencion}">
+<div class="totals-section" th:if="${is_ticket}">
+    <table class="totals-table-ticket">
+        <tr class="total-separator"><td class="total-label" th:text="${r.label_monto}"></td><td class="total-value" th:text="${'S/ ' + h.n2(r.monto)}"></td></tr>
+        <tr class="total-final"><td class="total-label" th:text="${r.label_neto}"></td><td class="total-value" th:text="${'S/ ' + h.n2(r.neto)}"></td></tr>
+    </table>
+</div>
+<th:block th:unless="${is_ticket}">
+<table class="totals-table">
+    <tr class="total-separator"><td class="total-label" th:text="${'Total ' + r.label_monto + ':'}"></td><td class="total-value" th:text="${'S/ ' + h.n2(r.monto)}"></td></tr>
+    <tr class="total-final"><td class="total-label" th:text="${'Total ' + r.label_neto + ':'}"></td><td class="total-value" th:text="${'S/ ' + h.n2(r.neto)}"></td></tr>
+</table>
+<div style="clear: both;"></div>
+</th:block>
+</th:block>
+</th:block>
+
+<!-- ───────────────────────── settlement-info / totals (04, nuevo) ───────────────────────── -->
+<th:block th:fragment="settlement_info">
+<th:block th:with="l=${liquidacion}">
+<div class="info-block" th:if="${is_ticket}">
+    <div class="info-line"><span class="info-label">Operación:</span> <span th:text="${l.operacion}"></span></div>
+    <div class="info-line"><span class="info-label">Domicilio vendedor:</span> <span th:text="${l.domicilio}"></span></div>
+    <div class="info-line"><span class="info-label">Lugar de la operación:</span> <span th:text="${l.lugar}"></span></div>
+    <div class="info-line" th:if="${h.filled(l.placa)}"><span class="info-label">Placa:</span> <span th:text="${l.placa}"></span></div>
+</div>
+<table class="info-section" th:unless="${is_ticket}">
+    <tr><td class="info-label">Tipo de operación:</td><td th:text="${l.operacion}"></td></tr>
+    <tr><td class="info-label">Domicilio vendedor:</td><td th:text="${l.domicilio}"></td></tr>
+    <tr><td class="info-label">Lugar de la operación:</td><td th:text="${l.lugar}"></td></tr>
+    <tr th:if="${h.filled(l.placa)}"><td class="info-label">Placa vehículo:</td><td th:text="${l.placa}"></td></tr>
+</table>
+</th:block>
+</th:block>
+
+<th:block th:fragment="settlement_totals">
+<th:block th:with="l=${liquidacion}">
+<div class="totals-section" th:if="${is_ticket}">
+    <table class="totals-table-ticket">
+        <tr th:if="${l.gravadas > 0}"><td class="total-label">Op. Gravadas</td><td class="total-value" th:text="${h.n2(l.gravadas)}"></td></tr>
+        <tr th:if="${l.exoneradas > 0}"><td class="total-label">Op. Exoneradas</td><td class="total-value" th:text="${h.n2(l.exoneradas)}"></td></tr>
+        <tr th:if="${l.inafectas > 0}"><td class="total-label">Op. Inafectas</td><td class="total-value" th:text="${h.n2(l.inafectas)}"></td></tr>
+        <tr class="total-separator"><td class="total-label" th:text="${'IGV retenido (' + l.igv_pct + '%)'}"></td><td class="total-value" th:text="${h.n2(l.igv)}"></td></tr>
+        <tr><td class="total-label">Importe total</td><td class="total-value" th:text="${h.n2(l.sub_total)}"></td></tr>
+        <tr><td class="total-label" th:text="${'Retención renta (' + l.renta_pct + '%)'}"></td><td class="total-value" th:text="${'-' + h.n2(l.renta)}"></td></tr>
+        <tr class="total-final"><td class="total-label">NETO A PAGAR</td><td class="total-value" th:text="${'S/ ' + h.n2(l.neto)}"></td></tr>
+    </table>
+</div>
+<th:block th:unless="${is_ticket}">
+<table class="totals-table">
+    <tr th:if="${l.gravadas > 0}"><td class="total-label">Op. Gravadas:</td><td class="total-value" th:text="${'S/ ' + h.n2(l.gravadas)}"></td></tr>
+    <tr th:if="${l.exoneradas > 0}"><td class="total-label">Op. Exoneradas:</td><td class="total-value" th:text="${'S/ ' + h.n2(l.exoneradas)}"></td></tr>
+    <tr th:if="${l.inafectas > 0}"><td class="total-label">Op. Inafectas:</td><td class="total-value" th:text="${'S/ ' + h.n2(l.inafectas)}"></td></tr>
+    <tr><td class="total-label" th:text="${'IGV retenido (' + l.igv_pct + '%):'}"></td><td class="total-value" th:text="${'S/ ' + h.n2(l.igv)}"></td></tr>
+    <tr><td class="total-label">Importe Total:</td><td class="total-value" th:text="${'S/ ' + h.n2(l.sub_total)}"></td></tr>
+    <tr><td class="total-label" th:text="${'Retención Renta (' + l.renta_pct + '%):'}"></td><td class="total-value" th:text="${'-S/ ' + h.n2(l.renta)}"></td></tr>
+    <tr class="total-final"><td class="total-label">NETO A PAGAR:</td><td class="total-value" th:text="${'S/ ' + h.n2(l.neto)}"></td></tr>
+</table>
+<div style="clear: both;"></div>
+</th:block>
+</th:block>
+</th:block>
+
+<!-- ───────────────────────── footer ───────────────────────── -->
+<th:block th:fragment="footer">
+<div class="footer-section" th:if="${is_ticket}">
+    <div style="margin-bottom: 3px; font-style: italic;" th:if="${h.filled(mensaje_agradecimiento)}" th:text="${mensaje_agradecimiento}"></div>
+    <div style="margin-bottom: 3px;" th:if="${h.filled(mensaje_promocional)}" th:text="${mensaje_promocional}"></div>
+    <div class="footer-hash" th:if="${h.filled(hash_cpe)}" th:text="${'Hash: ' + hash_cpe}"></div>
+    <div style="margin-bottom: 3px;" th:if="${h.filled(observacion)}" th:text="${observacion}"></div>
+    <div class="footer-legal">Representación impresa del<br/>comprobante electrónico</div>
+</div>
+<div class="footer-section" th:unless="${is_ticket}">
+    <div style="margin-bottom: 4px; font-style: italic;" th:if="${h.filled(mensaje_agradecimiento)}" th:text="${mensaje_agradecimiento}"></div>
+    <div style="margin-bottom: 4px;" th:if="${h.filled(mensaje_promocional)}" th:text="${mensaje_promocional}"></div>
+    <table>
+        <tr>
+            <td style="width: 50%; vertical-align: top;"><th:block th:if="${h.filled(hash_cpe)}"><strong>Hash CPE:</strong> <span th:text="${hash_cpe}"></span></th:block><th:block th:if="${h.filled(observacion)}"><br/><strong>Obs:</strong> <span th:text="${observacion}"></span></th:block></td>
+            <td style="text-align: right; vertical-align: top;">Representación impresa del comprobante electrónico</td>
+        </tr>
+    </table>
+</div>
+</th:block>
+
+</body>
+</html>

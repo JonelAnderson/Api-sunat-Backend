@@ -1,0 +1,1430 @@
+{
+ "now": "2026-10-24T15:15:30Z",
+ "tenant": {
+  "ruc": "20000000001",
+  "razon_social": "EMPRESA DEMO S.A.C.",
+  "nombre_comercial": "EMPRESA DEMO",
+  "direccion": "AV. DEMO 123",
+  "ubigeo": "150101",
+  "departamento": "LIMA",
+  "provincia": "LIMA",
+  "distrito": "LIMA",
+  "sol_user": "MODDATOS",
+  "sol_pass": "MODDATOS",
+  "api_key": "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",
+  "api_secret": "oracle-secret",
+  "plan": "business"
+ },
+ "series": [
+  {
+   "tipo": "01",
+   "serie": "F001"
+  },
+  {
+   "tipo": "03",
+   "serie": "B001"
+  },
+  {
+   "tipo": "07",
+   "serie": "FC01"
+  },
+  {
+   "tipo": "07",
+   "serie": "BC01"
+  },
+  {
+   "tipo": "08",
+   "serie": "FD01"
+  },
+  {
+   "tipo": "08",
+   "serie": "BD01"
+  }
+ ],
+ "view_fixes": {
+  "pdf/reports": {
+   "['sunat_status']": "['estado_sunat']",
+   "['payment_status']": "['estado_pago']"
+  }
+ },
+ "http_fakes": [
+  {
+   "url": "https://api.apis.net.pe/v1/ruc?numero=20100000009",
+   "body": {
+    "razonSocial": "PROVEEDOR CONSULTADO S.A.C.",
+    "direccion": "JR. UNION 456 LIMA",
+    "estado": "ACTIVO",
+    "condicion": "HABIDO"
+   }
+  },
+  {
+   "url": "https://api.apis.net.pe/v1/dni?numero=45678913",
+   "body": {
+    "data": {
+     "nombres": "ROSA",
+     "apellidoPaterno": "QUISPE",
+     "apellidoMaterno": "MAMANI"
+    }
+   }
+  },
+  {
+   "url": "https://api.apis.net.pe/v1/dni?numero=45678914",
+   "body": {
+    "nombreCompleto": "CARLOS ANDRES RAMOS DIAZ",
+    "nombres": "CARLOS ANDRES",
+    "apellido_paterno": "RAMOS",
+    "apellido_materno": "DIAZ",
+    "direccion": "CALLE 1"
+   }
+  },
+  {
+   "url": "https://api.apis.net.pe/v1/ruc?numero=20100000011",
+   "body": {
+    "estado": "ACTIVO"
+   }
+  }
+ ],
+ "steps": [
+  {
+   "name": "Factura base 1",
+   "method": "POST",
+   "url": "/api/v1/facturas",
+   "body": {
+    "serie": "F001",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "cliente": {
+     "tipo_doc": "6",
+     "num_doc": "20601234567",
+     "razon_social": "CLIENTE PRUEBA S.A.C.",
+     "direccion": "AV. LIMA 123"
+    },
+    "items": [
+     {
+      "codigo": "P1",
+      "descripcion": "Producto de prueba",
+      "unidad": "NIU",
+      "cantidad": 1,
+      "precio_unitario": 1180,
+      "tip_afe_igv": "10"
+     }
+    ]
+   },
+   "xml": false
+  },
+  {
+   "name": "Factura base 2",
+   "method": "POST",
+   "url": "/api/v1/facturas",
+   "body": {
+    "serie": "F001",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "cliente": {
+     "tipo_doc": "6",
+     "num_doc": "20601234567",
+     "razon_social": "CLIENTE PRUEBA S.A.C.",
+     "direccion": "AV. LIMA 123"
+    },
+    "items": [
+     {
+      "codigo": "P1",
+      "descripcion": "Producto de prueba",
+      "unidad": "NIU",
+      "cantidad": 1,
+      "precio_unitario": 590,
+      "tip_afe_igv": "10"
+     }
+    ]
+   },
+   "xml": false
+  },
+  {
+   "name": "Factura base 3",
+   "method": "POST",
+   "url": "/api/v1/facturas",
+   "body": {
+    "serie": "F001",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "cliente": {
+     "tipo_doc": "6",
+     "num_doc": "20601234567",
+     "razon_social": "CLIENTE PRUEBA S.A.C.",
+     "direccion": "AV. LIMA 123"
+    },
+    "items": [
+     {
+      "codigo": "P1",
+      "descripcion": "Producto de prueba",
+      "unidad": "NIU",
+      "cantidad": 1,
+      "precio_unitario": 236,
+      "tip_afe_igv": "10"
+     }
+    ]
+   },
+   "xml": false
+  },
+  {
+   "name": "Factura base 4",
+   "method": "POST",
+   "url": "/api/v1/facturas",
+   "body": {
+    "serie": "F001",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "cliente": {
+     "tipo_doc": "6",
+     "num_doc": "20601234567",
+     "razon_social": "CLIENTE PRUEBA S.A.C.",
+     "direccion": "AV. LIMA 123"
+    },
+    "items": [
+     {
+      "codigo": "P1",
+      "descripcion": "Producto de prueba",
+      "unidad": "NIU",
+      "cantidad": 1,
+      "precio_unitario": 118,
+      "tip_afe_igv": "10"
+     }
+    ]
+   },
+   "xml": false
+  },
+  {
+   "name": "Factura base 5",
+   "method": "POST",
+   "url": "/api/v1/facturas",
+   "body": {
+    "serie": "F001",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "cliente": {
+     "tipo_doc": "6",
+     "num_doc": "20601234567",
+     "razon_social": "CLIENTE PRUEBA S.A.C.",
+     "direccion": "AV. LIMA 123"
+    },
+    "items": [
+     {
+      "codigo": "P1",
+      "descripcion": "Producto de prueba",
+      "unidad": "NIU",
+      "cantidad": 1,
+      "precio_unitario": 354,
+      "tip_afe_igv": "10"
+     }
+    ]
+   },
+   "xml": false
+  },
+  {
+   "name": "Factura base 6",
+   "method": "POST",
+   "url": "/api/v1/facturas",
+   "body": {
+    "serie": "F001",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "cliente": {
+     "tipo_doc": "6",
+     "num_doc": "20601234567",
+     "razon_social": "CLIENTE PRUEBA S.A.C.",
+     "direccion": "AV. LIMA 123"
+    },
+    "items": [
+     {
+      "codigo": "P1",
+      "descripcion": "Producto de prueba",
+      "unidad": "NIU",
+      "cantidad": 1,
+      "precio_unitario": 472,
+      "tip_afe_igv": "10"
+     }
+    ]
+   },
+   "xml": false
+  },
+  {
+   "name": "Boleta base 1 (solo registro)",
+   "method": "POST",
+   "url": "/api/v1/boletas",
+   "body": {
+    "serie": "B001",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "solo_registro": true,
+    "cliente": {
+     "tipo_doc": "1",
+     "num_doc": "12345678",
+     "razon_social": "JUAN PEREZ"
+    },
+    "items": [
+     {
+      "codigo": "P1",
+      "descripcion": "Producto de prueba",
+      "unidad": "NIU",
+      "cantidad": 1,
+      "precio_unitario": 50,
+      "tip_afe_igv": "10"
+     }
+    ]
+   },
+   "xml": false
+  },
+  {
+   "name": "Boleta base 2 (solo registro)",
+   "method": "POST",
+   "url": "/api/v1/boletas",
+   "body": {
+    "serie": "B001",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "solo_registro": true,
+    "cliente": {
+     "tipo_doc": "1",
+     "num_doc": "12345678",
+     "razon_social": "JUAN PEREZ"
+    },
+    "items": [
+     {
+      "codigo": "P1",
+      "descripcion": "Producto de prueba",
+      "unidad": "NIU",
+      "cantidad": 2,
+      "precio_unitario": 30,
+      "tip_afe_igv": "20"
+     }
+    ]
+   },
+   "xml": false
+  },
+  {
+   "name": "Boleta base 3",
+   "method": "POST",
+   "url": "/api/v1/boletas",
+   "body": {
+    "serie": "B001",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "cliente": {
+     "tipo_doc": "1",
+     "num_doc": "12345678",
+     "razon_social": "JUAN PEREZ"
+    },
+    "items": [
+     {
+      "codigo": "P1",
+      "descripcion": "Producto de prueba",
+      "unidad": "NIU",
+      "cantidad": 1,
+      "precio_unitario": 80,
+      "tip_afe_igv": "10"
+     }
+    ]
+   },
+   "xml": false
+  },
+  {
+   "name": "Boleta base 4",
+   "method": "POST",
+   "url": "/api/v1/boletas",
+   "body": {
+    "serie": "B001",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "cliente": {
+     "tipo_doc": "1",
+     "num_doc": "12345678",
+     "razon_social": "JUAN PEREZ"
+    },
+    "items": [
+     {
+      "codigo": "P1",
+      "descripcion": "Producto de prueba",
+      "unidad": "NIU",
+      "cantidad": 1,
+      "precio_unitario": 45,
+      "tip_afe_igv": "10"
+     }
+    ]
+   },
+   "xml": false
+  },
+  {
+   "name": "NC - Anulación total de factura",
+   "method": "POST",
+   "url": "/api/v1/notas-credito",
+   "body": {
+    "serie": "FC01",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "doc_afectado_tipo": "01",
+    "doc_afectado_serie": "F001",
+    "doc_afectado_correlativo": "1",
+    "cod_motivo": "01",
+    "des_motivo": "Anulación de la operación",
+    "cliente": {
+     "tipo_doc": "6",
+     "num_doc": "20512345678",
+     "razon_social": "EMPRESA DEMO SAC",
+     "direccion": "Av. Los Olivos 123, Lima"
+    },
+    "items": [
+     {
+      "descripcion": "Producto de prueba",
+      "unidad": "NIU",
+      "cantidad": 2,
+      "precio_unitario": 100,
+      "tip_afe_igv": "10"
+     }
+    ]
+   },
+   "xml": true
+  },
+  {
+   "name": "NC - Descuento parcial",
+   "method": "POST",
+   "url": "/api/v1/notas-credito",
+   "body": {
+    "serie": "FC01",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "doc_afectado_tipo": "01",
+    "doc_afectado_serie": "F001",
+    "doc_afectado_correlativo": "2",
+    "cod_motivo": "04",
+    "des_motivo": "Descuento por volumen de compra",
+    "cliente": {
+     "tipo_doc": "6",
+     "num_doc": "20000000001",
+     "razon_social": "CLIENTE PRUEBA S.A.C."
+    },
+    "items": [
+     {
+      "descripcion": "Descuento Producto A",
+      "unidad": "NIU",
+      "cantidad": 1,
+      "precio_unitario": 60,
+      "tip_afe_igv": "10"
+     }
+    ]
+   },
+   "xml": true
+  },
+  {
+   "name": "NC - Corrección de precio / devolución parcial",
+   "method": "POST",
+   "url": "/api/v1/notas-credito",
+   "body": {
+    "serie": "FC01",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "doc_afectado_tipo": "01",
+    "doc_afectado_serie": "F001",
+    "doc_afectado_correlativo": "3",
+    "cod_motivo": "06",
+    "des_motivo": "Devolución parcial de mercadería",
+    "cliente": {
+     "tipo_doc": "6",
+     "num_doc": "20000000001",
+     "razon_social": "CLIENTE PRUEBA S.A.C."
+    },
+    "items": [
+     {
+      "descripcion": "Producto devuelto X",
+      "unidad": "NIU",
+      "cantidad": 3,
+      "precio_unitario": 25,
+      "tip_afe_igv": "10"
+     },
+     {
+      "descripcion": "Producto devuelto Y",
+      "unidad": "NIU",
+      "cantidad": 1,
+      "precio_unitario": 80,
+      "tip_afe_igv": "10"
+     }
+    ]
+   },
+   "xml": true
+  },
+  {
+   "name": "NC - En dólares (USD)",
+   "method": "POST",
+   "url": "/api/v1/notas-credito",
+   "body": {
+    "serie": "FC01",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "tipo_moneda": "USD",
+    "doc_afectado_tipo": "01",
+    "doc_afectado_serie": "F001",
+    "doc_afectado_correlativo": "1",
+    "cod_motivo": "01",
+    "des_motivo": "Anulación de operación en dólares",
+    "cliente": {
+     "tipo_doc": "6",
+     "num_doc": "20000000001",
+     "razon_social": "CLIENTE PRUEBA S.A.C."
+    },
+    "items": [
+     {
+      "descripcion": "Consultoría internacional",
+      "unidad": "ZZ",
+      "cantidad": 1,
+      "precio_unitario": 500,
+      "tip_afe_igv": "10"
+     }
+    ]
+   },
+   "xml": true
+  },
+  {
+   "name": "NC - Anulación de boleta",
+   "method": "POST",
+   "url": "/api/v1/notas-credito",
+   "body": {
+    "serie": "BC01",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "doc_afectado_tipo": "03",
+    "doc_afectado_serie": "B001",
+    "doc_afectado_correlativo": "3",
+    "cod_motivo": "01",
+    "des_motivo": "Anulación de la operación",
+    "cliente": {
+     "tipo_doc": "1",
+     "num_doc": "12345678",
+     "razon_social": "JUAN PEREZ"
+    },
+    "items": [
+     {
+      "descripcion": "Producto vendido",
+      "unidad": "NIU",
+      "cantidad": 1,
+      "precio_unitario": 50,
+      "tip_afe_igv": "10"
+     }
+    ]
+   },
+   "xml": true
+  },
+  {
+   "name": "NC envío manual (enviar_automatico=false)",
+   "method": "POST",
+   "url": "/api/v1/notas-credito",
+   "body": {
+    "serie": "FC01",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "tipo_moneda": "PEN",
+    "cliente": {
+     "tipo_doc": "6",
+     "num_doc": "20512345678",
+     "razon_social": "CLIENTE SAC"
+    },
+    "doc_afectado_tipo": "01",
+    "doc_afectado_serie": "F001",
+    "doc_afectado_correlativo": "4",
+    "cod_motivo": "01",
+    "des_motivo": "Anulación de la operación",
+    "items": [
+     {
+      "codigo": "P001",
+      "descripcion": "Producto a anular",
+      "unidad": "NIU",
+      "cantidad": 1,
+      "precio_unitario": 118,
+      "tip_afe_igv": "10"
+     }
+    ],
+    "enviar_automatico": false
+   },
+   "xml": true
+  },
+  {
+   "name": "ND — Intereses por mora",
+   "method": "POST",
+   "url": "/api/v1/notas-debito",
+   "body": {
+    "serie": "FD01",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "doc_afectado_tipo": "01",
+    "doc_afectado_serie": "F001",
+    "doc_afectado_correlativo": "1",
+    "cod_motivo": "01",
+    "des_motivo": "Intereses por mora",
+    "cliente": {
+     "tipo_doc": "6",
+     "num_doc": "20000000001",
+     "razon_social": "CLIENTE PRUEBA S.A.C."
+    },
+    "items": [
+     {
+      "descripcion": "Interés por pago fuera de plazo",
+      "unidad": "ZZ",
+      "cantidad": 1,
+      "precio_unitario": 150,
+      "tip_afe_igv": "10"
+     }
+    ]
+   },
+   "xml": true
+  },
+  {
+   "name": "ND — Aumento de valor",
+   "method": "POST",
+   "url": "/api/v1/notas-debito",
+   "body": {
+    "serie": "FD01",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "doc_afectado_tipo": "01",
+    "doc_afectado_serie": "F001",
+    "doc_afectado_correlativo": "2",
+    "cod_motivo": "02",
+    "des_motivo": "Aumento en el valor por servicio adicional",
+    "cliente": {
+     "tipo_doc": "6",
+     "num_doc": "20000000001",
+     "razon_social": "CLIENTE PRUEBA S.A.C."
+    },
+    "items": [
+     {
+      "descripcion": "Servicio de instalación adicional",
+      "unidad": "ZZ",
+      "cantidad": 1,
+      "precio_unitario": 120,
+      "tip_afe_igv": "10"
+     }
+    ]
+   },
+   "xml": true
+  },
+  {
+   "name": "ND — Penalidad",
+   "method": "POST",
+   "url": "/api/v1/notas-debito",
+   "body": {
+    "serie": "FD01",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "doc_afectado_tipo": "01",
+    "doc_afectado_serie": "F001",
+    "doc_afectado_correlativo": "3",
+    "cod_motivo": "02",
+    "des_motivo": "Aumento en el valor por servicio adicional",
+    "cliente": {
+     "tipo_doc": "6",
+     "num_doc": "20000000001",
+     "razon_social": "CLIENTE PRUEBA S.A.C."
+    },
+    "items": [
+     {
+      "descripcion": "Servicio de instalación adicional",
+      "unidad": "ZZ",
+      "cantidad": 1,
+      "precio_unitario": 200,
+      "tip_afe_igv": "10"
+     }
+    ]
+   },
+   "xml": true
+  },
+  {
+   "name": "ND — Sobre boleta",
+   "method": "POST",
+   "url": "/api/v1/notas-debito",
+   "body": {
+    "serie": "BD01",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "doc_afectado_tipo": "03",
+    "doc_afectado_serie": "B001",
+    "doc_afectado_correlativo": "3",
+    "cod_motivo": "01",
+    "des_motivo": "Intereses por mora",
+    "cliente": {
+     "tipo_doc": "1",
+     "num_doc": "12345678",
+     "razon_social": "JUAN PEREZ"
+    },
+    "items": [
+     {
+      "descripcion": "Interés por pago tardío",
+      "unidad": "ZZ",
+      "cantidad": 1,
+      "precio_unitario": 20,
+      "tip_afe_igv": "10"
+     }
+    ]
+   },
+   "xml": true
+  },
+  {
+   "name": "ND envío manual",
+   "method": "POST",
+   "url": "/api/v1/notas-debito",
+   "body": {
+    "serie": "FD01",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "tipo_moneda": "PEN",
+    "cliente": {
+     "tipo_doc": "6",
+     "num_doc": "20512345678",
+     "razon_social": "CLIENTE SAC"
+    },
+    "doc_afectado_tipo": "01",
+    "doc_afectado_serie": "F001",
+    "doc_afectado_correlativo": "4",
+    "cod_motivo": "01",
+    "des_motivo": "Intereses por mora",
+    "items": [
+     {
+      "codigo": "INT001",
+      "descripcion": "Intereses por mora 30 días",
+      "unidad": "ZZ",
+      "cantidad": 1,
+      "precio_unitario": 118,
+      "tip_afe_igv": "10"
+     }
+    ],
+    "enviar_automatico": false
+   },
+   "xml": true
+  },
+  {
+   "name": "NC mayor que la factura (ERR-3286)",
+   "method": "POST",
+   "url": "/api/v1/notas-credito",
+   "body": {
+    "serie": "FC01",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "doc_afectado_tipo": "01",
+    "doc_afectado_serie": "F001",
+    "doc_afectado_correlativo": "4",
+    "cod_motivo": "07",
+    "des_motivo": "Devolución",
+    "cliente": {
+     "tipo_doc": "6",
+     "num_doc": "20601234567",
+     "razon_social": "CLIENTE PRUEBA S.A.C.",
+     "direccion": "AV. LIMA 123"
+    },
+    "items": [
+     {
+      "codigo": "P1",
+      "descripcion": "Producto de prueba",
+      "unidad": "NIU",
+      "cantidad": 1,
+      "precio_unitario": 500,
+      "tip_afe_igv": "10"
+     }
+    ]
+   },
+   "xml": false
+  },
+  {
+   "name": "NC con descuento por línea e ISC",
+   "method": "POST",
+   "url": "/api/v1/notas-credito",
+   "body": {
+    "serie": "FC01",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "doc_afectado_tipo": "01",
+    "doc_afectado_serie": "F001",
+    "doc_afectado_correlativo": "1",
+    "cod_motivo": "07",
+    "des_motivo": "Devolución <parcial> & ajuste",
+    "cliente": {
+     "tipo_doc": "6",
+     "num_doc": "20601234567",
+     "razon_social": "CLIENTE PRUEBA S.A.C.",
+     "direccion": "AV. LIMA 123"
+    },
+    "items": [
+     {
+      "codigo": "P1",
+      "descripcion": "Producto de prueba",
+      "unidad": "NIU",
+      "cantidad": 2,
+      "precio_unitario": 100,
+      "tip_afe_igv": "10",
+      "descuentos": [
+       {
+        "cod_tipo": "00",
+        "porcentaje": 10
+       }
+      ]
+     },
+     {
+      "codigo": "P1",
+      "descripcion": "Producto de prueba",
+      "unidad": "NIU",
+      "cantidad": 1,
+      "precio_unitario": 50,
+      "tip_afe_igv": "10",
+      "porcentaje_isc": 10
+     }
+    ]
+   },
+   "xml": true
+  },
+  {
+   "name": "ND penalidad sin documento (motivo 13)",
+   "method": "POST",
+   "url": "/api/v1/notas-debito",
+   "body": {
+    "serie": "FD01",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "cod_motivo": "13",
+    "des_motivo": "Penalidad por incumplimiento",
+    "cliente": {
+     "tipo_doc": "6",
+     "num_doc": "20601234567",
+     "razon_social": "CLIENTE PRUEBA S.A.C.",
+     "direccion": "AV. LIMA 123"
+    },
+    "items": [
+     {
+      "codigo": "P1",
+      "descripcion": "Producto de prueba",
+      "unidad": "NIU",
+      "cantidad": 1,
+      "precio_unitario": 100,
+      "tip_afe_igv": "30"
+     }
+    ]
+   },
+   "xml": true
+  },
+  {
+   "name": "ND penalidad con IGV (ERR-3507)",
+   "method": "POST",
+   "url": "/api/v1/notas-debito",
+   "body": {
+    "serie": "FD01",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "cod_motivo": "13",
+    "des_motivo": "Penalidad",
+    "cliente": {
+     "tipo_doc": "6",
+     "num_doc": "20601234567",
+     "razon_social": "CLIENTE PRUEBA S.A.C.",
+     "direccion": "AV. LIMA 123"
+    },
+    "items": [
+     {
+      "codigo": "P1",
+      "descripcion": "Producto de prueba",
+      "unidad": "NIU",
+      "cantidad": 1,
+      "precio_unitario": 118,
+      "tip_afe_igv": "10"
+     }
+    ]
+   },
+   "xml": false
+  },
+  {
+   "name": "NC validación (faltan campos)",
+   "method": "POST",
+   "url": "/api/v1/notas-credito",
+   "body": {
+    "serie": "XX",
+    "items": []
+   },
+   "xml": false
+  },
+  {
+   "name": "Crear factura crédito (con cuotas)",
+   "method": "POST",
+   "url": "/api/v1/facturas",
+   "body": {
+    "serie": "F001",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "fecha_vencimiento": "2026-10-04",
+    "tipo_operacion": "0101",
+    "tipo_moneda": "PEN",
+    "forma_pago": "Credito",
+    "cliente": {
+     "tipo_doc": "6",
+     "num_doc": "20512345678",
+     "razon_social": "CLIENTE SAC",
+     "direccion": "AV. AREQUIPA 1234, LIMA"
+    },
+    "items": [
+     {
+      "codigo": "P001",
+      "descripcion": "Producto",
+      "unidad": "NIU",
+      "cantidad": 10,
+      "precio_unitario": 118,
+      "tip_afe_igv": "10"
+     }
+    ],
+    "cuotas": [
+     {
+      "monto": 590,
+      "fecha_pago": "2026-09-04"
+     },
+     {
+      "monto": 590,
+      "fecha_pago": "2026-11-04"
+     }
+    ]
+   },
+   "xml": true
+  },
+  {
+   "name": "Crear factura exportación (tipo 0200)",
+   "method": "POST",
+   "url": "/api/v1/facturas",
+   "body": {
+    "serie": "F001",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "tipo_operacion": "0200",
+    "tipo_moneda": "USD",
+    "forma_pago": "Contado",
+    "cliente": {
+     "tipo_doc": "0",
+     "num_doc": "0",
+     "razon_social": "FOREIGN CLIENT INC",
+     "direccion": "5TH AVENUE 1000, NEW YORK, USA"
+    },
+    "items": [
+     {
+      "codigo": "EXP001",
+      "descripcion": "Producto exportación",
+      "unidad": "NIU",
+      "cantidad": 12,
+      "precio_unitario": 50,
+      "tip_afe_igv": "40"
+     }
+    ]
+   },
+   "xml": true
+  },
+  {
+   "name": "Factura gratuita",
+   "method": "POST",
+   "url": "/api/v1/facturas",
+   "body": {
+    "serie": "F001",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "tipo_operacion": "0101",
+    "tipo_moneda": "PEN",
+    "cliente": {
+     "tipo_doc": "6",
+     "num_doc": "20000000002",
+     "razon_social": "EMPRESA X SAC",
+     "direccion": "AV. AREQUIPA 1234, LIMA"
+    },
+    "items": [
+     {
+      "codigo": "P001",
+      "descripcion": "Mause Razer",
+      "unidad": "NIU",
+      "cantidad": 2,
+      "precio_unitario": 0,
+      "mto_valor_unitario": 100,
+      "tip_afe_igv": "11",
+      "porcentaje_igv": 18
+     }
+    ]
+   },
+   "xml": true
+  },
+  {
+   "name": "Factura ICBPER (bolsas plásticas)",
+   "method": "POST",
+   "url": "/api/v1/facturas",
+   "body": {
+    "serie": "F001",
+    "fecha_emision": "2026-10-24 10:15:30",
+    "tipo_operacion": "0101",
+    "tipo_moneda": "PEN",
+    "cliente": {
+     "tipo_doc": "6",
+     "num_doc": "20000000002",
+     "razon_social": "EMPRESA X SAC"
+    },
+    "items": [
+     {
+      "codigo": "P001",
+      "descripcion": "PRODUCTO 1",
+      "unidad": "NIU",
+      "cantidad": 2,
+      "precio_unitario": 118,
+      "tip_afe_igv": "10"
+     },
+     {
+      "codigo": "P002",
+      "descripcion": "BOLSA DE PLASTICO",
+      "unidad": "NIU",
+      "cantidad": 4,
+      "precio_unitario": 0.059,
+      "tip_afe_igv": "10",
+      "mto_valor_unitario": 0.05,
+      "factor_icbper": 0.2
+     }
+    ]
+   },
+   "xml": true
+  },
+  {
+   "name": "Sucursal norte",
+   "method": "POST",
+   "url": "/api/v1/sucursales",
+   "body": {
+    "nombre": "SUCURSAL NORTE",
+    "cod_local": "0001",
+    "direccion": "AV. NORTE 100",
+    "ubigeo": "150101"
+   }
+  },
+  {
+   "name": "Sucursal sur",
+   "method": "POST",
+   "url": "/api/v1/sucursales",
+   "body": {
+    "nombre": "SUCURSAL SUR",
+    "cod_local": "0002",
+    "direccion": "AV. SUR 200",
+    "ubigeo": "150101"
+   }
+  },
+  {
+   "name": "Cliente registrado",
+   "method": "POST",
+   "url": "/api/v1/clientes",
+   "body": {
+    "tipo_documento": "6",
+    "numero_documento": "20100000002",
+    "razon_social": "CLIENTE REGISTRADO S.A.C.",
+    "nombre_comercial": "REGISTRADO",
+    "direccion": "AV. LOS OLIVOS 123",
+    "email": "cliente@example.com",
+    "telefono": "999888777"
+   }
+  },
+  {
+   "name": "Cliente DNI registrado",
+   "method": "POST",
+   "url": "/api/v1/clientes",
+   "body": {
+    "tipo_documento": "1",
+    "numero_documento": "45678912",
+    "razon_social": "MARIA LOPEZ QUISPE"
+   }
+  },
+  {
+   "name": "Estados SUNAT",
+   "sql": "UPDATE invoices SET sunat_status = 'aceptado', sunat_code = '0' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001');\nUPDATE invoices SET sunat_code = '4252', sunat_description = 'El dato ingresado como atributo @listName es incorrecto.' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 5;\nUPDATE invoices SET sunat_status = 'rechazado', sunat_code = '2800', sunat_description = 'El dato ingresado en el tipo de documento de identidad del receptor no esta permitido.' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 6;\nUPDATE invoices SET sunat_status = 'anulado' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 10;\nUPDATE boletas SET sunat_status = 'aceptado', sunat_code = '0' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND correlativo IN (1, 2);\nUPDATE boletas SET sunat_status = 'rechazado', sunat_code = '2017', sunat_description = 'El numero de documento de identidad del receptor debe ser RUC' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'B001' AND correlativo = 3;\nUPDATE credit_notes SET sunat_status = 'aceptado', sunat_code = '0' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001');\nUPDATE credit_notes SET sunat_status = 'rechazado', sunat_code = '2116', sunat_description = 'El tipo de documento modificado por la Nota de credito debe ser factura electronica o ticket' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'FC01' AND correlativo = 5;\nUPDATE debit_notes SET sunat_status = 'aceptado', sunat_code = '0' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND correlativo <> 4"
+  },
+  {
+   "name": "Fechas de emisión",
+   "sql": "UPDATE invoices SET fecha_emision = '2026-10-23 09:00:00' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 1;\nUPDATE invoices SET fecha_emision = '2026-10-20 11:00:00' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 2;\nUPDATE invoices SET fecha_emision = '2026-09-15 10:00:00' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 3;\nUPDATE invoices SET fecha_emision = '2025-10-10 10:00:00' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 4;\nUPDATE boletas SET fecha_emision = '2026-05-05 12:00:00' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'B001' AND correlativo = 1;\nUPDATE credit_notes SET fecha_emision = '2026-09-16 10:00:00' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'FC01' AND correlativo = 2"
+  },
+  {
+   "name": "Clientes, productos y sucursales",
+   "sql": "UPDATE invoices SET client_num_doc = '20100000002', client_razon_social = 'CLIENTE REGISTRADO S.A.C.' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo IN (2, 7);\nUPDATE boletas SET client_num_doc = '45678912', client_razon_social = 'MARIA LOPEZ QUISPE' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND correlativo = 4;\nUPDATE invoice_items SET descripcion = 'Servicio de instalación', codigo = 'S1' WHERE invoice_id = (SELECT id FROM invoices WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 2);\nUPDATE invoice_items SET descripcion = 'Mantenimiento preventivo', codigo = 'S2' WHERE invoice_id = (SELECT id FROM invoices WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 5);\nUPDATE invoices SET cod_local = '0001', sucursal_id = (SELECT id FROM sucursales WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND cod_local = '0001') WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND correlativo IN (1, 2, 7);\nUPDATE invoices SET cod_local = '0002', sucursal_id = (SELECT id FROM sucursales WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND cod_local = '0002') WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND correlativo = 8;\nUPDATE boletas SET cod_local = '0002', sucursal_id = (SELECT id FROM sucursales WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND cod_local = '0002') WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND correlativo IN (1, 2);\nUPDATE credit_notes SET cod_local = '0001' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'FC01' AND correlativo = 2"
+  },
+  {
+   "name": "Vencimientos (sin caer en los bordes de los tramos)",
+   "sql": "UPDATE invoices SET fecha_vencimiento = '2026-05-01' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 1;\nUPDATE invoices SET fecha_vencimiento = '2026-10-27' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 7;\nUPDATE invoices SET fecha_vencimiento = '2026-09-04' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 8;\nUPDATE invoices SET fecha_vencimiento = '2026-07-01' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 9;\nUPDATE boletas SET fecha_vencimiento = '2026-10-14' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'B001' AND correlativo = 2"
+  },
+  {
+   "name": "Fechas de registro",
+   "sql": "UPDATE invoices SET created_at = '2026-10-24 14:00:01' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 1;\nUPDATE invoices SET created_at = '2026-10-24 14:00:02' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 2;\nUPDATE invoices SET created_at = '2026-10-24 14:00:03' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 3;\nUPDATE invoices SET created_at = '2026-10-24 14:00:04' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 4;\nUPDATE invoices SET created_at = '2026-10-24 14:00:05' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 5;\nUPDATE invoices SET created_at = '2026-10-24 14:00:06' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 6;\nUPDATE invoices SET created_at = '2026-10-24 14:00:07' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 7;\nUPDATE invoices SET created_at = '2026-10-24 14:00:08' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 8;\nUPDATE invoices SET created_at = '2026-10-24 14:00:09' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 9;\nUPDATE invoices SET created_at = '2026-10-24 14:00:10' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 10;\nUPDATE boletas SET created_at = '2026-10-24 14:00:11' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'B001' AND correlativo = 1;\nUPDATE boletas SET created_at = '2026-10-24 14:00:12' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'B001' AND correlativo = 2;\nUPDATE boletas SET created_at = '2026-10-24 14:00:13' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'B001' AND correlativo = 3;\nUPDATE boletas SET created_at = '2026-10-24 14:00:14' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'B001' AND correlativo = 4;\nUPDATE credit_notes SET created_at = '2026-10-24 14:00:15' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'FC01' AND correlativo = 1;\nUPDATE credit_notes SET created_at = '2026-10-24 14:00:16' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'FC01' AND correlativo = 2;\nUPDATE credit_notes SET created_at = '2026-10-24 14:00:17' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'FC01' AND correlativo = 3;\nUPDATE credit_notes SET created_at = '2026-10-24 14:00:18' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'FC01' AND correlativo = 4;\nUPDATE credit_notes SET created_at = '2026-10-24 14:00:19' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'FC01' AND correlativo = 5;\nUPDATE credit_notes SET created_at = '2026-10-24 14:00:20' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'FC01' AND correlativo = 6;\nUPDATE credit_notes SET created_at = '2026-10-24 14:00:21' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'BC01' AND correlativo = 1;\nUPDATE debit_notes SET created_at = '2026-10-24 14:00:22' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'FD01' AND correlativo = 1;\nUPDATE debit_notes SET created_at = '2026-10-24 14:00:23' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'FD01' AND correlativo = 2;\nUPDATE debit_notes SET created_at = '2026-10-24 14:00:24' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'FD01' AND correlativo = 3;\nUPDATE debit_notes SET created_at = '2026-10-24 14:00:25' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'FD01' AND correlativo = 4;\nUPDATE debit_notes SET created_at = '2026-10-24 14:00:26' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'FD01' AND correlativo = 5;\nUPDATE debit_notes SET created_at = '2026-10-24 14:00:27' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'FD01' AND correlativo = 6;\nUPDATE debit_notes SET created_at = '2026-10-24 14:00:28' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'BD01' AND correlativo = 1"
+  },
+  {
+   "name": "Pago parcial F001-1",
+   "method": "POST",
+   "url": "/api/v1/facturas/1/pagos",
+   "body": {
+    "metodo": "efectivo",
+    "monto": 100,
+    "referencia": "CAJA-1"
+   }
+  },
+  {
+   "name": "Pago parcial F001-7",
+   "method": "POST",
+   "url": "/api/v1/facturas/7/pagos",
+   "body": {
+    "metodo": "yape",
+    "monto": 20.5,
+    "referencia": "YP-778",
+    "notas": "Adelanto"
+   }
+  },
+  {
+   "name": "Pago parcial B001-2",
+   "method": "POST",
+   "url": "/api/v1/boletas/2/pagos",
+   "body": {
+    "metodo": "transferencia",
+    "monto": 5
+   }
+  },
+  {
+   "name": "Pago total F001-2",
+   "sql": "UPDATE invoices SET monto_pagado = mto_imp_venta, payment_status = 'pagado' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 2"
+  },
+  {
+   "name": "Serie por agotarse",
+   "sql": "UPDATE series SET correlativo = 90000001 WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'FD01'"
+  },
+  {
+   "name": "Rutas F001-1",
+   "sql": "UPDATE invoices SET xml_path = '20000000001/0000/2026-10-23/facturas/xml/F001-1.xml', pdf_path = '20000000001/0000/2026-10-23/facturas/pdf/F001-1.pdf' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 1"
+  },
+  {
+   "name": "XML F001-1",
+   "file": "20000000001/0000/2026-10-23/facturas/xml/F001-1.xml",
+   "content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Invoice><ID>F001-1</ID></Invoice>"
+  },
+  {
+   "name": "PDF F001-1",
+   "file": "20000000001/0000/2026-10-23/facturas/pdf/F001-1.pdf",
+   "content": "%PDF-1.4 F001-1"
+  },
+  {
+   "name": "Rutas F001-2",
+   "sql": "UPDATE invoices SET xml_path = '20000000001/0000/2026-10-20/facturas/xml/F001-2.xml', pdf_path = '20000000001/0000/2026-10-20/facturas/pdf/F001-2.pdf' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'F001' AND correlativo = 2"
+  },
+  {
+   "name": "XML F001-2",
+   "file": "20000000001/0000/2026-10-20/facturas/xml/F001-2.xml",
+   "content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Invoice><ID>F001-2</ID></Invoice>"
+  },
+  {
+   "name": "Rutas B001-1",
+   "sql": "UPDATE boletas SET xml_path = '20000000001/0000/2026-05-05/boletas/xml/B001-1.xml', pdf_path = '20000000001/0000/2026-05-05/boletas/pdf/B001-1.pdf' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'B001' AND correlativo = 1"
+  },
+  {
+   "name": "XML B001-1",
+   "file": "20000000001/0000/2026-05-05/boletas/xml/B001-1.xml",
+   "content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Invoice><ID>B001-1</ID></Invoice>"
+  },
+  {
+   "name": "PDF B001-1",
+   "file": "20000000001/0000/2026-05-05/boletas/pdf/B001-1.pdf",
+   "content": "%PDF-1.4 B001-1"
+  },
+  {
+   "name": "Rutas FC01-2",
+   "sql": "UPDATE credit_notes SET xml_path = '20000000001/0000/2026-09-16/notas_credito/xml/FC01-2.xml', pdf_path = '20000000001/0000/2026-09-16/notas_credito/pdf/FC01-2.pdf' WHERE tenant_id = (SELECT id FROM tenants WHERE ruc = '20000000001') AND serie = 'FC01' AND correlativo = 2"
+  },
+  {
+   "name": "XML FC01-2",
+   "file": "20000000001/0000/2026-09-16/notas_credito/xml/FC01-2.xml",
+   "content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Invoice><ID>FC01-2</ID></Invoice>"
+  },
+  {
+   "name": "Panel del mes",
+   "method": "GET",
+   "url": "/api/v1/panel"
+  },
+  {
+   "name": "Panel de septiembre",
+   "method": "GET",
+   "url": "/api/v1/panel?mes=2026-09"
+  },
+  {
+   "name": "Panel por rango",
+   "method": "GET",
+   "url": "/api/v1/panel?desde=2026-10-19&hasta=2026-10-24"
+  },
+  {
+   "name": "Indicadores",
+   "method": "GET",
+   "url": "/api/v1/panel/indicadores"
+  },
+  {
+   "name": "Estado SUNAT",
+   "method": "GET",
+   "url": "/api/v1/panel/estado-sunat"
+  },
+  {
+   "name": "Estado SUNAT sin documentos",
+   "method": "GET",
+   "url": "/api/v1/panel/estado-sunat?mes=2026-01"
+  },
+  {
+   "name": "Cobranzas",
+   "method": "GET",
+   "url": "/api/v1/panel/cobranzas"
+  },
+  {
+   "name": "Ventas mensuales",
+   "method": "GET",
+   "url": "/api/v1/panel/ventas-mensuales"
+  },
+  {
+   "name": "Por sucursal",
+   "method": "GET",
+   "url": "/api/v1/panel/por-sucursal"
+  },
+  {
+   "name": "Por moneda",
+   "method": "GET",
+   "url": "/api/v1/panel/por-moneda"
+  },
+  {
+   "name": "Clientes",
+   "method": "GET",
+   "url": "/api/v1/panel/clientes"
+  },
+  {
+   "name": "Productos",
+   "method": "GET",
+   "url": "/api/v1/panel/productos"
+  },
+  {
+   "name": "Documentos recientes",
+   "method": "GET",
+   "url": "/api/v1/panel/documentos-recientes"
+  },
+  {
+   "name": "Documentos recientes (5)",
+   "method": "GET",
+   "url": "/api/v1/panel/documentos-recientes?limit=5"
+  },
+  {
+   "name": "Alertas",
+   "method": "GET",
+   "url": "/api/v1/panel/alertas"
+  },
+  {
+   "name": "Registro de ventas",
+   "method": "GET",
+   "url": "/api/v1/reportes/registro-ventas?fecha_desde=2026-01-01&fecha_hasta=2026-10-25"
+  },
+  {
+   "name": "Registro de ventas filtrado",
+   "method": "GET",
+   "url": "/api/v1/reportes/registro-ventas?fecha_desde=2026-01-01&fecha_hasta=2026-10-25&serie=F001&estado_sunat=aceptado&tipo_moneda=PEN"
+  },
+  {
+   "name": "Registro de ventas por sucursal",
+   "method": "GET",
+   "url": "/api/v1/reportes/registro-ventas?fecha_desde=2026-01-01&fecha_hasta=2026-10-25&sucursal_id=1"
+  },
+  {
+   "name": "Ventas consolidado",
+   "method": "GET",
+   "url": "/api/v1/reportes/ventas-consolidado?fecha_desde=2026-01-01&fecha_hasta=2026-10-25"
+  },
+  {
+   "name": "Ventas consolidado por día",
+   "method": "GET",
+   "url": "/api/v1/reportes/ventas-consolidado?fecha_desde=2026-01-01&fecha_hasta=2026-10-25&agrupacion=dia"
+  },
+  {
+   "name": "Ventas consolidado por semana",
+   "method": "GET",
+   "url": "/api/v1/reportes/ventas-consolidado?fecha_desde=2026-01-01&fecha_hasta=2026-10-25&agrupacion=semana"
+  },
+  {
+   "name": "Notas",
+   "method": "GET",
+   "url": "/api/v1/reportes/notas?fecha_desde=2026-01-01&fecha_hasta=2026-10-25"
+  },
+  {
+   "name": "Cobranzas",
+   "method": "GET",
+   "url": "/api/v1/reportes/cobranzas?fecha_desde=2026-01-01&fecha_hasta=2026-10-25"
+  },
+  {
+   "name": "Cobranzas vencidas",
+   "method": "GET",
+   "url": "/api/v1/reportes/cobranzas?fecha_desde=2026-01-01&fecha_hasta=2026-10-25&vencido=1"
+  },
+  {
+   "name": "Cobranzas parciales",
+   "method": "GET",
+   "url": "/api/v1/reportes/cobranzas?fecha_desde=2026-01-01&fecha_hasta=2026-10-25&estado_pago=parcial"
+  },
+  {
+   "name": "Estado de cuenta",
+   "method": "GET",
+   "url": "/api/v1/reportes/por-cliente?fecha_desde=2026-01-01&fecha_hasta=2026-10-25&client_num_doc=20100000002"
+  },
+  {
+   "name": "Estado de cuenta (no registrado)",
+   "method": "GET",
+   "url": "/api/v1/reportes/por-cliente?fecha_desde=2026-01-01&fecha_hasta=2026-10-25&client_num_doc=20601234567"
+  },
+  {
+   "name": "Estado de cuenta sin cliente",
+   "method": "GET",
+   "url": "/api/v1/reportes/por-cliente?fecha_desde=2026-01-01&fecha_hasta=2026-10-25"
+  },
+  {
+   "name": "Por sucursal",
+   "method": "GET",
+   "url": "/api/v1/reportes/por-sucursal?fecha_desde=2026-01-01&fecha_hasta=2026-10-25"
+  },
+  {
+   "name": "Por sucursal (una)",
+   "method": "GET",
+   "url": "/api/v1/reportes/por-sucursal?fecha_desde=2026-01-01&fecha_hasta=2026-10-25&sucursal_id=2"
+  },
+  {
+   "name": "Reporte sin fechas",
+   "method": "GET",
+   "url": "/api/v1/reportes/registro-ventas"
+  },
+  {
+   "name": "Reporte rango invertido",
+   "method": "GET",
+   "url": "/api/v1/reportes/registro-ventas?fecha_desde=2026-10-24&fecha_hasta=2026-10-01"
+  },
+  {
+   "name": "Reporte de más de un año",
+   "method": "GET",
+   "url": "/api/v1/reportes/notas?fecha_desde=2025-01-01&fecha_hasta=2026-10-24"
+  },
+  {
+   "name": "Reporte con filtros inválidos",
+   "method": "GET",
+   "url": "/api/v1/reportes/cobranzas?fecha_desde=2026-01-01&fecha_hasta=2026-10-25&estado_pago=debe&tipo_moneda=EUR&formato=xls&agrupacion=anio&serie=F1"
+  },
+  {
+   "name": "Registro de ventas (PDF)",
+   "method": "GET",
+   "url": "/api/v1/reportes/registro-ventas?fecha_desde=2026-01-01&fecha_hasta=2026-10-25&formato=pdf"
+  },
+  {
+   "name": "Ventas consolidado (PDF)",
+   "method": "GET",
+   "url": "/api/v1/reportes/ventas-consolidado?fecha_desde=2026-01-01&fecha_hasta=2026-10-25&formato=pdf"
+  },
+  {
+   "name": "Notas (PDF)",
+   "method": "GET",
+   "url": "/api/v1/reportes/notas?fecha_desde=2026-01-01&fecha_hasta=2026-10-25&formato=pdf"
+  },
+  {
+   "name": "Cobranzas (PDF)",
+   "method": "GET",
+   "url": "/api/v1/reportes/cobranzas?fecha_desde=2026-01-01&fecha_hasta=2026-10-25&formato=pdf"
+  },
+  {
+   "name": "Por sucursal (PDF)",
+   "method": "GET",
+   "url": "/api/v1/reportes/por-sucursal?fecha_desde=2026-01-01&fecha_hasta=2026-10-25&formato=pdf"
+  },
+  {
+   "name": "Estado de cuenta (PDF)",
+   "method": "GET",
+   "url": "/api/v1/reportes/por-cliente?fecha_desde=2026-01-01&fecha_hasta=2026-10-25&client_num_doc=20100000002&formato=pdf"
+  },
+  {
+   "name": "Registro de ventas filtrado (PDF)",
+   "method": "GET",
+   "url": "/api/v1/reportes/registro-ventas?fecha_desde=2026-01-01&fecha_hasta=2026-10-25&serie=F001&estado_sunat=aceptado&formato=pdf"
+  },
+  {
+   "name": "ZIP de XML",
+   "method": "GET",
+   "url": "/api/v1/comprobantes/exportar-zip?fecha_desde=2026-01-01&fecha_hasta=2026-10-24"
+  },
+  {
+   "name": "ZIP de XML y PDF",
+   "method": "GET",
+   "url": "/api/v1/comprobantes/exportar-zip?fecha_desde=2026-01-01&fecha_hasta=2026-10-24&tipo=ambos"
+  },
+  {
+   "name": "ZIP de PDF de facturas aceptadas",
+   "method": "GET",
+   "url": "/api/v1/comprobantes/exportar-zip?fecha_desde=2026-10-01&fecha_hasta=2026-10-24&tipo=pdf&documentos=facturas&estado=aceptado"
+  },
+  {
+   "name": "ZIP por sucursal",
+   "method": "GET",
+   "url": "/api/v1/comprobantes/exportar-zip?fecha_desde=2026-01-01&fecha_hasta=2026-10-24&sucursal_id=1&documentos=facturas, notas-credito"
+  },
+  {
+   "name": "ZIP sin fechas",
+   "method": "GET",
+   "url": "/api/v1/comprobantes/exportar-zip?fecha_desde=2026-01-01"
+  },
+  {
+   "name": "ZIP fecha inválida",
+   "method": "GET",
+   "url": "/api/v1/comprobantes/exportar-zip?fecha_desde=2026-13-45&fecha_hasta=2026-10-24"
+  },
+  {
+   "name": "ZIP rango invertido",
+   "method": "GET",
+   "url": "/api/v1/comprobantes/exportar-zip?fecha_desde=2026-10-24&fecha_hasta=2026-10-01"
+  },
+  {
+   "name": "ZIP de más de un año",
+   "method": "GET",
+   "url": "/api/v1/comprobantes/exportar-zip?fecha_desde=2025-01-01&fecha_hasta=2026-10-24"
+  },
+  {
+   "name": "ZIP tipo inválido",
+   "method": "GET",
+   "url": "/api/v1/comprobantes/exportar-zip?fecha_desde=2026-01-01&fecha_hasta=2026-10-24&tipo=zip"
+  },
+  {
+   "name": "ZIP documentos inválidos",
+   "method": "GET",
+   "url": "/api/v1/comprobantes/exportar-zip?fecha_desde=2026-01-01&fecha_hasta=2026-10-24&documentos=guias,cotizaciones"
+  },
+  {
+   "name": "ZIP sin archivos",
+   "method": "GET",
+   "url": "/api/v1/comprobantes/exportar-zip?fecha_desde=2026-02-01&fecha_hasta=2026-02-28"
+  },
+  {
+   "name": "Buscar cliente registrado",
+   "method": "GET",
+   "url": "/api/v1/buscar-documento?tipo=6&numero=20100000002"
+  },
+  {
+   "name": "Buscar RUC en SUNAT",
+   "method": "GET",
+   "url": "/api/v1/buscar-documento?tipo=6&numero=20100000009"
+  },
+  {
+   "name": "Buscar DNI en RENIEC",
+   "method": "GET",
+   "url": "/api/v1/buscar-documento?tipo=1&numero=45678913"
+  },
+  {
+   "name": "Buscar DNI con nombre completo",
+   "method": "GET",
+   "url": "/api/v1/buscar-documento?tipo=1&numero=45678914"
+  },
+  {
+   "name": "Buscar RUC inexistente",
+   "method": "GET",
+   "url": "/api/v1/buscar-documento?tipo=6&numero=20100000010"
+  },
+  {
+   "name": "Buscar RUC sin razón social",
+   "method": "GET",
+   "url": "/api/v1/buscar-documento?tipo=6&numero=20100000011"
+  },
+  {
+   "name": "Buscar carné de extranjería",
+   "method": "GET",
+   "url": "/api/v1/buscar-documento?tipo=4&numero=X00000001"
+  },
+  {
+   "name": "Buscar sin tipo",
+   "method": "GET",
+   "url": "/api/v1/buscar-documento?numero=20100000002"
+  },
+  {
+   "name": "Buscar número corto",
+   "method": "GET",
+   "url": "/api/v1/buscar-documento?tipo=6&numero=123"
+  },
+  {
+   "name": "Consultar CPE sin datos",
+   "method": "GET",
+   "url": "/api/v1/consultar-cpe"
+  },
+  {
+   "name": "Consultar CPE fecha ISO",
+   "method": "GET",
+   "url": "/api/v1/consultar-cpe?tipo_doc=01&serie=F001&correlativo=1&fecha_emision=2026-10-24&monto=1180"
+  },
+  {
+   "name": "Consultar CPE sin credenciales",
+   "method": "GET",
+   "url": "/api/v1/consultar-cpe?tipo_doc=01&serie=F001&correlativo=1&fecha_emision=24/10/2026&monto=1180"
+  }
+ ]
+}

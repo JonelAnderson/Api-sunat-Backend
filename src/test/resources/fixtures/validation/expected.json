@@ -1,0 +1,193 @@
+[
+    {
+        "name": "requeridos y nombres de atributo",
+        "errors": {
+            "serie": [
+                "El campo serie es obligatorio."
+            ],
+            "fecha_emision": [
+                "El campo fecha emision es obligatorio."
+            ],
+            "cliente.num_doc": [
+                "El campo cliente.num doc es obligatorio."
+            ],
+            "items": [
+                "El campo elementos es obligatorio."
+            ]
+        },
+        "validated": null
+    },
+    {
+        "name": "tipos sobre valores JSON",
+        "errors": {
+            "serie": [
+                "El campo serie debe ser una cadena de caracteres."
+            ],
+            "cantidad": [
+                "El campo cantidad debe ser numérico."
+            ],
+            "entero": [
+                "El campo entero debe ser un número entero."
+            ],
+            "activo": [
+                "El campo activo debe tener un valor verdadero o falso."
+            ],
+            "lista": [
+                "El campo lista debe ser un conjunto."
+            ],
+            "fecha": [
+                "El campo fecha debe ser una fecha válida."
+            ],
+            "correo": [
+                "El campo correo no es un correo válido."
+            ]
+        },
+        "validated": null
+    },
+    {
+        "name": "tamaños por tipo",
+        "errors": {
+            "texto": [
+                "El campo texto no debe ser mayor que 5 caracteres."
+            ],
+            "monto": [
+                "El campo monto no debe ser mayor que 100."
+            ],
+            "monto_str": [
+                "El campo monto str no debe ser mayor que 2 caracteres."
+            ],
+            "arr": [
+                "El campo arr no debe tener más de 2 elementos."
+            ],
+            "corto": [
+                "El campo corto debe contener al menos 3 caracteres.",
+                "El campo corto debe contener 4 caracteres."
+            ]
+        },
+        "validated": null
+    },
+    {
+        "name": "comodines de items y mensajes personalizados",
+        "errors": {
+            "items.1.descripcion": [
+                "El campo items.1.descripcion es obligatorio."
+            ],
+            "items.2.descripcion": [
+                "El campo items.2.descripcion es obligatorio."
+            ],
+            "items.0.cantidad": [
+                "La cantidad debe ser mayor a cero."
+            ],
+            "items.0.unidad": [
+                "El campo items.0.unidad no está en la lista de valores permitidos."
+            ],
+            "items.0.precio_unitario": [
+                "El campo items.0.precio_unitario es obligatorio."
+            ],
+            "items.1.precio_unitario": [
+                "El tamaño de items.1.precio_unitario debe ser de al menos 0."
+            ]
+        },
+        "validated": null
+    },
+    {
+        "name": "regex en forma de arreglo y mensaje por regla",
+        "errors": {
+            "serie": [
+                "La serie de factura debe empezar con F seguido de 3 caracteres alfanuméricos (ej. F001)."
+            ],
+            "ruc": [
+                "El formato del campo ruc no es válido."
+            ]
+        },
+        "validated": null
+    },
+    {
+        "name": "dependientes",
+        "errors": {
+            "cuotas": [
+                "El campo cuotas es obligatorio cuando forma pago es Credito."
+            ],
+            "detraccion.cod_bien_detraccion": [
+                "El campo detraccion.cod bien detraccion es obligatorio cuando detraccion está presente."
+            ],
+            "detraccion.cta_banco": [
+                "El campo detraccion.cta banco es obligatorio cuando detraccion.porcentaje está presente."
+            ],
+            "razon_social": [
+                "El campo razon social es obligatorio a menos que tipo doc esté en 0, 1."
+            ],
+            "fecha_vencimiento": [
+                "El campo fecha vencimiento es obligatorio cuando forma pago es Credito."
+            ]
+        },
+        "validated": null
+    },
+    {
+        "name": "sometimes y nullable",
+        "errors": {
+            "b": [
+                "El campo b es obligatorio."
+            ],
+            "d": [
+                "El campo d debe ser un número entero."
+            ]
+        },
+        "validated": null
+    },
+    {
+        "name": "between gt con campo y digits",
+        "errors": {
+            "tasa": [
+                "El campo tasa tiene que estar entre 0 - 30."
+            ],
+            "monto": [
+                "El campo monto debe ser mayor que 20."
+            ],
+            "codigo": [
+                "El campo codigo debe tener 3 dígitos."
+            ],
+            "nombre": [
+                "El campo nombre tiene que tener entre 3 - 10 caracteres."
+            ]
+        },
+        "validated": null
+    },
+    {
+        "name": "validated descarta claves no declaradas",
+        "errors": {},
+        "validated": {
+            "serie": "F001",
+            "cliente": {
+                "tipo_doc": "6",
+                "num_doc": "20123456789"
+            },
+            "extras": {
+                "libre": true,
+                "n": 2
+            },
+            "items": [
+                {
+                    "descripcion": "A",
+                    "cantidad": 1
+                },
+                {
+                    "descripcion": "B",
+                    "cantidad": 2
+                }
+            ]
+        }
+    },
+    {
+        "name": "in con enteros y booleanos",
+        "errors": {
+            "codigo": [
+                "El campo codigo no está en la lista de valores permitidos."
+            ],
+            "lista": [
+                "El campo lista no está en la lista de valores permitidos."
+            ]
+        },
+        "validated": null
+    }
+]

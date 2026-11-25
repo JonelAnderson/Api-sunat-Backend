@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Port de resources/views/pdf/formats/ticket_80.blade.php de API-PRO. -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style th:replace="~{styles :: base}"></style>
+    <style th:replace="~{styles :: ticket}"></style>
+    <style th:inline="text">
+        @page { size: [[${page_size}]]; }
+
+    </style>
+</head>
+<body>
+    <th:block th:each="section : ${sections}" th:switch="${section}">
+        <th:block th:case="'header'"><th:block th:if="${is_ticket}" th:insert="~{sections :: header}"></th:block></th:block>
+        <th:block th:case="'document-badge'"><th:block th:if="${is_ticket}" th:insert="~{sections :: document_badge}"></th:block></th:block>
+        <th:block th:case="'receiver'"><th:block th:insert="~{sections :: receiver}"></th:block></th:block>
+        <th:block th:case="'note-reference'"><th:block th:insert="~{sections :: note_reference}"></th:block></th:block>
+        <th:block th:case="'dispatch-info'"><th:block th:insert="~{sections :: dispatch_info}"></th:block></th:block>
+        <th:block th:case="'items'"><th:block th:insert="~{sections :: items}"></th:block></th:block>
+        <th:block th:case="'totals'"><th:block th:insert="~{sections :: totals}"></th:block></th:block>
+        <th:block th:case="'leyenda'"><th:block th:insert="~{sections :: leyenda}"></th:block></th:block>
+        <th:block th:case="'payment-info'"><th:block th:insert="~{sections :: payment_info}"></th:block></th:block>
+        <th:block th:case="'bank-accounts'"><th:block th:insert="~{sections :: bank_accounts}"></th:block></th:block>
+        <th:block th:case="'qr-code'"><th:block th:insert="~{sections :: qr_code}"></th:block></th:block>
+        <th:block th:case="'retention-info'"><th:block th:insert="~{sections :: retention_info}"></th:block></th:block>
+        <th:block th:case="'retention-items'"><th:block th:insert="~{sections :: retention_items}"></th:block></th:block>
+        <th:block th:case="'retention-totals'"><th:block th:insert="~{sections :: retention_totals}"></th:block></th:block>
+        <th:block th:case="'settlement-info'"><th:block th:insert="~{sections :: settlement_info}"></th:block></th:block>
+        <th:block th:case="'settlement-totals'"><th:block th:insert="~{sections :: settlement_totals}"></th:block></th:block>
+        <th:block th:case="'footer'"><th:block th:insert="~{sections :: footer}"></th:block></th:block>
+    </th:block>
+</body>
+</html>

@@ -1,0 +1,950 @@
+{
+    "now": "2026-10-24T15:15:30Z",
+    "tenant": {
+        "ruc": "20000000001",
+        "razon_social": "EMPRESA DEMO S.A.C.",
+        "nombre_comercial": "EMPRESA DEMO",
+        "direccion": "AV. DEMO 123",
+        "ubigeo": "150101",
+        "departamento": "LIMA",
+        "provincia": "LIMA",
+        "distrito": "LIMA",
+        "sol_user": "MODDATOS",
+        "sol_pass": "MODDATOS",
+        "api_key": "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",
+        "api_secret": "oracle-secret",
+        "cert_pem": "C:/laragon/www/API-SUNAT-MULTILENGUAJE/spring-boot/src/test/resources/fixtures/certs/cert-con-clave.pem"
+    },
+    "series": [
+        {
+            "tipo": "01",
+            "serie": "F001"
+        },
+        {
+            "tipo": "03",
+            "serie": "B001"
+        }
+    ],
+    "steps": [
+        {
+            "name": "Crear factura básica",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "forma_pago": "Contado",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20601234567",
+                    "razon_social": "DISTRIBUIDORA COMERCIAL DEL PACIFICO S.A.C.",
+                    "direccion": "AV. REPUBLICA DE PANAMA NRO. 3565, SURQUILLO - LIMA"
+                },
+                "items": [
+                    {
+                        "codigo": "PROD-001",
+                        "descripcion": "Laptop Lenovo ThinkPad E14",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 2360,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Crear factura, codigo producto",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "forma_pago": "Contado",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20605145648",
+                    "razon_social": "TRANSPORTES SAN MARTIN S.A.C.",
+                    "direccion": "AV. INDUSTRIAL 456 - LIMA"
+                },
+                "items": [
+                    {
+                        "codigo": "SERV-001",
+                        "cod_producto_sunat": "78181500",
+                        "descripcion": "Mantenimiento preve",
+                        "unidad": "ZZ",
+                        "cantidad": 1,
+                        "precio_unitario": 354,
+                        "tip_afe_igv": "10"
+                    },
+                    {
+                        "codigo": "REP-045",
+                        "cod_producto_sunat": "43211508",
+                        "descripcion": "Scanner automotriz",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 118,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Crear factura crédito (con cuotas)",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "fecha_vencimiento": "2026-10-04",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "forma_pago": "Credito",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20512345678",
+                    "razon_social": "CLIENTE SAC",
+                    "direccion": "AV. AREQUIPA 1234, LIMA"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "Producto",
+                        "unidad": "NIU",
+                        "cantidad": 10,
+                        "precio_unitario": 118,
+                        "tip_afe_igv": "10"
+                    }
+                ],
+                "cuotas": [
+                    {
+                        "monto": 590,
+                        "fecha_pago": "2026-09-04"
+                    },
+                    {
+                        "monto": 590,
+                        "fecha_pago": "2026-11-04"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Crear factura exonerada (servicios médicos)",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "forma_pago": "Contado",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20512345678",
+                    "razon_social": "CLIENTE SAC",
+                    "direccion": "AV. AREQUIPA 1234, LIMA"
+                },
+                "items": [
+                    {
+                        "codigo": "SERV001",
+                        "descripcion": "Consulta médica especializada",
+                        "unidad": "ZZ",
+                        "cantidad": 1,
+                        "precio_unitario": 200,
+                        "tip_afe_igv": "20"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Crear factura exportación (tipo 0200)",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0200",
+                "tipo_moneda": "USD",
+                "forma_pago": "Contado",
+                "cliente": {
+                    "tipo_doc": "0",
+                    "num_doc": "0",
+                    "razon_social": "FOREIGN CLIENT INC",
+                    "direccion": "5TH AVENUE 1000, NEW YORK, USA"
+                },
+                "items": [
+                    {
+                        "codigo": "EXP001",
+                        "descripcion": "Producto exportación",
+                        "unidad": "NIU",
+                        "cantidad": 12,
+                        "precio_unitario": 50,
+                        "tip_afe_igv": "40"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Factura inafecta (Tipo 4)",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC",
+                    "direccion": "AV. AREQUIPA 1234, LIMA"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "PROD 1",
+                        "unidad": "KGM",
+                        "cantidad": 2,
+                        "precio_unitario": 50,
+                        "tip_afe_igv": "30"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Factura gratuita",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC",
+                    "direccion": "AV. AREQUIPA 1234, LIMA"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "Mause Razer",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 0,
+                        "mto_valor_unitario": 100,
+                        "tip_afe_igv": "11",
+                        "porcentaje_igv": 18
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Factura con detracción",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC",
+                    "direccion": "AV. AREQUIPA 1234, LIMA"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "Matenimiento preventivo de PC",
+                        "unidad": "ZZ",
+                        "cantidad": 1,
+                        "precio_unitario": 1000,
+                        "tip_afe_igv": "10"
+                    }
+                ],
+                "detraccion": {
+                    "tipo_operacion": "1001",
+                    "cod_bien": "014",
+                    "cod_medio_pago": "001",
+                    "cta_banco": "0004-3342343243",
+                    "porcentaje": 4,
+                    "monto": 37.76
+                }
+            },
+            "xml": true
+        },
+        {
+            "name": "Factura anticipo",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC",
+                    "direccion": "AV. AREQUIPA 1234, LIMA"
+                },
+                "anticipos": [
+                    {
+                        "tipo_doc": "02",
+                        "serie": "F001",
+                        "correlativo": "111",
+                        "monto": 100
+                    }
+                ],
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "PROD 1",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 118,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Factura descuento global",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "Cuadernos",
+                        "unidad": "NIU",
+                        "cantidad": 10,
+                        "precio_unitario": 2.36,
+                        "tip_afe_igv": "10"
+                    },
+                    {
+                        "codigo": "P002",
+                        "descripcion": "Radio",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 59,
+                        "tip_afe_igv": "10"
+                    }
+                ],
+                "descuentos_globales": [
+                    {
+                        "cod_tipo": "02",
+                        "monto": 3
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Factura descuento por línea",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "Cuadernos",
+                        "unidad": "NIU",
+                        "cantidad": 10,
+                        "precio_unitario": 2.36,
+                        "tip_afe_igv": "10",
+                        "descuentos": [
+                            {
+                                "cod_tipo": "00",
+                                "monto": 4
+                            }
+                        ]
+                    },
+                    {
+                        "codigo": "P002",
+                        "descripcion": "Radio",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 59,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Factura descuento que NO afecta base",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC"
+                },
+                "descuentos_globales": [
+                    {
+                        "cod_tipo": "03",
+                        "monto_base": 100,
+                        "factor": 0.1,
+                        "monto": 10
+                    }
+                ],
+                "items": [
+                    {
+                        "codigo": "P004",
+                        "descripcion": "PRODUCTO 4",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 118,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Factura ICBPER (bolsas plásticas)",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "PRODUCTO 1",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 118,
+                        "tip_afe_igv": "10"
+                    },
+                    {
+                        "codigo": "P002",
+                        "descripcion": "BOLSA DE PLASTICO",
+                        "unidad": "NIU",
+                        "cantidad": 4,
+                        "precio_unitario": 0.059,
+                        "tip_afe_igv": "10",
+                        "mto_valor_unitario": 0.05,
+                        "factor_icbper": 0.2
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Factura ISC (impuesto selectivo)",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "PROD CON ISC",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 138.06,
+                        "tip_afe_igv": "10",
+                        "porcentaje_isc": 17,
+                        "tip_sis_isc": "01"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Factura IVAP (arroz pilado)",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC"
+                },
+                "items": [
+                    {
+                        "codigo": "A001",
+                        "descripcion": "SACOS DE ARROZ",
+                        "unidad": "SA",
+                        "cantidad": 900,
+                        "precio_unitario": 104,
+                        "tip_afe_igv": "17",
+                        "porcentaje_igv": 4
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Factura + Guía de Remisión",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "tipo_documento": "01",
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC"
+                },
+                "guias": [
+                    {
+                        "tipo_doc": "09",
+                        "nro_doc": "T001-2"
+                    }
+                ],
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "PROD 1",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 118,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Factura compleja (todos los campos)",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "tipo_documento": "01",
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "PROD 1 - Gravado",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 118,
+                        "tip_afe_igv": "10"
+                    },
+                    {
+                        "codigo": "P002",
+                        "descripcion": "PROD 2 - Exonerado",
+                        "unidad": "KGM",
+                        "cantidad": 2,
+                        "precio_unitario": 50,
+                        "tip_afe_igv": "20"
+                    },
+                    {
+                        "codigo": "P003",
+                        "descripcion": "PROD 3 - Inafecto",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 100,
+                        "tip_afe_igv": "30"
+                    },
+                    {
+                        "codigo": "P004",
+                        "descripcion": "PROD 4 - Gratuita Gravada (Retiro)",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 0,
+                        "mto_valor_unitario": 100,
+                        "tip_afe_igv": "13",
+                        "porcentaje_igv": 18
+                    },
+                    {
+                        "codigo": "P005",
+                        "descripcion": "PROD 5 - Gratuita Inafecta (Retiro)",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 0,
+                        "mto_valor_unitario": 100,
+                        "tip_afe_igv": "32"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Factura ICBPER + ítem gratuito",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "tipo_documento": "01",
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "PRODUCTO 1",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 118,
+                        "tip_afe_igv": "10"
+                    },
+                    {
+                        "codigo": "P002",
+                        "descripcion": "BOLSA - Gratuita",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 0,
+                        "mto_valor_unitario": 0.05,
+                        "tip_afe_igv": "13",
+                        "factor_icbper": 0.2
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Factura con contingencia (modo offline)",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "enviar_automatico": false,
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "PROD 1",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 118,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Factura envío manual (enviar_automatico=false)",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "forma_pago": "Contado",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20512345678",
+                    "razon_social": "CLIENTE SAC"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "Producto",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 118,
+                        "tip_afe_igv": "10"
+                    }
+                ],
+                "enviar_automatico": false
+            },
+            "xml": true
+        },
+        {
+            "name": "Boleta básica (DNI, contado)",
+            "method": "POST",
+            "url": "/api/v1/boletas",
+            "body": {
+                "serie": "B001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_moneda": "PEN",
+                "forma_pago": "Contado",
+                "cliente": {
+                    "tipo_doc": "1",
+                    "num_doc": "72243561",
+                    "razon_social": "CHAVEZ HUINCHO JORGE"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "Lapicero",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 1.5,
+                        "tip_afe_igv": "20"
+                    }
+                ],
+                "solo_registro": true
+            },
+            "xml": true
+        },
+        {
+            "name": "Boleta con codigo productos sunat",
+            "method": "POST",
+            "url": "/api/v1/boletas",
+            "body": {
+                "serie": "B001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "1",
+                    "num_doc": "45678912",
+                    "razon_social": "JUAN PEREZ ROJAS",
+                    "direccion": "JR. LOS OLIVOS 123"
+                },
+                "items": [
+                    {
+                        "codigo": "SERV-002",
+                        "cod_producto_sunat": "78181500",
+                        "descripcion": "Cambio de aceite y filtros",
+                        "unidad": "ZZ",
+                        "cantidad": 1,
+                        "precio_unitario": 90,
+                        "tip_afe_igv": "20"
+                    }
+                ],
+                "solo_registro": false
+            },
+            "xml": true
+        },
+        {
+            "name": "Boleta consumidor final (sin DNI)",
+            "method": "POST",
+            "url": "/api/v1/boletas",
+            "body": {
+                "serie": "B001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cliente": {
+                    "tipo_doc": "0",
+                    "num_doc": "99999999",
+                    "razon_social": "CONSUMIDOR FINAL"
+                },
+                "items": [
+                    {
+                        "codigo": "P002",
+                        "descripcion": "Producto varios",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 12,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Boleta NRUS (tipo_operacion 0113 — auto)",
+            "method": "POST",
+            "url": "/api/v1/boletas",
+            "body": {
+                "serie": "B001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cliente": {
+                    "tipo_doc": "1",
+                    "num_doc": "12345678",
+                    "razon_social": "CLIENTE NRUS"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "Producto NRUS",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 50,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Boleta MYPE Restaurantes (10.5% en 2026)",
+            "method": "POST",
+            "url": "/api/v1/boletas",
+            "body": {
+                "serie": "B001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cliente": {
+                    "tipo_doc": "1",
+                    "num_doc": "12345678",
+                    "razon_social": "CLIENTE RESTAURANTE"
+                },
+                "items": [
+                    {
+                        "codigo": "PLATO001",
+                        "descripcion": "Almuerzo ejecutivo",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 27.5,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Boleta solo registro (envío vía resumen)",
+            "method": "POST",
+            "url": "/api/v1/boletas",
+            "body": {
+                "serie": "B001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cliente": {
+                    "tipo_doc": "1",
+                    "num_doc": "12345678",
+                    "razon_social": "CLIENTE"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "Producto",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 10,
+                        "tip_afe_igv": "10"
+                    }
+                ],
+                "solo_registro": true
+            },
+            "xml": true
+        },
+        {
+            "name": "Boleta envío manual (enviar_automatico=false)",
+            "method": "POST",
+            "url": "/api/v1/boletas",
+            "body": {
+                "serie": "B001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cliente": {
+                    "tipo_doc": "1",
+                    "num_doc": "12345678",
+                    "razon_social": "CLIENTE"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "Producto",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 10,
+                        "tip_afe_igv": "10"
+                    }
+                ],
+                "enviar_automatico": false
+            },
+            "xml": true
+        },
+        {
+            "name": "Boleta con anticipo",
+            "method": "POST",
+            "url": "/api/v1/boletas",
+            "body": {
+                "serie": "B001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "1",
+                    "num_doc": "12345678",
+                    "razon_social": "CLIENTE PRUEBA ANTICIPO",
+                    "direccion": "AV. LIMA 123"
+                },
+                "anticipos": [
+                    {
+                        "tipo_doc": "03",
+                        "serie": "B001",
+                        "correlativo": "50",
+                        "monto": 100
+                    }
+                ],
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "PROD 1",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 118,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": true
+        }
+    ]
+}

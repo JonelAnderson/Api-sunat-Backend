@@ -1,0 +1,65 @@
+# API SUNAT en Docker (WSL) usando el PostgreSQL compartido de desarrollo "postgres-dev".
+#
+#   docker compose -f docker-compose.local.yml up -d --build
+#   docker compose -f docker-compose.local.yml logs -f api
+#
+# Requisitos:
+#   - El contenedor postgres-dev levantado (~/postgres-dev/docker-compose.yml, red "postgres-dev_default").
+#   - La base y el usuario de DB_DATABASE / DB_USERNAME / DB_PASSWORD (.env) creados en postgres-dev.
+#   - REDIS_PASSWORD definido en .env.
+#
+# Diferencias con docker-compose.yml (pila completa con su propio Postgres):
+#   - Sin Postgres propio: la API entra a postgres-dev por la red externa.
+#   - Redis con contraseña y SIN puerto publicado (solo lo ve la API): ver docs/SEGURIDAD_2026-11-23.md, H1.
+#   - La API solo se publica en 127.0.0.1 (en WSL mirrored con firewall=false, 0.0.0.0 la abriría a la red local).
+name: api-sunat
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # En este WSL los contenedores en red bridge no siempre salen a internet durante el build (Maven).
+      network: host
+    image: api-sunat-spring-boot:dev
+    env_file: .env
+    environment:
+      DB_HOST: postgres-dev
+      DB_PORT: 5432
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      STORAGE_PATH: /data/storage
+    ports:
+      - "127.0.0.1:${APP_PORT:-8081}:8081"
+    volumes:
+      - storage:/data/storage
+    networks:
+      - default
+      - postgres-dev
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  redis:
+    image: redis:7.4-alpine
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    command: ["sh", "-c", "exec redis-server --appendonly yes --requirepass \"$$REDIS_PASSWORD\""]
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD-SHELL", "REDISCLI_AUTH=\"$$REDIS_PASSWORD\" redis-cli ping | grep -q PONG"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+networks:
+  postgres-dev:
+    external: true
+    name: postgres-dev_default
+
+volumes:
+  redisdata:
+  storage:

@@ -1,0 +1,127 @@
+# API SUNAT — Coolify (build pack "Docker Compose"). Runbook: deploy/README.md.
+#   Coolify: Base Directory "/"  ·  Docker Compose Location "/docker-compose.coolify.yml"
+# Servicios: db (PostgreSQL) y redis (caché, límites, colas) -> api (Spring Boot; Flyway migra la base al arrancar).
+# Sin "ports:" en la API: Coolify la publica por su proxy (Traefik) con el dominio que se le asigne al servicio "api" (con el puerto:
+# https://api.midominio.pe:8081). Es la API pública de las empresas (/api/v1) y también sirve /api/admin (panel y consola, protegidos
+# por JWT + MFA o por clave de servicio + IP) y /api/portal (portal de clientes).
+# Sin "${VAR:?}": Coolify compila con un .env que solo trae las variables marcadas para el build, y compose interpola todo el
+# archivo también al compilar, así que un secreto que (bien) no está en el build haría fallar la compilación. Las obligatorias las
+# exige quien las usa al arrancar (la API: clave de cifrado, conexión; Postgres: POSTGRES_PASSWORD).
+# Red compartida (SUNAT_SHARED_NETWORK): los frontends (panel y portal) llegan a la API como http://sunat-api:8081. QA y producción
+# en el mismo servidor: un nombre distinto. Todos los nombres (volúmenes, variables) llevan el prefijo "sunat".
+
+services:
+  db:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-api_sunat}
+      POSTGRES_USER: ${DB_USERNAME:-api_sunat}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      TZ: UTC
+    volumes:
+      # Postgres 18 guarda los datos en /var/lib/postgresql/18/docker: el volumen va en /var/lib/postgresql (no en .../data).
+      - sunat-db-data:/var/lib/postgresql
+      - sunat-db-backups:/backups
+    # Solo en 127.0.0.1 del VPS, nunca a internet (DBeaver entra con un túnel SSH). Otro puerto que el ERP (5433) y la consola (5435).
+    ports:
+      - "127.0.0.1:${SUNAT_DB_LOCAL_PORT:-5436}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7.4-alpine
+    restart: unless-stopped
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    command: ["sh", "-c", "exec redis-server --appendonly yes --requirepass \"$$REDIS_PASSWORD\""]
+    volumes:
+      - sunat-redis-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$$REDIS_PASSWORD\" --no-auth-warning ping | grep -q PONG"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_SEED: "false"
+      APP_URL: ${APP_URL}
+      APP_TIMEZONE: ${APP_TIMEZONE:-America/Lima}
+      # AES-256 en base64 (openssl rand -base64 32): cifra la clave SOL, api_secret, etc. en la base. Perderla = perder esos datos.
+      APP_ENCRYPTION_KEY: ${APP_ENCRYPTION_KEY}
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_DATABASE: ${DB_DATABASE:-api_sunat}
+      DB_USERNAME: ${DB_USERNAME:-api_sunat}
+      DB_PASSWORD: ${DB_PASSWORD}
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      STORAGE_PATH: /data/storage
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-}
+      INTERNAL_TOKEN: ${INTERNAL_TOKEN:-}
+      SAAS_BRIDGE_SECRET: ${SAAS_BRIDGE_SECRET:-}
+      # Autoservicio apagado: las empresas y sus planes los gestiona la consola de plataforma.
+      REGISTRO_PUBLICO_ENABLED: ${REGISTRO_PUBLICO_ENABLED:-false}
+      SUSCRIPCION_AUTOSERVICIO_ENABLED: ${SUSCRIPCION_AUTOSERVICIO_ENABLED:-false}
+      # Panel interno (Api-sunat-Frontend): JWT + MFA. Sin ADMIN_JWT_SECRET el panel queda apagado.
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET:-}
+      ADMIN_ALLOWED_ORIGINS: ${ADMIN_ALLOWED_ORIGINS:-}
+      ADMIN_INITIAL_EMAIL: ${ADMIN_INITIAL_EMAIL:-}
+      ADMIN_INITIAL_PASSWORD: ${ADMIN_INITIAL_PASSWORD:-}
+      # Acceso de servicio de la consola de plataforma: la misma clave que API_SUNAT_ADMIN_KEY de la consola, y la IP de la consola.
+      ADMIN_SERVICE_KEY: ${ADMIN_SERVICE_KEY:-}
+      ADMIN_SERVICE_ALLOWED_IPS: ${ADMIN_SERVICE_ALLOWED_IPS:-}
+      # Portal de clientes (Portal-api-sunat-Frontend): clave DISTINTA de ADMIN_JWT_SECRET; sin ella el portal queda apagado (503).
+      PORTAL_JWT_SECRET: ${PORTAL_JWT_SECRET:-}
+      PORTAL_ALLOWED_ORIGINS: ${PORTAL_ALLOWED_ORIGINS:-}
+      # SUNAT: credenciales de guías de remisión (API REST) y consulta integrada de CPE. Las URLs tienen su valor oficial por defecto.
+      SUNAT_PROD_GRE_CLIENT_ID: ${SUNAT_PROD_GRE_CLIENT_ID:-}
+      SUNAT_PROD_GRE_CLIENT_SECRET: ${SUNAT_PROD_GRE_CLIENT_SECRET:-}
+      SUNAT_BETA_GRE_CLIENT_ID: ${SUNAT_BETA_GRE_CLIENT_ID:-}
+      SUNAT_BETA_GRE_CLIENT_SECRET: ${SUNAT_BETA_GRE_CLIENT_SECRET:-}
+      # Consulta RUC / DNI (proveedor externo) y correo de recuperación de credenciales.
+      LOOKUP_API_TOKEN: ${LOOKUP_API_TOKEN:-}
+      MAIL_HOST: ${MAIL_HOST:-}
+      MAIL_PORT: ${MAIL_PORT:-587}
+      MAIL_USERNAME: ${MAIL_USERNAME:-}
+      MAIL_PASSWORD: ${MAIL_PASSWORD:-}
+      MAIL_FROM_ADDRESS: ${MAIL_FROM_ADDRESS:-}
+      MAIL_FROM_NAME: ${MAIL_FROM_NAME:-API SUNAT}
+      # Alertas operativas (Slack, Discord o genérico). Vacío = solo log.
+      OPS_WEBHOOK_URL: ${OPS_WEBHOOK_URL:-}
+      OPS_LABEL: ${OPS_LABEL:-api-sunat}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      LOG_FORMAT: ${LOG_FORMAT:-json}
+    volumes:
+      # XML, CDR, PDF y certificados de las empresas: respaldar este volumen junto con la base.
+      - sunat-storage:/data/storage
+    networks:
+      default:
+      sunat-shared:
+        aliases: [sunat-api]
+
+networks:
+  sunat-shared:
+    name: ${SUNAT_SHARED_NETWORK:-sunat-prod}
+
+volumes:
+  sunat-db-data:
+  sunat-db-backups:
+  sunat-redis-data:
+  sunat-storage:

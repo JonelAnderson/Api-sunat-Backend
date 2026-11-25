@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Port de resources/views/pdf/reports/layout.blade.php de API-PRO; el contenido de cada reporte
+     llega como bloques (indicadores, tablas, textos) armados en ReportPdf. -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style th:inline="text">
+        @page { size: [[${page_size}]]; margin: 10mm; }
+        * { margin: 0; padding: 0; }
+        body { font-family: Helvetica, Arial, sans-serif; color: #1a1a1a; line-height: 1.4; font-size: 9pt; margin: 30px 28px; }
+        table { width: 100%; border-collapse: collapse; }
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .text-left { text-align: left; }
+        .page-border { padding: 10px 10px; }
+        .header-table { margin-bottom: 6px; }
+        .header-table td { vertical-align: middle; }
+        .logo-cell { width: 90px; }
+        .logo-cell img { max-width: 80px; max-height: 80px; }
+        .emitter-cell { padding-left: 10px; }
+        .empresa-name { font-size: 12pt; font-weight: bold; color: #000; }
+        .empresa-info { font-size: 8pt; font-weight: bold; color: #000; }
+        .report-title-section { text-align: center; padding: 8px 0; margin-bottom: 8px; border-top: 0.5px solid #000; border-bottom: 0.5px solid #000; }
+        .report-title { font-size: 12pt; font-weight: bold; color: #000; letter-spacing: 0.5px; }
+        .report-period { font-size: 9pt; font-weight: bold; color: #000; margin-top: 2px; }
+        .filters-applied { font-size: 8pt; color: #444; margin-top: 2px; }
+        .kpi-container { width: 100%; margin-bottom: 12px; }
+        .kpi-container td { padding: 2px 3px; }
+        .kpi-box { border: 0.5px solid #000; border-radius: 6px; padding: 7px 6px; text-align: center; }
+        .kpi-value { font-size: 13px; font-weight: bold; color: #000; }
+        .kpi-label { font-size: 6.5px; color: #000; text-transform: uppercase; margin-top: 2px; letter-spacing: 0.4px; }
+        .kpi-highlight .kpi-value { color: #166534; }
+        .kpi-warning .kpi-value { color: #92400e; }
+        .kpi-danger .kpi-value { color: #991b1b; }
+        .data-table { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 8.5pt; -fs-table-paginate: paginate; }
+        /* Como dompdf: la cabecera de la tabla se repite en cada página */
+        thead { display: table-header-group; }
+        .data-table th { background: #f5f5f5; border-bottom: 0.5px solid #000; padding: 5px 4px; font-size: 8pt; font-weight: bold; text-align: left; color: #000; }
+        .data-table th.text-right { text-align: right; }
+        .data-table td { border-bottom: 0.5px solid #000; padding: 4px; font-weight: bold; color: #000; }
+        .data-table tr.even td { background: #fafafa; }
+        .data-table .subtotal td { font-weight: bold; background: #f0f0f0; border-top: 0.5px solid #000; }
+        .data-table .total td { font-weight: bold; background: #eee; color: #000; border-top: 0.5px solid #000; font-size: 9.5pt; }
+        .section-title { font-size: 9.5pt; font-weight: bold; color: #000; margin: 12px 0 4px; padding-bottom: 3px; border-bottom: 0.5px solid #000; }
+        .aging-bar { height: 10px; border-radius: 2px; display: inline-block; min-width: 2px; }
+        .aging-green { background: #16a34a; }
+        .aging-yellow { background: #d97706; }
+        .aging-orange { background: #ea580c; }
+        .aging-red { background: #dc2626; }
+        .aging-darkred { background: #991b1b; }
+        .aging-crimson { background: #450a0a; }
+        .badge { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 7pt; font-weight: bold; letter-spacing: 0.3px; }
+        .badge-success { background: #dcfce7; color: #166534; }
+        .badge-warning { background: #fef3c7; color: #92400e; }
+        .badge-danger { background: #fee2e2; color: #991b1b; }
+        .footer { font-size: 7.5pt; font-weight: bold; color: #000; margin-top: 8px; padding-top: 6px; border-top: 0.5px solid #000; }
+        .info-table { width: 100%; margin-bottom: 8px; font-size: 9.5px; }
+    </style>
+</head>
+<body>
+    <div class="page-border">
+
+    <table class="header-table">
+        <tr>
+            <td class="logo-cell" th:if="${h.filled(tenant.logo_base64)}"><img th:src="${tenant.logo_base64}" alt="Logo"/></td>
+            <td class="emitter-cell">
+                <div class="empresa-name" th:text="${tenant.nombre_comercial}"></div>
+                <div class="empresa-info" th:text="'RUC: ' + ${tenant.ruc}"></div>
+                <div class="empresa-info" th:text="${tenant.direccion}"></div>
+            </td>
+            <td style="text-align:right; font-size:8pt; color:#555; width:130px;" th:text="${generated_at}"></td>
+        </tr>
+    </table>
+
+    <div class="report-title-section">
+        <div class="report-title" th:text="${titulo}"></div>
+        <div class="report-period" th:if="${periodo_texto != null}" th:text="${periodo_texto}"></div>
+        <div class="filters-applied" th:if="${!#lists.isEmpty(filtros)}">Filtros: <th:block th:each="f, s : ${filtros}"><span th:text="${f.filtro} + ': ' + ${f.valor}"></span><span th:unless="${s.last}"> | </span></th:block></div>
+    </div>
+
+    <th:block th:each="b : ${blocks}">
+        <table th:if="${b.type == 'kpis'}" class="kpi-container">
+            <tr>
+                <td th:each="k : ${b.items}" th:class="${k.cls}">
+                    <div class="kpi-box">
+                        <div class="kpi-value" th:text="${k.value}"></div>
+                        <div class="kpi-label" th:text="${k.label}"></div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <div th:if="${b.type == 'text'}" th:style="${b.style}" th:text="${b.text}"></div>
+
+        <th:block th:if="${b.type == 'info'}">
+            <div class="section-title" th:text="${b.title}"></div>
+            <table class="info-table">
+                <tr>
+                    <td style="width: 50%;"><th:block th:each="l, s : ${b.left}"><strong th:if="${s.first}" th:text="${l}"></strong><span th:unless="${s.first}" th:text="${l}"></span><br th:unless="${s.last}"/></th:block></td>
+                    <td style="width: 50%;"><th:block th:each="l, s : ${b.right}"><span th:text="${l}"></span><br th:unless="${s.last}"/></th:block></td>
+                </tr>
+            </table>
+        </th:block>
+
+        <th:block th:if="${b.type == 'table'}">
+            <div class="section-title" th:if="${b.title != null}" th:text="${b.title}"></div>
+            <table class="data-table" th:style="${b.style}">
+                <thead th:if="${!#lists.isEmpty(b.headers)}">
+                    <tr><th th:each="x : ${b.headers}" th:class="${x.cls}" th:style="${x.style}" th:text="${x.text}"></th></tr>
+                </thead>
+                <tbody>
+                    <tr th:each="r, s : ${b.rows}" th:class="${r.cls != null ? r.cls : (s.even ? 'even' : null)}">
+                        <td th:each="c : ${r.cells}" th:class="${c.cls}" th:colspan="${c.colspan > 1 ? c.colspan : null}"><strong th:if="${c.strong != null}" th:text="${c.strong}"></strong><th:block th:text="${c.text}"></th:block><span th:if="${c.badge != null}" th:class="'badge ' + ${c.badge.cls}" th:text="${c.badge.text}"></span><div th:if="${c.bar != null}" th:class="'aging-bar ' + ${c.bar.cls}" th:style="'width: ' + ${c.bar.width} + '%;'"></div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </th:block>
+    </th:block>
+
+    <div class="footer">
+        <table>
+            <tr>
+                <td style="width:50%;" th:text="'Generado el ' + ${generated_at}"></td>
+                <td style="text-align:right;" th:text="${tenant.nombre_comercial} + ' — ' + ${titulo}"></td>
+            </tr>
+        </table>
+    </div>
+
+    </div>
+</body>
+</html>

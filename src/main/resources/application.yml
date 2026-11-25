@@ -1,0 +1,199 @@
+server:
+  port: 8081
+  shutdown: graceful
+  # RemoteIpValve de Tomcat: solo confía en X-Forwarded-* de redes privadas/loopback (SEC-013)
+  forward-headers-strategy: native
+  error:
+    whitelabel:
+      enabled: false
+  tomcat:
+    max-swallow-size: 10MB
+
+spring:
+  application:
+    name: api-sunat-spring-boot
+  main:
+    banner-mode: off
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_DATABASE:api_sunat_spring_boot}
+    username: ${DB_USERNAME:api_sunat}
+    password: ${DB_PASSWORD:}
+    hikari:
+      maximum-pool-size: ${DB_POOL_SIZE:10}
+      connection-timeout: 10000
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+        format_sql: false
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  mail:
+    host: ${MAIL_HOST:}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.connectiontimeout: 10000
+      mail.smtp.timeout: 15000
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      timeout: 3s
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 12MB
+  # 404 propio (JSON) para rutas inexistentes: desde Spring 6.1 / Boot 4 DispatcherServlet lanza
+  # NoHandlerFoundException por defecto (la propiedad spring.mvc.throw-exception-if-no-handler-found se retiró).
+  web:
+    resources:
+      add-mappings: false
+  jackson:
+    time-zone: UTC
+    # Boot 4 usa Jackson 3, que cambió valores por defecto (orden alfabético de propiedades, enums por toString…).
+    # Las respuestas de la API salen por PhpJson (que fija lo mismo); esto cubre lo que serializa Spring.
+    use-jackson2-defaults: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: never
+
+springdoc:
+  api-docs:
+    path: /api/docs/openapi.json
+  swagger-ui:
+    path: /api/docs
+  packages-to-scan: pe.facturacion.api
+
+app:
+  env: ${APP_ENV:local}
+  url: ${APP_URL:http://localhost:8081}
+  timezone: ${APP_TIMEZONE:America/Lima}
+  debug: ${APP_DEBUG:false}
+  encryption-key: ${APP_ENCRYPTION_KEY:}
+  seed: ${APP_SEED:false}
+  storage-path: ${STORAGE_PATH:./storage}
+  # Registro público de empresas (POST /api/v1/registro). Apagado: 404 y no se crea nada; las empresas las da de alta la
+  # consola de plataforma (/api/admin) o el bridge SaaS.
+  registro:
+    enabled: ${REGISTRO_PUBLICO_ENABLED:false}
+  # Autoservicio de suscripción con la API key de la empresa (POST /api/v1/suscripcion, PUT .../cambiar-plan y .../cancelar).
+  # Apagado: 404 y no se cambia nada; el plan lo gestiona la consola. Las lecturas (GET suscripcion, pagos, uso) siguen activas.
+  suscripcion-autoservicio:
+    enabled: ${SUSCRIPCION_AUTOSERVICIO_ENABLED:false}
+  # Emisión sin cupo para todas las empresas (equivale al switch global del panel de API-PRO)
+  emision-ilimitada-global: ${EMISION_ILIMITADA_GLOBAL:false}
+  queue:
+    worker-enabled: ${QUEUE_WORKER_ENABLED:true}
+    concurrency: ${QUEUE_CONCURRENCY:4}
+    poll-ms: ${QUEUE_POLL_MS:500}
+  # Tareas programadas (routes/console.php de API-PRO). Con varias instancias basta dejarlo activo
+  # en todas: un candado en Redis hace que cada tarea corra en una sola.
+  scheduler:
+    enabled: ${SCHEDULER_ENABLED:true}
+  # Alertas operativas (certificados, jobs fallidos, salud) a Slack/Discord/webhook genérico
+  ops:
+    webhook-url: ${OPS_WEBHOOK_URL:}
+    webhook-timeout: ${OPS_WEBHOOK_TIMEOUT:5}
+    throttle-minutes: ${OPS_THROTTLE_MINUTES:60}
+    label: ${OPS_LABEL:API SUNAT}
+    cert-dias-aviso: ${OPS_CERT_DIAS_AVISO:30}
+    jobs-fallidos-umbral: ${OPS_JOBS_FALLIDOS_UMBRAL:1}
+  webhooks:
+    allow-private: ${WEBHOOKS_ALLOW_PRIVATE:false}
+  security:
+    cors-allowed-origins: ${CORS_ALLOWED_ORIGINS:}
+    internal-token: ${INTERNAL_TOKEN:}
+    bridge-secret: ${SAAS_BRIDGE_SECRET:}
+    tenant-cache-ttl: ${TENANT_CACHE_TTL:60}
+    idempotency-ttl-days: ${IDEMPOTENCY_TTL_DAYS:1}
+    api-logs-retention-days: ${API_LOGS_RETENTION_DAYS:90}
+  # Panel de administración interno (/api/admin/**, Docs/api-sunat-panel-admin-diseno.md).
+  # Sin ADMIN_JWT_SECRET (>= 32 bytes) el panel queda apagado: todo /api/admin/** responde 503.
+  admin:
+    jwt-secret: ${ADMIN_JWT_SECRET:}
+    allowed-origins: ${ADMIN_ALLOWED_ORIGINS:}
+    initial-email: ${ADMIN_INITIAL_EMAIL:}
+    initial-password: ${ADMIN_INITIAL_PASSWORD:}
+    # Acceso de servicio de la consola de plataforma (X-Admin-Key + X-Admin-Actor). Sin clave de >= 32 bytes o sin
+    # IP permitidas queda apagado: nunca se acepta una clave sola.
+    service:
+      key: ${ADMIN_SERVICE_KEY:}
+      allowed-ips: ${ADMIN_SERVICE_ALLOWED_IPS:}
+  # Portal de clientes (/api/portal/**, Docs/api-sunat-portal-clientes-diseno.md). Sin PORTAL_JWT_SECRET (>= 32 bytes y
+  # distinta de ADMIN_JWT_SECRET) queda apagado: todo /api/portal/** responde 503.
+  portal:
+    jwt-secret: ${PORTAL_JWT_SECRET:}
+    allowed-origins: ${PORTAL_ALLOWED_ORIGINS:}
+  mail:
+    from-address: ${MAIL_FROM_ADDRESS:no-reply@example.com}
+    from-name: ${MAIL_FROM_NAME:API SUNAT}
+  demo:
+    api-key: ${DEMO_API_KEY:}
+    api-secret: ${DEMO_API_SECRET:}
+  # Consulta RUC/DNI (GET /buscar-documento)
+  lookup:
+    base-url: ${LOOKUP_BASE_URL:https://api.apis.net.pe}
+    token: ${LOOKUP_API_TOKEN:}
+    timeout: ${LOOKUP_TIMEOUT:8}
+  pdf:
+    default-format: ${PDF_DEFAULT_FORMAT:a4}
+    auto-generate: ${PDF_AUTO_GENERATE:true}
+  lc:
+    igv-tasa: ${LC_IGV_TASA:18}
+    retencion-tasa: ${LC_RETENCION_RENTA_TASA:1.5}
+    retencion-tasa-oro: ${LC_RETENCION_RENTA_TASA_ORO:4}
+    retencion-minimo: ${LC_RETENCION_RENTA_MINIMO:700}
+    agro-exento-hasta: ${LC_AGRO_EXENTO_HASTA:2026-12-31}
+    uit:
+      2025: ${LC_UIT_2025:5350}
+      2026: ${LC_UIT_2026:5500}
+    limite-uit: ${LC_LIMITE_UIT:75}
+    reversion-dias: ${LC_REVERSION_DIAS:5}
+  sunat:
+    http-timeout: ${SUNAT_HTTP_TIMEOUT:60}
+    per-tenant-per-minute: ${SUNAT_PER_TENANT_PER_MINUTE:120}
+    # Consulta Integrada de CPE (GET /consultar-cpe)
+    cpe:
+      auth-url: ${SUNAT_CPE_AUTH_URL:https://api-seguridad.sunat.gob.pe/v1}
+      api-url: ${SUNAT_CPE_API_URL:https://api.sunat.gob.pe/v1}
+    beta:
+      fe: ${SUNAT_BETA_FE_URL:https://e-beta.sunat.gob.pe/ol-ti-itcpfegem-beta/billService}
+      retention: ${SUNAT_BETA_RETENTION_URL:https://e-beta.sunat.gob.pe/ol-ti-itemision-otroscpe-gem-beta/billService}
+      consulta-cdr: ${SUNAT_BETA_CONSULTA_CDR_URL:https://e-beta.sunat.gob.pe/ol-it-wsconscpegem-beta/billConsultService}
+      gre-auth: ${SUNAT_BETA_GRE_AUTH_URL:https://gre-test.nubefact.com/v1}
+      gre-cpe: ${SUNAT_BETA_GRE_CPE_URL:https://gre-test.nubefact.com/v1}
+      gre-client-id: ${SUNAT_BETA_GRE_CLIENT_ID:}
+      gre-client-secret: ${SUNAT_BETA_GRE_CLIENT_SECRET:}
+    production:
+      fe: ${SUNAT_PROD_FE_URL:https://e-factura.sunat.gob.pe/ol-ti-itcpfegem/billService}
+      retention: ${SUNAT_PROD_RETENTION_URL:https://e-factura.sunat.gob.pe/ol-ti-itemision-otroscpe-gem/billService}
+      consulta-cdr: ${SUNAT_PROD_CONSULTA_CDR_URL:https://e-factura.sunat.gob.pe/ol-it-wsconscpegem/billConsultService}
+      gre-auth: ${SUNAT_PROD_GRE_AUTH_URL:https://api-seguridad.sunat.gob.pe/v1}
+      gre-cpe: ${SUNAT_PROD_GRE_CPE_URL:https://api-cpe.sunat.gob.pe/v1}
+      gre-client-id: ${SUNAT_PROD_GRE_CLIENT_ID:}
+      gre-client-secret: ${SUNAT_PROD_GRE_CLIENT_SECRET:}
+
+logging:
+  level:
+    root: ${LOG_LEVEL:INFO}
+    org.hibernate.SQL: WARN

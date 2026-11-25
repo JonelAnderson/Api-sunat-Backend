@@ -1,0 +1,1323 @@
+{
+    "now": "2026-10-24T15:15:30Z",
+    "tenant": {
+        "ruc": "20000000001",
+        "razon_social": "EMPRESA DEMO S.A.C.",
+        "nombre_comercial": "EMPRESA DEMO",
+        "direccion": "AV. DEMO 123",
+        "ubigeo": "150101",
+        "departamento": "LIMA",
+        "provincia": "LIMA",
+        "distrito": "LIMA",
+        "sol_user": "MODDATOS",
+        "sol_pass": "MODDATOS",
+        "api_key": "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",
+        "api_secret": "oracle-secret",
+        "plan": "business",
+        "cert_pem": "C:/laragon/www/API-SUNAT-MULTILENGUAJE/spring-boot/src/test/resources/fixtures/certs/cert-con-clave.pem"
+    },
+    "series": [
+        {
+            "tipo": "01",
+            "serie": "F001"
+        },
+        {
+            "tipo": "09",
+            "serie": "T001"
+        },
+        {
+            "tipo": "31",
+            "serie": "V001"
+        },
+        {
+            "tipo": "20",
+            "serie": "R001"
+        },
+        {
+            "tipo": "40",
+            "serie": "P001"
+        }
+    ],
+    "steps": [
+        {
+            "name": "GRR — Transporte público",
+            "method": "POST",
+            "url": "/api/v1/guias-remision",
+            "body": {
+                "serie": "T001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "destinatario": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA DESTINO SAC"
+                },
+                "cod_traslado": "01",
+                "mod_traslado": "01",
+                "fecha_traslado": "2026-10-24",
+                "fecha_de_entrega_al_transportista": "2026-10-24",
+                "peso_total": 12.5,
+                "und_peso_total": "KGM",
+                "partida_ubigeo": "150203",
+                "partida_direccion": "AV ITALIA 123, RIMAC",
+                "llegada_ubigeo": "150101",
+                "llegada_direccion": "AV LIMA 456, CERCADO",
+                "transportista": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "TRANSPORTES SAC",
+                    "nro_mtc": "0001"
+                },
+                "items": [
+                    {
+                        "codigo": "PROD1",
+                        "descripcion": "Producto de prueba",
+                        "cantidad": 2,
+                        "unidad": "NIU"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "GRR — Transporte privado",
+            "method": "POST",
+            "url": "/api/v1/guias-remision",
+            "body": {
+                "serie": "T001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "destinatario": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA DESTINO SAC"
+                },
+                "cod_traslado": "01",
+                "mod_traslado": "02",
+                "fecha_traslado": "2026-10-24",
+                "peso_total": 50,
+                "und_peso_total": "KGM",
+                "num_bultos": 5,
+                "partida_ubigeo": "150203",
+                "partida_direccion": "AV ITALIA 123, RIMAC",
+                "llegada_ubigeo": "150101",
+                "llegada_direccion": "AV LIMA 456, CERCADO",
+                "vehiculo": {
+                    "placa": "ABC123",
+                    "secundarios": [
+                        {
+                            "placa": "XYZ789"
+                        }
+                    ]
+                },
+                "conductor": {
+                    "tipo": "Principal",
+                    "tipo_doc": "1",
+                    "num_doc": "44004400",
+                    "nombres": "ROBERTO",
+                    "apellidos": "RODRIGUEZ VALENCIA",
+                    "licencia": "0001122020"
+                },
+                "items": [
+                    {
+                        "codigo": "PROD1",
+                        "descripcion": "Laptop HP ProBook 450",
+                        "cantidad": 10,
+                        "unidad": "NIU"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "GRR — Vehículo menor M1/L",
+            "method": "POST",
+            "url": "/api/v1/guias-remision",
+            "body": {
+                "serie": "T001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "destinatario": {
+                    "tipo_doc": "1",
+                    "num_doc": "44004400",
+                    "razon_social": "JUAN PEREZ GARCIA"
+                },
+                "cod_traslado": "01",
+                "mod_traslado": "02",
+                "fecha_traslado": "2026-10-24",
+                "peso_total": 5,
+                "und_peso_total": "KGM",
+                "indicadores": [
+                    "SUNAT_Envio_IndicadorTrasladoVehiculoM1L"
+                ],
+                "partida_ubigeo": "150101",
+                "partida_direccion": "AV LIMA 123, CERCADO",
+                "llegada_ubigeo": "150203",
+                "llegada_direccion": "JR COMERCIO 456, RIMAC",
+                "items": [
+                    {
+                        "codigo": "PED001",
+                        "descripcion": "Paquete pequeño delivery",
+                        "cantidad": 1,
+                        "unidad": "ZZ"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "GRR — Entre establecimientos propios",
+            "method": "POST",
+            "url": "/api/v1/guias-remision",
+            "body": {
+                "serie": "T001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "destinatario": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000001",
+                    "razon_social": "EMPRESA DEMO S.A.C."
+                },
+                "cod_traslado": "04",
+                "mod_traslado": "02",
+                "indicadores": [
+                    "SUNAT_Envio_IndicadorTrasladoVehiculoM1L"
+                ],
+                "fecha_traslado": "2026-10-24",
+                "peso_total": 200,
+                "und_peso_total": "KGM",
+                "num_bultos": 15,
+                "partida_ubigeo": "150203",
+                "partida_direccion": "Almacén Central - AV ITALIA 123, RIMAC",
+                "partida_ruc": "20000000001",
+                "partida_cod_local": "0000",
+                "llegada_ubigeo": "150101",
+                "llegada_direccion": "Sucursal Lima - AV LIMA 456, CERCADO",
+                "llegada_ruc": "20000000001",
+                "llegada_cod_local": "0001",
+                "items": [
+                    {
+                        "codigo": "INV001",
+                        "descripcion": "Televisor Samsung 55 pulgadas",
+                        "cantidad": 10,
+                        "unidad": "NIU"
+                    },
+                    {
+                        "codigo": "INV002",
+                        "descripcion": "Refrigeradora LG 350L",
+                        "cantidad": 5,
+                        "unidad": "NIU"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "GRR — Múltiples conductores",
+            "method": "POST",
+            "url": "/api/v1/guias-remision",
+            "body": {
+                "serie": "T001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "destinatario": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "DISTRIBUIDORA NORTE SAC"
+                },
+                "cod_traslado": "01",
+                "mod_traslado": "02",
+                "fecha_traslado": "2026-10-24",
+                "peso_total": 500,
+                "und_peso_total": "KGM",
+                "num_bultos": 30,
+                "partida_ubigeo": "150101",
+                "partida_direccion": "AV ARGENTINA 1500, LIMA",
+                "llegada_ubigeo": "130101",
+                "llegada_direccion": "AV MANSICHE 500, TRUJILLO",
+                "vehiculo": {
+                    "placa": "D4E567"
+                },
+                "conductores": [
+                    {
+                        "tipo": "Principal",
+                        "tipo_doc": "1",
+                        "num_doc": "44004400",
+                        "nombres": "CARLOS",
+                        "apellidos": "GOMEZ TORRES",
+                        "licencia": "Q44004400"
+                    },
+                    {
+                        "tipo": "Secundario",
+                        "tipo_doc": "1",
+                        "num_doc": "55005500",
+                        "nombres": "PEDRO",
+                        "apellidos": "LOPEZ RUIZ",
+                        "licencia": "Q55005500"
+                    }
+                ],
+                "items": [
+                    {
+                        "codigo": "FERT01",
+                        "descripcion": "Fertilizante NPK 50kg",
+                        "cantidad": 100,
+                        "unidad": "NIU"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "GRR envío manual (enviar_automatico=false)",
+            "method": "POST",
+            "url": "/api/v1/guias-remision",
+            "body": {
+                "serie": "T001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "destinatario": {
+                    "tipo_doc": "6",
+                    "num_doc": "20512345678",
+                    "razon_social": "CLIENTE FINAL SAC"
+                },
+                "cod_traslado": "01",
+                "mod_traslado": "02",
+                "fecha_traslado": "2026-10-24",
+                "peso_total": 100.5,
+                "und_peso_total": "KGM",
+                "partida_ubigeo": "150101",
+                "partida_direccion": "AV. ALMACEN 100, LIMA",
+                "llegada_ubigeo": "040101",
+                "llegada_direccion": "AV. DESTINO 200, AREQUIPA",
+                "vehiculo": {
+                    "placa": "ABC123"
+                },
+                "conductor": {
+                    "tipo_doc": "1",
+                    "num_doc": "12345678",
+                    "nombres": "JUAN",
+                    "apellidos": "PEREZ",
+                    "licencia": "Q12345678"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "Cajas de productos",
+                        "unidad": "NIU",
+                        "cantidad": 10
+                    }
+                ],
+                "enviar_automatico": false
+            },
+            "xml": true
+        },
+        {
+            "name": "Actualizar guía rechazada",
+            "method": "PUT",
+            "url": "/api/v1/guias-remision/1",
+            "body": {
+                "transportista": {
+                    "tipo_doc": "6",
+                    "num_doc": "20987654321",
+                    "razon_social": "TRANSPORTES CORREGIDO SAC"
+                },
+                "fecha_emision": "2026-10-24 10:15:30",
+                "fecha_traslado": "2026-10-24"
+            },
+            "xml": false
+        },
+        {
+            "name": "GRT — Transporte estándar (atajo)",
+            "method": "POST",
+            "url": "/api/v1/guias-remision-transportista",
+            "body": {
+                "serie": "V001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "remitente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20512345678",
+                    "razon_social": "EMPRESA REMITENTE SAC"
+                },
+                "destinatario": {
+                    "tipo_doc": "6",
+                    "num_doc": "20987654321",
+                    "razon_social": "EMPRESA DESTINATARIA SAC"
+                },
+                "doc_relacionado": {
+                    "tipo_codigo": "09",
+                    "numero": "T001-2",
+                    "ruc_emisor": "20512345678"
+                },
+                "cod_traslado": "01",
+                "mod_traslado": "01",
+                "fecha_traslado": "2026-10-24",
+                "peso_total": 500,
+                "und_peso_total": "KGM",
+                "num_bultos": 5,
+                "partida_ubigeo": "150101",
+                "partida_direccion": "AV. ALMACEN 100, LIMA",
+                "llegada_ubigeo": "040101",
+                "llegada_direccion": "AV. DESTINO 200, AREQUIPA",
+                "vehiculo": {
+                    "placa": "ABC123",
+                    "nro_circulacion": "ABC321981R"
+                },
+                "conductor": [
+                    {
+                        "tipo_doc": "1",
+                        "num_doc": "12345678",
+                        "nombres": "JUAN",
+                        "apellidos": "PEREZ",
+                        "licencia": "Q12345678"
+                    }
+                ],
+                "items": [
+                    {
+                        "codigo": "M001",
+                        "descripcion": "Mercancia transportada",
+                        "unidad": "NIU",
+                        "cantidad": 10
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "GRT — Vía endpoint general (tipo_documento=31)",
+            "method": "POST",
+            "url": "/api/v1/guias-remision",
+            "body": {
+                "tipo_documento": "31",
+                "serie": "V001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "remitente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20512345678",
+                    "razon_social": "EMPRESA REMITENTE SAC"
+                },
+                "destinatario": {
+                    "tipo_doc": "6",
+                    "num_doc": "20987654321",
+                    "razon_social": "EMPRESA DESTINATARIA SAC"
+                },
+                "doc_relacionado": {
+                    "tipo_codigo": "09",
+                    "numero": "T001-1",
+                    "ruc_emisor": "20512345678"
+                },
+                "cod_traslado": "01",
+                "mod_traslado": "01",
+                "fecha_traslado": "2026-10-24",
+                "peso_total": 500,
+                "und_peso_total": "KGM",
+                "partida_ubigeo": "150101",
+                "partida_direccion": "AV. ALMACEN 100, LIMA",
+                "llegada_ubigeo": "040101",
+                "llegada_direccion": "AV. DESTINO 200, AREQUIPA",
+                "vehiculo": {
+                    "placa": "ABC123",
+                    "nro_circulacion": "ABC321981R"
+                },
+                "conductor": [
+                    {
+                        "tipo_doc": "1",
+                        "num_doc": "12345678",
+                        "nombres": "JUAN",
+                        "apellidos": "PEREZ",
+                        "licencia": "Q12345678"
+                    }
+                ],
+                "items": [
+                    {
+                        "codigo": "M001",
+                        "descripcion": "Mercancia",
+                        "unidad": "NIU",
+                        "cantidad": 10
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "GRT — Subcontratado (yo subcontraté a otro transportista)",
+            "method": "POST",
+            "url": "/api/v1/guias-remision-transportista",
+            "body": {
+                "serie": "V001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "remitente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20512345678",
+                    "razon_social": "EMPRESA REMITENTE SAC"
+                },
+                "destinatario": {
+                    "tipo_doc": "6",
+                    "num_doc": "20987654321",
+                    "razon_social": "EMPRESA DESTINATARIA SAC"
+                },
+                "doc_relacionado": {
+                    "tipo_codigo": "09",
+                    "numero": "T001-1",
+                    "ruc_emisor": "20512345678"
+                },
+                "cod_traslado": "01",
+                "mod_traslado": "01",
+                "fecha_traslado": "2026-10-24",
+                "peso_total": 500,
+                "und_peso_total": "KGM",
+                "partida_ubigeo": "150101",
+                "partida_direccion": "AV. ALMACEN 100",
+                "llegada_ubigeo": "040101",
+                "llegada_direccion": "AV. DESTINO 200",
+                "vehiculo": {
+                    "placa": "ABC123"
+                },
+                "conductor": [
+                    {
+                        "tipo_doc": "1",
+                        "num_doc": "12345678",
+                        "nombres": "JUAN",
+                        "apellidos": "PEREZ",
+                        "licencia": "Q12345678"
+                    }
+                ],
+                "items": [
+                    {
+                        "codigo": "M001",
+                        "descripcion": "Mercancia",
+                        "unidad": "NIU",
+                        "cantidad": 10
+                    }
+                ],
+                "datos_subcontratador": {
+                    "tipo_doc": "6",
+                    "num_doc": "20111222333",
+                    "razon_social": "TRANSPORTES SUBCONTRATADO SAC"
+                },
+                "datos_pagador_flete": {
+                    "tipo": "subcontratador"
+                }
+            },
+            "xml": true
+        },
+        {
+            "name": "GRT — Pagador del flete = tercero",
+            "method": "POST",
+            "url": "/api/v1/guias-remision-transportista",
+            "body": {
+                "serie": "V001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "remitente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20512345678",
+                    "razon_social": "EMPRESA REMITENTE SAC"
+                },
+                "destinatario": {
+                    "tipo_doc": "6",
+                    "num_doc": "20987654321",
+                    "razon_social": "EMPRESA DESTINATARIA SAC"
+                },
+                "doc_relacionado": {
+                    "tipo_codigo": "09",
+                    "numero": "T001-1",
+                    "ruc_emisor": "20512345678"
+                },
+                "cod_traslado": "01",
+                "mod_traslado": "01",
+                "fecha_traslado": "2026-10-24",
+                "peso_total": 500,
+                "und_peso_total": "KGM",
+                "partida_ubigeo": "150101",
+                "partida_direccion": "AV. ALMACEN 100",
+                "llegada_ubigeo": "040101",
+                "llegada_direccion": "AV. DESTINO 200",
+                "vehiculo": {
+                    "placa": "ABC123"
+                },
+                "conductor": [
+                    {
+                        "tipo_doc": "1",
+                        "num_doc": "12345678",
+                        "nombres": "JUAN",
+                        "apellidos": "PEREZ",
+                        "licencia": "Q12345678"
+                    }
+                ],
+                "items": [
+                    {
+                        "codigo": "M001",
+                        "descripcion": "Mercancia",
+                        "unidad": "NIU",
+                        "cantidad": 10
+                    }
+                ],
+                "datos_pagador_flete": {
+                    "tipo": "tercero",
+                    "tipo_doc": "6",
+                    "num_doc": "20444555666",
+                    "razon_social": "EMPRESA QUE PAGA EL FLETE SAC"
+                }
+            },
+            "xml": true
+        },
+        {
+            "name": "GRT — Múltiples conductores y vehículos secundarios",
+            "method": "POST",
+            "url": "/api/v1/guias-remision-transportista",
+            "body": {
+                "serie": "V001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "remitente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20512345678",
+                    "razon_social": "EMPRESA REMITENTE SAC"
+                },
+                "destinatario": {
+                    "tipo_doc": "6",
+                    "num_doc": "20987654321",
+                    "razon_social": "EMPRESA DESTINATARIA SAC"
+                },
+                "doc_relacionado": {
+                    "tipo_codigo": "09",
+                    "numero": "T001-1",
+                    "ruc_emisor": "20512345678"
+                },
+                "cod_traslado": "01",
+                "mod_traslado": "01",
+                "fecha_traslado": "2026-10-24",
+                "peso_total": 1000,
+                "und_peso_total": "KGM",
+                "partida_ubigeo": "150101",
+                "partida_direccion": "AV. ALMACEN 100",
+                "llegada_ubigeo": "040101",
+                "llegada_direccion": "AV. DESTINO 200",
+                "vehiculo": {
+                    "placa": "ABC123",
+                    "nro_circulacion": "ABC321981R",
+                    "secundarios": [
+                        {
+                            "placa": "XYZ456",
+                            "nro_circulacion": "ABC321981R"
+                        }
+                    ]
+                },
+                "conductor": [
+                    {
+                        "tipo_doc": "1",
+                        "num_doc": "12345678",
+                        "nombres": "JUAN",
+                        "apellidos": "PEREZ",
+                        "licencia": "Q12345678"
+                    },
+                    {
+                        "tipo_doc": "1",
+                        "num_doc": "87654321",
+                        "nombres": "PEDRO",
+                        "apellidos": "GOMEZ",
+                        "licencia": "Q87654321"
+                    }
+                ],
+                "items": [
+                    {
+                        "codigo": "M001",
+                        "descripcion": "Mercancia",
+                        "unidad": "NIU",
+                        "cantidad": 20
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "GRT — DAM (importación/exportación)",
+            "method": "POST",
+            "url": "/api/v1/guias-remision-transportista",
+            "body": {
+                "serie": "V001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "remitente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20512345678",
+                    "razon_social": "IMPORTADORA SAC"
+                },
+                "destinatario": {
+                    "tipo_doc": "6",
+                    "num_doc": "20987654321",
+                    "razon_social": "CLIENTE NACIONAL SAC"
+                },
+                "doc_relacionado": {
+                    "tipo_codigo": "50",
+                    "numero": "118-2026-10-123456"
+                },
+                "cod_traslado": "08",
+                "mod_traslado": "01",
+                "fecha_traslado": "2026-10-24",
+                "peso_total": 2000,
+                "und_peso_total": "KGM",
+                "partida_ubigeo": "070101",
+                "partida_direccion": "PUERTO DEL CALLAO",
+                "llegada_ubigeo": "150101",
+                "llegada_direccion": "AV. ALMACEN CLIENTE 100",
+                "vehiculo": {
+                    "placa": "ABC123"
+                },
+                "conductor": [
+                    {
+                        "tipo_doc": "1",
+                        "num_doc": "12345678",
+                        "nombres": "JUAN",
+                        "apellidos": "PEREZ",
+                        "licencia": "Q12345678"
+                    }
+                ],
+                "items": [
+                    {
+                        "codigo": "IMP001",
+                        "descripcion": "Mercancía importada",
+                        "unidad": "NIU",
+                        "cantidad": 50
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "GRT — Envío manual",
+            "method": "POST",
+            "url": "/api/v1/guias-remision-transportista",
+            "body": {
+                "serie": "V001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "remitente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20512345678",
+                    "razon_social": "REMITENTE SAC"
+                },
+                "destinatario": {
+                    "tipo_doc": "6",
+                    "num_doc": "20987654321",
+                    "razon_social": "DESTINATARIO SAC"
+                },
+                "doc_relacionado": {
+                    "tipo_codigo": "09",
+                    "numero": "T001-1",
+                    "ruc_emisor": "20512345678"
+                },
+                "cod_traslado": "01",
+                "mod_traslado": "01",
+                "fecha_traslado": "2026-10-24",
+                "peso_total": 500,
+                "und_peso_total": "KGM",
+                "partida_ubigeo": "150101",
+                "partida_direccion": "AV. ALMACEN 100",
+                "llegada_ubigeo": "040101",
+                "llegada_direccion": "AV. DESTINO 200",
+                "vehiculo": {
+                    "placa": "ABC123"
+                },
+                "conductor": [
+                    {
+                        "tipo_doc": "1",
+                        "num_doc": "12345678",
+                        "nombres": "JUAN",
+                        "apellidos": "PEREZ",
+                        "licencia": "Q12345678"
+                    }
+                ],
+                "items": [
+                    {
+                        "codigo": "M001",
+                        "descripcion": "Mercancia",
+                        "unidad": "NIU",
+                        "cantidad": 10
+                    }
+                ],
+                "enviar_automatico": false
+            },
+            "xml": true
+        },
+        {
+            "name": "GRR transporte público sin transportista",
+            "method": "POST",
+            "url": "/api/v1/guias-remision",
+            "body": {
+                "serie": "T001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "destinatario": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "X"
+                },
+                "cod_traslado": "01",
+                "mod_traslado": "01",
+                "fecha_traslado": "2026-10-24",
+                "peso_total": 1,
+                "partida_ubigeo": "150101",
+                "partida_direccion": "A",
+                "llegada_ubigeo": "150101",
+                "llegada_direccion": "B",
+                "items": [
+                    {
+                        "descripcion": "x",
+                        "cantidad": 1
+                    }
+                ]
+            },
+            "xml": false
+        },
+        {
+            "name": "GRT sin remitente ni documento",
+            "method": "POST",
+            "url": "/api/v1/guias-remision-transportista",
+            "body": {
+                "serie": "V001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "destinatario": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "X"
+                },
+                "fecha_traslado": "2026-10-24",
+                "peso_total": 1,
+                "partida_ubigeo": "150101",
+                "partida_direccion": "A",
+                "llegada_ubigeo": "150101",
+                "llegada_direccion": "B",
+                "items": [
+                    {
+                        "descripcion": "x",
+                        "cantidad": 1
+                    }
+                ]
+            },
+            "xml": false
+        },
+        {
+            "name": "GRR con caracteres especiales",
+            "method": "POST",
+            "url": "/api/v1/guias-remision",
+            "body": {
+                "serie": "T001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "observacion": "Entregar en almacén \"Norte\" de O'Brien",
+                "destinatario": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA \"DESTINO\" SAC"
+                },
+                "cod_traslado": "01",
+                "mod_traslado": "02",
+                "fecha_traslado": "2026-10-24",
+                "peso_total": 7.1234,
+                "partida_ubigeo": "150101",
+                "partida_direccion": "JR. O'HIGGINS 123",
+                "llegada_ubigeo": "150203",
+                "llegada_direccion": "AV. \"LA MAR\" 456",
+                "vehiculo": {
+                    "placa": "ABC123"
+                },
+                "conductor": {
+                    "tipo_doc": "1",
+                    "num_doc": "12345678",
+                    "nombres": "JOSE D'ANGELO",
+                    "apellidos": "PEREZ",
+                    "licencia": "Q12345678"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Caja \"grande\" de O'Neil",
+                        "cantidad": 2.5,
+                        "unidad": "KGM",
+                        "cod_prod_sunat": "43211503"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Crear retención (régimen general 3%)",
+            "method": "POST",
+            "url": "/api/v1/retenciones",
+            "body": {
+                "serie": "R001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "regimen": "01",
+                "tasa": 3,
+                "proveedor": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC"
+                },
+                "documentos": [
+                    {
+                        "tipo_doc": "01",
+                        "num_doc": "F001-000034",
+                        "fecha_emision": "2026-04-20",
+                        "moneda": "PEN",
+                        "imp_total": 236,
+                        "fecha_retencion": "2026-04-20",
+                        "imp_retenido": 7.08,
+                        "imp_pagar": 228.92,
+                        "pagos": [
+                            {
+                                "moneda": "PEN",
+                                "importe": 236,
+                                "fecha": "2026-04-20"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Crear retención múltiples documentos",
+            "method": "POST",
+            "url": "/api/v1/retenciones",
+            "body": {
+                "serie": "R001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cod_local": "0000",
+                "proveedor": {
+                    "tipo_doc": "6",
+                    "num_doc": "20987654321",
+                    "razon_social": "PROVEEDOR SAC"
+                },
+                "regimen": "01",
+                "tasa": 3,
+                "documentos": [
+                    {
+                        "tipo_doc": "01",
+                        "num_doc": "F001-100",
+                        "fecha_emision": "2026-04-15",
+                        "imp_total": 590,
+                        "moneda": "PEN",
+                        "pagos": [
+                            {
+                                "fecha": "2026-04-19",
+                                "importe": 590
+                            }
+                        ],
+                        "fecha_retencion": "2026-04-19"
+                    },
+                    {
+                        "tipo_doc": "01",
+                        "num_doc": "F001-101",
+                        "fecha_emision": "2026-04-16",
+                        "imp_total": 1180,
+                        "moneda": "PEN",
+                        "pagos": [
+                            {
+                                "fecha": "2026-04-19",
+                                "importe": 1180
+                            }
+                        ],
+                        "fecha_retencion": "2026-04-19"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Retención envío manual",
+            "method": "POST",
+            "url": "/api/v1/retenciones",
+            "body": {
+                "serie": "R001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cod_local": "0000",
+                "proveedor": {
+                    "tipo_doc": "6",
+                    "num_doc": "20987654321",
+                    "razon_social": "PROVEEDOR SAC"
+                },
+                "regimen": "01",
+                "tasa": 3,
+                "documentos": [
+                    {
+                        "tipo_doc": "01",
+                        "num_doc": "F001-100",
+                        "fecha_emision": "2026-04-15",
+                        "imp_total": 1180,
+                        "moneda": "PEN",
+                        "pagos": [
+                            {
+                                "fecha": "2026-04-19",
+                                "importe": 1180
+                            }
+                        ],
+                        "fecha_retencion": "2026-04-19"
+                    }
+                ],
+                "enviar_automatico": false
+            },
+            "xml": true
+        },
+        {
+            "name": "0.5% — Entre agentes de percepción",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC",
+                    "direccion": "AV. AREQUIPA 1234, LIMA"
+                },
+                "percepcion": {
+                    "cod_regimen": "03",
+                    "porcentaje": 0.5,
+                    "base": 236,
+                    "monto": 1.18
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "COMBUSTIBLE",
+                        "unidad": "GLL",
+                        "cantidad": 1,
+                        "precio_unitario": 236,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "1% — Venta de bienes (combustible, consumo masivo)",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC"
+                },
+                "percepcion": {
+                    "cod_regimen": "02",
+                    "porcentaje": 1,
+                    "base": 236,
+                    "monto": 2.36
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "BIEN DE CONSUMO MASIVO",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 236,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "2% — Sujeto no designado / consumidor final",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC",
+                    "direccion": "AV. AREQUIPA 1234, LIMA"
+                },
+                "percepcion": {
+                    "tipo_operacion": "2001",
+                    "cod_regimen": "01",
+                    "porcentaje": 2,
+                    "base": 236,
+                    "monto": 4.72
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "MERCADERIA",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 236,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Crear percepción venta interna (2%)",
+            "method": "POST",
+            "url": "/api/v1/percepciones",
+            "body": {
+                "serie": "P001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cod_local": "0000",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20987654321",
+                    "razon_social": "CLIENTE SAC",
+                    "direccion": "AV. CLIENTE 100"
+                },
+                "regimen": "01",
+                "tasa": 2,
+                "observacion": "Percepción venta interna",
+                "documentos": [
+                    {
+                        "tipo_doc": "01",
+                        "num_doc": "F001-100",
+                        "fecha_emision": "2026-04-15",
+                        "imp_total": 1180,
+                        "moneda": "PEN",
+                        "fecha_percepcion": "2026-04-19",
+                        "cobros": [
+                            {
+                                "fecha": "2026-04-19",
+                                "importe": 1180
+                            }
+                        ]
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Crear percepción combustible (1%)",
+            "method": "POST",
+            "url": "/api/v1/percepciones",
+            "body": {
+                "serie": "P001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cod_local": "0000",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20987654321",
+                    "razon_social": "CLIENTE SAC"
+                },
+                "regimen": "02",
+                "tasa": 1,
+                "observacion": "Percepción combustible",
+                "documentos": [
+                    {
+                        "tipo_doc": "01",
+                        "num_doc": "F001-100",
+                        "fecha_emision": "2026-04-15",
+                        "imp_total": 5900,
+                        "moneda": "PEN",
+                        "fecha_percepcion": "2026-04-19",
+                        "cobros": [
+                            {
+                                "fecha": "2026-04-19",
+                                "importe": 5900
+                            }
+                        ]
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Percepción envío manual",
+            "method": "POST",
+            "url": "/api/v1/percepciones",
+            "body": {
+                "serie": "P001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cod_local": "0000",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20987654321",
+                    "razon_social": "CLIENTE SAC"
+                },
+                "regimen": "01",
+                "tasa": 2,
+                "documentos": [
+                    {
+                        "tipo_doc": "01",
+                        "num_doc": "F001-100",
+                        "fecha_emision": "2026-04-15",
+                        "imp_total": 1180,
+                        "moneda": "PEN",
+                        "fecha_percepcion": "2026-04-19",
+                        "cobros": [
+                            {
+                                "fecha": "2026-04-19",
+                                "importe": 1180
+                            }
+                        ]
+                    }
+                ],
+                "enviar_automatico": false
+            },
+            "xml": true
+        },
+        {
+            "name": "Retención validación",
+            "method": "POST",
+            "url": "/api/v1/retenciones",
+            "body": {
+                "serie": "X001",
+                "regimen": "99",
+                "documentos": []
+            },
+            "xml": false
+        },
+        {
+            "name": "Aceptar R001-1, R001-2 y P001-1",
+            "sql": "UPDATE retentions SET sunat_status='aceptado' WHERE correlativo IN (1,2); UPDATE perceptions SET sunat_status='aceptado' WHERE correlativo=1"
+        },
+        {
+            "name": "Reversión de retención",
+            "method": "POST",
+            "url": "/api/v1/reversiones",
+            "body": {
+                "fecha_generacion": "2026-10-24",
+                "fecha_comunicacion": "2026-10-24",
+                "detalles": [
+                    {
+                        "tipo_documento": "20",
+                        "serie": "R001",
+                        "correlativo": "1",
+                        "motivo": "Error en datos del proveedor"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Reversión de percepción",
+            "method": "POST",
+            "url": "/api/v1/reversiones",
+            "body": {
+                "fecha_generacion": "2026-10-24",
+                "detalles": [
+                    {
+                        "tipo_documento": "40",
+                        "serie": "P001",
+                        "correlativo": "1",
+                        "motivo": "Cliente solicita anulación"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Reversión múltiple",
+            "method": "POST",
+            "url": "/api/v1/reversiones",
+            "body": {
+                "fecha_generacion": "2026-10-24",
+                "detalles": [
+                    {
+                        "tipo_documento": "20",
+                        "serie": "R001",
+                        "correlativo": "5",
+                        "motivo": "Error monto"
+                    },
+                    {
+                        "tipo_documento": "40",
+                        "serie": "P001",
+                        "correlativo": "3",
+                        "motivo": "Cliente anuló compra"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Reversión envío manual",
+            "method": "POST",
+            "url": "/api/v1/reversiones",
+            "body": {
+                "fecha_generacion": "2026-10-24",
+                "detalles": [
+                    {
+                        "tipo_documento": "20",
+                        "serie": "R001",
+                        "correlativo": "1",
+                        "motivo": "Error datos"
+                    }
+                ],
+                "enviar_automatico": false
+            },
+            "xml": true
+        },
+        {
+            "name": "Reversión de R001-2",
+            "method": "POST",
+            "url": "/api/v1/reversiones",
+            "body": {
+                "fecha_generacion": "2026-10-24",
+                "detalles": [
+                    {
+                        "tipo_documento": "20",
+                        "serie": "R001",
+                        "correlativo": "2",
+                        "motivo": "Error"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Listar guías",
+            "method": "GET",
+            "url": "/api/v1/guias-remision?por_pagina=15"
+        },
+        {
+            "name": "Ver guía 1",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/1"
+        },
+        {
+            "name": "Estado guía 1 (sin ticket)",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/1/estado"
+        },
+        {
+            "name": "Estado guía 6 (manual)",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/6/estado"
+        },
+        {
+            "name": "XML guía 1 (no disponible)",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/1/xml"
+        },
+        {
+            "name": "Listar retenciones",
+            "method": "GET",
+            "url": "/api/v1/retenciones?per_page=15"
+        },
+        {
+            "name": "Retenciones por proveedor",
+            "method": "GET",
+            "url": "/api/v1/retenciones?proveedor_num_doc=20987654321"
+        },
+        {
+            "name": "Ver retención 2",
+            "method": "GET",
+            "url": "/api/v1/retenciones/2"
+        },
+        {
+            "name": "Listar percepciones",
+            "method": "GET",
+            "url": "/api/v1/percepciones?per_page=15"
+        },
+        {
+            "name": "Ver percepción 1",
+            "method": "GET",
+            "url": "/api/v1/percepciones/1"
+        },
+        {
+            "name": "Bajas y reversiones",
+            "method": "GET",
+            "url": "/api/v1/anulaciones?per_page=15"
+        }
+    ]
+}

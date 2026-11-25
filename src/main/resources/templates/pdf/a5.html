@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Port de resources/views/pdf/formats/a5.blade.php de API-PRO. -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style th:replace="~{styles :: base}"></style>
+    <style th:replace="~{styles :: a4}"></style>
+    <style th:inline="text">
+        @page { size: [[${page_size}]]; }
+        @page { margin: 8mm; }
+        body { font-size: 8.5pt; }
+        .page-border { border: 0.5px solid #000; border-radius: 6px; padding: 12px 14px; }
+        .document-badge { border: 0.5px solid #000; border-radius: 6px; padding: 7px 6px; }
+        .emitter-name { font-size: 10pt; }
+        .badge-title { font-size: 8.5pt; }
+        .badge-number { font-size: 9.5pt; }
+        .badge-cell { width: 170px; }
+        .items-table th { font-size: 7pt; padding: 3px; }
+        .items-table td { font-size: 7.5pt; padding: 3px; }
+        .totals-table { width: 240px; }
+        .totals-table td { font-size: 8pt; }
+        .info-section { font-size: 8pt; }
+        .leyenda { font-size: 7.5pt; }
+        .footer-section { font-size: 7pt; }
+        .qr-section img { width: 85px; height: 85px; }
+        .logo-cell img { max-width: 55px; max-height: 55px; }
+    </style>
+</head>
+<body>
+    <div class="page-border">
+    <table class="header-table">
+        <tr>
+            <td class="logo-cell" th:if="${h.filled(logo_base64)}"><img th:src="${logo_base64}" alt="Logo"/></td>
+            <td class="emitter-cell">
+                <div class="emitter-name" th:text="${emisor.nombre_comercial}"></div>
+                <div class="emitter-ruc" th:text="${'RUC: ' + emisor.ruc}"></div>
+                <div class="emitter-address" th:text="${emisor.direccion}"></div>
+                <div class="emitter-address" th:if="${emisor.cod_local != '0000'}" th:text="${'Cod. Local: ' + emisor.cod_local}"></div>
+                <div class="emitter-address" th:if="${h.filled(telefonos)}" th:text="${'Tel: ' + h.join(telefonos, ' | ')}"></div>
+                <div class="emitter-address" th:if="${h.filled(emails)}" th:text="${h.join(emails, ' | ')}"></div>
+            </td>
+            <td class="badge-cell">
+                <div class="document-badge">
+                    <div class="badge-ruc" th:text="${'RUC: ' + emisor.ruc}"></div>
+                    <div class="badge-title" th:text="${titulo}"></div>
+                    <div class="badge-number" th:text="${numero_completo}"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <th:block th:each="section : ${sections}" th:switch="${section}">
+        <th:block th:case="'header'"><th:block th:if="${is_ticket}" th:insert="~{sections :: header}"></th:block></th:block>
+        <th:block th:case="'document-badge'"><th:block th:if="${is_ticket}" th:insert="~{sections :: document_badge}"></th:block></th:block>
+        <th:block th:case="'receiver'"><th:block th:insert="~{sections :: receiver}"></th:block></th:block>
+        <th:block th:case="'note-reference'"><th:block th:insert="~{sections :: note_reference}"></th:block></th:block>
+        <th:block th:case="'dispatch-info'"><th:block th:insert="~{sections :: dispatch_info}"></th:block></th:block>
+        <th:block th:case="'items'"><th:block th:insert="~{sections :: items}"></th:block></th:block>
+        <th:block th:case="'totals'"><th:block th:insert="~{sections :: totals}"></th:block></th:block>
+        <th:block th:case="'leyenda'"><th:block th:insert="~{sections :: leyenda}"></th:block></th:block>
+        <th:block th:case="'payment-info'"><th:block th:insert="~{sections :: payment_info}"></th:block></th:block>
+        <th:block th:case="'bank-accounts'"><th:block th:insert="~{sections :: bank_accounts}"></th:block></th:block>
+        <th:block th:case="'qr-code'"><th:block th:insert="~{sections :: qr_code}"></th:block></th:block>
+        <th:block th:case="'retention-info'"><th:block th:insert="~{sections :: retention_info}"></th:block></th:block>
+        <th:block th:case="'retention-items'"><th:block th:insert="~{sections :: retention_items}"></th:block></th:block>
+        <th:block th:case="'retention-totals'"><th:block th:insert="~{sections :: retention_totals}"></th:block></th:block>
+        <th:block th:case="'settlement-info'"><th:block th:insert="~{sections :: settlement_info}"></th:block></th:block>
+        <th:block th:case="'settlement-totals'"><th:block th:insert="~{sections :: settlement_totals}"></th:block></th:block>
+        <th:block th:case="'footer'"><th:block th:insert="~{sections :: footer}"></th:block></th:block>
+    </th:block>
+    </div>
+</body>
+</html>

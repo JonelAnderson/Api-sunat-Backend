@@ -1,0 +1,103 @@
+#1 Registrar empresa (cert PFX): archivo "certificado" sin ruta (antes postman-cloud)
+#5 PUT Empresa (actualizar datos): comentario // eliminado (el JSON era inválido y la API lo tomaba vacío)
+#5 PUT Empresa (actualizar datos): corrección específica del cuerpo
+#6 Subir logo de empresa: archivo "logo" sin ruta (antes postman-cloud)
+#7 Subir / actualizar certificado SUNAT: archivo "certificado" sin ruta (antes postman-cloud)
+#12 Recuperar credenciales (verificar token): corrección específica del cuerpo
+#16 Ver sucursal {id}: URL /sucursales/1 → /sucursales/{{id_sucursal}}
+#17 Actualizar sucursal: URL /sucursales/1 → /sucursales/{{id_sucursal}}
+#18 Eliminar sucursal: URL /sucursales/2 → /sucursales/{{id_sucursal_2}}
+#21 Ver serie {id}: URL /series/1 → /series/{{id_serie}}
+#22 Activar/desactivar serie: URL /series/1 → /series/{{id_serie}}
+#22 Activar/desactivar serie: corrección específica del cuerpo
+#24 Eliminar serie: URL /series/1 → /series/{{id_serie}}
+#29 Ver cliente por id: URL /clientes/1 → /clientes/{{id_cliente}}
+#30 Actualizar cliente: URL /clientes/1 → /clientes/{{id_cliente}}
+#31 Eliminar cliente: URL /clientes/1 → /clientes/{{id_cliente}}
+#46 Crear factura básica: sin "correlativo" fijo (autonumeración)
+#47 Crear factura, codigo producto: RUC de una empresa real reemplazado por 20601234567
+#53 Factura con detracción: corrección específica del cuerpo
+#67 Reenviar a SUNAT (alias): URL /facturas/1/reenviar → /facturas/{{id_factura}}/reenviar
+#68 Registrar pago en factura: URL /facturas/1/pagos → /facturas/{{id_factura}}/pagos
+#69 Registrar pago parcial: URL /facturas/1/pagos → /facturas/{{id_factura}}/pagos
+#75 Actualizar factura (corregir y reenviar): URL /facturas/1 → /facturas/{{id_factura}}
+#82 Listar pagos de la factura: URL /facturas/1/pagos → /facturas/{{id_factura}}/pagos
+#83 Eliminar pago: URL /facturas/1/pagos/1 → /facturas/{{id_factura}}/pagos/{{id_pago}}
+#96 Actualizar boleta: URL /boletas/1 → /boletas/{{id_boleta}}
+#97 Eliminar boleta (solo si no aceptada): URL /boletas/1 → /boletas/{{id_boleta}}
+#99 Descargar CDR: URL /boletas/72/cdr → /boletas/{{id_boleta}}/cdr
+#102 Enviar a SUNAT (manual): URL /boletas/15/enviar → /boletas/{{id_boleta}}/enviar
+#103 Reenviar a SUNAT: URL /boletas/1/reenviar → /boletas/{{id_boleta}}/reenviar
+#104 Registrar pago en boleta: URL /boletas/1/pagos → /boletas/{{id_boleta}}/pagos
+#105 Listar pagos de boleta: URL /boletas/1/pagos → /boletas/{{id_boleta}}/pagos
+#106 Eliminar pago: URL /boletas/1/pagos/1 → /boletas/{{id_boleta}}/pagos/{{id_pago}}
+#110 NC - En dólares (USD) → NC - En dólares sobre factura en soles (responde 422)
+#113 Enviar a SUNAT (manual): URL /notas-credito/1/enviar → /notas-credito/{{id_NC}}/enviar
+#114 Reenviar a SUNAT: URL /notas-credito/1/reenviar → /notas-credito/{{id_NC}}/reenviar
+#118 Actualizar NC rechazada: URL /notas-credito/1 → /notas-credito/{{id_NC}}
+#119 Descargar XML: URL /notas-credito/1/xml → /notas-credito/{{id_NC}}/xml
+#120 Descargar CDR: URL /notas-credito/3/cdr → /notas-credito/{{id_NC}}/cdr
+#124 ND — Penalidad → ND — Aumento en el valor (motivo 02)
+#127 Enviar a SUNAT (manual): URL /notas-debito/1/enviar → /notas-debito/{{id_ND}}/enviar
+#128 Reenviar a SUNAT: URL /notas-debito/1/reenviar → /notas-debito/{{id_ND}}/reenviar
+#130 Ver ND por ID: URL /notas-debito/1 → /notas-debito/{{id_ND}}
+#131 Actualizar ND rechazada: URL /notas-debito/1 → /notas-debito/{{id_ND}}
+#132 Descargar XML: URL /notas-debito/1/xml → /notas-debito/{{id_ND}}/xml
+#133 Descargar CDR: URL /notas-debito/1/cdr → /notas-debito/{{id_ND}}/cdr
+#139 Filtrar por mes: URL /resumenes?mes=2026-04 → /resumenes?mes={{mes}}
+#143 Descargar CDR: URL /resumenes/1/cdr → /resumenes/{{id_resumen}}/cdr
+#144 Enviar a SUNAT (manual): URL /resumenes/1/enviar → /resumenes/{{id_resumen}}/enviar
+#151 Ver comunicación por ID: URL /anulaciones/{{id}} → /anulaciones/{{id_anular}}
+#155 Enviar a SUNAT (manual): URL /anulaciones/1/enviar → /anulaciones/{{id_anular}}/enviar
+#159 GRR — Entre establecimientos propios: RUC de una empresa real reemplazado por 20000000002
+#159 GRR — Entre establecimientos propios: corrección específica del cuerpo
+#162 Enviar a SUNAT (manual): URL /guias-remision/1/enviar → /guias-remision/{{id_guia}}/enviar
+#165 Actualizar guía rechazada: URL /guias-remision/1 → /guias-remision/{{id_guia}}
+#166 Descargar XML: URL /guias-remision/1/xml → /guias-remision/{{id_guia}}/xml
+#167 Descargar CDR: URL /guias-remision/1/cdr → /guias-remision/{{id_guia}}/cdr
+#178 Ver GRT por ID: URL /guias-remision/1 → /guias-remision/{{id_guia}}
+#179 Descargar XML: URL /guias-remision/1/xml → /guias-remision/{{id_guia}}/xml
+#180 Descargar CDR: URL /guias-remision/1/cdr → /guias-remision/{{id_guia}}/cdr
+#183 Enviar a SUNAT (manual): URL /guias-remision/1/enviar → /guias-remision/{{id_guia}}/enviar
+#184 POST /facturas/{id}/enviar: URL /facturas/1/enviar → /facturas/{{id_factura}}/enviar
+#185 POST /boletas/{id}/enviar: URL /boletas/1/enviar → /boletas/{{id_boleta}}/enviar
+#186 POST /notas-credito/{id}/enviar: URL /notas-credito/1/enviar → /notas-credito/{{id_NC}}/enviar
+#187 POST /notas-debito/{id}/enviar: URL /notas-debito/1/enviar → /notas-debito/{{id_ND}}/enviar
+#188 POST /guias-remision/{id}/enviar: URL /guias-remision/1/enviar → /guias-remision/{{id_guia}}/enviar
+#189 POST /resumenes/{id}/enviar: URL /resumenes/1/enviar → /resumenes/{{id_resumen}}/enviar
+#190 POST /anulaciones/{id}/enviar: URL /anulaciones/1/enviar → /anulaciones/{{id_anular}}/enviar
+#191 POST /retenciones/{id}/enviar: URL /retenciones/1/enviar → /retenciones/{{id_retencion}}/enviar
+#192 POST /percepciones/{id}/enviar: URL /percepciones/1/enviar → /percepciones/{{id_percepcion}}/enviar
+#193 Corregir factura rechazada (cliente): URL /facturas/1 → /facturas/{{id_factura}}
+#194 Corregir factura rechazada (items): URL /facturas/1 → /facturas/{{id_factura}}
+#195 Corregir boleta rechazada: URL /boletas/1 → /boletas/{{id_boleta}}
+#196 Corregir nota de crédito: URL /notas-credito/1 → /notas-credito/{{id_NC}}
+#197 Corregir nota de débito: URL /notas-debito/1 → /notas-debito/{{id_ND}}
+#198 Corregir guía de remisión: URL /guias-remision/1 → /guias-remision/{{id_guia}}
+#199 Consultar CPE — venta propia: URL /consultar-cpe?ruc_emisor=20100000001&tipo_doc=01&serie=F001&correlativo=1&fecha_emision=2026-04-19&monto_total=118.00 → /consultar-cpe?ruc_emisor={{ruc_empresa}}&tipo_doc=01&serie=F001&correlativo={{correlativo_factura}}&fecha_emision={{hoy_dmy}}&monto=118.00
+#200 Consultar CPE — factura de proveedor: URL /consultar-cpe?ruc_emisor=20987654321&tipo_doc=01&serie=F001&correlativo=100&fecha_emision=2026-04-15&monto_total=590.00 → /consultar-cpe?ruc_emisor=20987654321&tipo_doc=01&serie=F001&correlativo=100&fecha_emision={{hoy_dmy}}&monto=590.00
+#201 Consultar CPE — boleta: URL /consultar-cpe?ruc_emisor=20100000001&tipo_doc=03&serie=B001&correlativo=10&fecha_emision=2026-04-19&monto_total=35.00 → /consultar-cpe?ruc_emisor={{ruc_empresa}}&tipo_doc=03&serie=B001&correlativo={{correlativo_boleta}}&fecha_emision={{hoy_dmy}}&monto=35.00
+#202 Consultar CPE — nota de crédito: URL /consultar-cpe?ruc_emisor=20100000001&tipo_doc=07&serie=FC01&correlativo=1&fecha_emision=2026-04-19&monto_total=118.00 → /consultar-cpe?ruc_emisor={{ruc_empresa}}&tipo_doc=07&serie=FC01&correlativo={{correlativo_NC}}&fecha_emision={{hoy_dmy}}&monto=118.00
+#203 Consultar CDR (estado vía CDR): cuerpo con tipo_documento (la colección mandaba tipo_doc y ruc_emisor)
+#204 Exportar comprobantes: URL /comprobantes/exportar-zip?fecha_desde=2026-05-01&fecha_hasta=2026-05-31&documentos=facturas → /comprobantes/exportar-zip?fecha_desde={{inicio_mes}}&fecha_hasta={{hoy}}&documentos=facturas
+#216 Registro de Ventas (mensual SUNAT): URL /reportes/registro-ventas?fecha_desde=2026-04-01&fecha_hasta=2026-04-30 → /reportes/registro-ventas?fecha_desde={{inicio_mes}}&fecha_hasta={{hoy}}
+#217 Ventas consolidado: URL /reportes/ventas-consolidado?fecha_desde=2026-04-01&fecha_hasta=2026-04-30 → /reportes/ventas-consolidado?fecha_desde={{inicio_mes}}&fecha_hasta={{hoy}}
+#218 Reporte de notas (NC + ND): URL /reportes/notas?fecha_desde=2026-04-01&fecha_hasta=2026-04-30 → /reportes/notas?fecha_desde={{inicio_mes}}&fecha_hasta={{hoy}}
+#219 Cobranzas (aging): URL /reportes/cobranzas?fecha_desde=2026-04-01&fecha_hasta=2026-04-30 → /reportes/cobranzas?fecha_desde={{inicio_mes}}&fecha_hasta={{hoy}}
+#220 Documentos internos (cotizaciones + notas de venta): URL /reportes/documentos-internos?fecha_desde=2026-04-01&fecha_hasta=2026-04-30 → /reportes/documentos-internos?fecha_desde={{inicio_mes}}&fecha_hasta={{hoy}}
+#221 Por cliente (detalle de un cliente): URL /reportes/por-cliente?fecha_desde=2026-04-01&fecha_hasta=2026-04-30&client_num_doc=20512345678 → /reportes/por-cliente?fecha_desde={{inicio_mes}}&fecha_hasta={{hoy}}&client_num_doc=20512345678
+#222 Por sucursal (ranking): URL /reportes/por-sucursal?fecha_desde=2026-04-01&fecha_hasta=2026-04-30 → /reportes/por-sucursal?fecha_desde={{inicio_mes}}&fecha_hasta={{hoy}}
+#238 Reemplazar propuesta (5.3) — Multipart (TXT): archivo "archivo" sin ruta (antes postman-cloud)
+#254 Ver retención por ID: URL /retenciones/3 → /retenciones/{{id_retencion}}
+#255 Descargar XML: URL /retenciones/2/xml → /retenciones/{{id_retencion}}/xml
+#256 Descargar CDR: URL /retenciones/2/cdr → /retenciones/{{id_retencion}}/cdr
+#257 Descargar PDF a4: URL /retenciones/3/pdf?format=a4 → /retenciones/{{id_retencion}}/pdf?format=a4
+#258 Descargar PDF a5: URL /retenciones/2/pdf?format=a5 → /retenciones/{{id_retencion}}/pdf?format=a5
+#259 Descargar PDF 58 MM: URL /retenciones/2/pdf?format=ticket-58 → /retenciones/{{id_retencion}}/pdf?format=ticket-58
+#260 Descargar PDF 80 MM: URL /retenciones/2/pdf?format=ticket-80 → /retenciones/{{id_retencion}}/pdf?format=ticket-80
+#261 Enviar a SUNAT (manual): URL /retenciones/1/enviar → /retenciones/{{id_retencion}}/enviar
+#268 Enviar a SUNAT (manual): URL /percepciones/1/enviar → /percepciones/{{id_percepcion}}/enviar
+#271 Ver percepción por ID: URL /percepciones/1 → /percepciones/{{id_percepcion}}
+#272 Descargar XML: URL /percepciones/1/xml → /percepciones/{{id_percepcion}}/xml
+#273 Descargar CDR: URL /percepciones/1/cdr → /percepciones/{{id_percepcion}}/cdr
+Documentos de apoyo añadidos: 1 factura en 06; 2 boletas en 08; 4 facturas, 2 NC y 1 ND en 09; 3 retenciones y 2 percepciones en 20

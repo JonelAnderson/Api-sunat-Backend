@@ -1,0 +1,2717 @@
+{
+    "now": "2026-10-24T15:15:30Z",
+    "tenant": {
+        "ruc": "20000000001",
+        "razon_social": "EMPRESA DEMO S.A.C.",
+        "nombre_comercial": "EMPRESA DEMO",
+        "direccion": "AV. DEMO 123",
+        "ubigeo": "150101",
+        "departamento": "LIMA",
+        "provincia": "LIMA",
+        "distrito": "LIMA",
+        "sol_user": "MODDATOS",
+        "sol_pass": "MODDATOS",
+        "api_key": "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",
+        "api_secret": "oracle-secret",
+        "plan": "business",
+        "cert_pem": "C:/laragon/www/API-SUNAT-MULTILENGUAJE/spring-boot/src/test/resources/fixtures/certs/cert-con-clave.pem",
+        "telefonos": [
+            "01-4567890",
+            "987654321"
+        ],
+        "emails": [
+            "ventas@demo.pe"
+        ],
+        "cuentas_bancarias": [
+            {
+                "banco": "BCP",
+                "tipo_cuenta": "Corriente",
+                "moneda": "PEN",
+                "numero": "191-1234567-0-12",
+                "cci": "00219100123456701254"
+            },
+            {
+                "banco": "BBVA",
+                "moneda": "USD",
+                "numero": "0011-0123-0100012345"
+            }
+        ],
+        "billeteras_digitales": [
+            {
+                "tipo": "yape",
+                "numero": "987654321",
+                "titular": "EMPRESA DEMO"
+            },
+            {
+                "tipo": "plin",
+                "numero": "912345678"
+            }
+        ],
+        "mensaje_agradecimiento": "¡Gracias por su compra!",
+        "mensaje_promocional": "Visítenos en www.demo.pe"
+    },
+    "series": [
+        {
+            "tipo": "01",
+            "serie": "F001"
+        },
+        {
+            "tipo": "03",
+            "serie": "B001"
+        },
+        {
+            "tipo": "07",
+            "serie": "FC01"
+        },
+        {
+            "tipo": "07",
+            "serie": "BC01"
+        },
+        {
+            "tipo": "08",
+            "serie": "FD01"
+        },
+        {
+            "tipo": "08",
+            "serie": "BD01"
+        },
+        {
+            "tipo": "09",
+            "serie": "T001"
+        },
+        {
+            "tipo": "31",
+            "serie": "V001"
+        },
+        {
+            "tipo": "20",
+            "serie": "R001"
+        },
+        {
+            "tipo": "40",
+            "serie": "P001"
+        }
+    ],
+    "steps": [
+        {
+            "name": "Factura base 1",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20601234567",
+                    "razon_social": "CLIENTE PRUEBA S.A.C.",
+                    "direccion": "AV. LIMA 123"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 1180,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Factura base 2",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20601234567",
+                    "razon_social": "CLIENTE PRUEBA S.A.C.",
+                    "direccion": "AV. LIMA 123"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 590,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Factura base 3",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20601234567",
+                    "razon_social": "CLIENTE PRUEBA S.A.C.",
+                    "direccion": "AV. LIMA 123"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 236,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Factura base 4",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20601234567",
+                    "razon_social": "CLIENTE PRUEBA S.A.C.",
+                    "direccion": "AV. LIMA 123"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 118,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Factura base 5",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20601234567",
+                    "razon_social": "CLIENTE PRUEBA S.A.C.",
+                    "direccion": "AV. LIMA 123"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 354,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Factura base 6",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20601234567",
+                    "razon_social": "CLIENTE PRUEBA S.A.C.",
+                    "direccion": "AV. LIMA 123"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 472,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Boleta base 1 (solo registro)",
+            "method": "POST",
+            "url": "/api/v1/boletas",
+            "body": {
+                "serie": "B001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "solo_registro": true,
+                "cliente": {
+                    "tipo_doc": "1",
+                    "num_doc": "12345678",
+                    "razon_social": "JUAN PEREZ"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 50,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Boleta base 2 (solo registro)",
+            "method": "POST",
+            "url": "/api/v1/boletas",
+            "body": {
+                "serie": "B001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "solo_registro": true,
+                "cliente": {
+                    "tipo_doc": "1",
+                    "num_doc": "12345678",
+                    "razon_social": "JUAN PEREZ"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 30,
+                        "tip_afe_igv": "20"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Boleta base 3",
+            "method": "POST",
+            "url": "/api/v1/boletas",
+            "body": {
+                "serie": "B001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cliente": {
+                    "tipo_doc": "1",
+                    "num_doc": "12345678",
+                    "razon_social": "JUAN PEREZ"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 80,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Boleta base 4",
+            "method": "POST",
+            "url": "/api/v1/boletas",
+            "body": {
+                "serie": "B001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cliente": {
+                    "tipo_doc": "1",
+                    "num_doc": "12345678",
+                    "razon_social": "JUAN PEREZ"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 45,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "NC - Anulación total de factura",
+            "method": "POST",
+            "url": "/api/v1/notas-credito",
+            "body": {
+                "serie": "FC01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "doc_afectado_tipo": "01",
+                "doc_afectado_serie": "F001",
+                "doc_afectado_correlativo": "1",
+                "cod_motivo": "01",
+                "des_motivo": "Anulación de la operación",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20512345678",
+                    "razon_social": "EMPRESA DEMO SAC",
+                    "direccion": "Av. Los Olivos 123, Lima"
+                },
+                "items": [
+                    {
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 100,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "NC - Descuento parcial",
+            "method": "POST",
+            "url": "/api/v1/notas-credito",
+            "body": {
+                "serie": "FC01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "doc_afectado_tipo": "01",
+                "doc_afectado_serie": "F001",
+                "doc_afectado_correlativo": "2",
+                "cod_motivo": "04",
+                "des_motivo": "Descuento por volumen de compra",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000001",
+                    "razon_social": "CLIENTE PRUEBA S.A.C."
+                },
+                "items": [
+                    {
+                        "descripcion": "Descuento Producto A",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 60,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "NC - Corrección de precio / devolución parcial",
+            "method": "POST",
+            "url": "/api/v1/notas-credito",
+            "body": {
+                "serie": "FC01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "doc_afectado_tipo": "01",
+                "doc_afectado_serie": "F001",
+                "doc_afectado_correlativo": "3",
+                "cod_motivo": "06",
+                "des_motivo": "Devolución parcial de mercadería",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000001",
+                    "razon_social": "CLIENTE PRUEBA S.A.C."
+                },
+                "items": [
+                    {
+                        "descripcion": "Producto devuelto X",
+                        "unidad": "NIU",
+                        "cantidad": 3,
+                        "precio_unitario": 25,
+                        "tip_afe_igv": "10"
+                    },
+                    {
+                        "descripcion": "Producto devuelto Y",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 80,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "NC - En dólares (USD)",
+            "method": "POST",
+            "url": "/api/v1/notas-credito",
+            "body": {
+                "serie": "FC01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_moneda": "USD",
+                "doc_afectado_tipo": "01",
+                "doc_afectado_serie": "F001",
+                "doc_afectado_correlativo": "1",
+                "cod_motivo": "01",
+                "des_motivo": "Anulación de operación en dólares",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000001",
+                    "razon_social": "CLIENTE PRUEBA S.A.C."
+                },
+                "items": [
+                    {
+                        "descripcion": "Consultoría internacional",
+                        "unidad": "ZZ",
+                        "cantidad": 1,
+                        "precio_unitario": 500,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "NC - Anulación de boleta",
+            "method": "POST",
+            "url": "/api/v1/notas-credito",
+            "body": {
+                "serie": "BC01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "doc_afectado_tipo": "03",
+                "doc_afectado_serie": "B001",
+                "doc_afectado_correlativo": "3",
+                "cod_motivo": "01",
+                "des_motivo": "Anulación de la operación",
+                "cliente": {
+                    "tipo_doc": "1",
+                    "num_doc": "12345678",
+                    "razon_social": "JUAN PEREZ"
+                },
+                "items": [
+                    {
+                        "descripcion": "Producto vendido",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 50,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "NC envío manual (enviar_automatico=false)",
+            "method": "POST",
+            "url": "/api/v1/notas-credito",
+            "body": {
+                "serie": "FC01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20512345678",
+                    "razon_social": "CLIENTE SAC"
+                },
+                "doc_afectado_tipo": "01",
+                "doc_afectado_serie": "F001",
+                "doc_afectado_correlativo": "4",
+                "cod_motivo": "01",
+                "des_motivo": "Anulación de la operación",
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "Producto a anular",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 118,
+                        "tip_afe_igv": "10"
+                    }
+                ],
+                "enviar_automatico": false
+            }
+        },
+        {
+            "name": "ND — Intereses por mora",
+            "method": "POST",
+            "url": "/api/v1/notas-debito",
+            "body": {
+                "serie": "FD01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "doc_afectado_tipo": "01",
+                "doc_afectado_serie": "F001",
+                "doc_afectado_correlativo": "1",
+                "cod_motivo": "01",
+                "des_motivo": "Intereses por mora",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000001",
+                    "razon_social": "CLIENTE PRUEBA S.A.C."
+                },
+                "items": [
+                    {
+                        "descripcion": "Interés por pago fuera de plazo",
+                        "unidad": "ZZ",
+                        "cantidad": 1,
+                        "precio_unitario": 150,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "ND — Aumento de valor",
+            "method": "POST",
+            "url": "/api/v1/notas-debito",
+            "body": {
+                "serie": "FD01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "doc_afectado_tipo": "01",
+                "doc_afectado_serie": "F001",
+                "doc_afectado_correlativo": "2",
+                "cod_motivo": "02",
+                "des_motivo": "Aumento en el valor por servicio adicional",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000001",
+                    "razon_social": "CLIENTE PRUEBA S.A.C."
+                },
+                "items": [
+                    {
+                        "descripcion": "Servicio de instalación adicional",
+                        "unidad": "ZZ",
+                        "cantidad": 1,
+                        "precio_unitario": 120,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "ND — Penalidad",
+            "method": "POST",
+            "url": "/api/v1/notas-debito",
+            "body": {
+                "serie": "FD01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "doc_afectado_tipo": "01",
+                "doc_afectado_serie": "F001",
+                "doc_afectado_correlativo": "3",
+                "cod_motivo": "02",
+                "des_motivo": "Aumento en el valor por servicio adicional",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000001",
+                    "razon_social": "CLIENTE PRUEBA S.A.C."
+                },
+                "items": [
+                    {
+                        "descripcion": "Servicio de instalación adicional",
+                        "unidad": "ZZ",
+                        "cantidad": 1,
+                        "precio_unitario": 200,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "ND — Sobre boleta",
+            "method": "POST",
+            "url": "/api/v1/notas-debito",
+            "body": {
+                "serie": "BD01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "doc_afectado_tipo": "03",
+                "doc_afectado_serie": "B001",
+                "doc_afectado_correlativo": "3",
+                "cod_motivo": "01",
+                "des_motivo": "Intereses por mora",
+                "cliente": {
+                    "tipo_doc": "1",
+                    "num_doc": "12345678",
+                    "razon_social": "JUAN PEREZ"
+                },
+                "items": [
+                    {
+                        "descripcion": "Interés por pago tardío",
+                        "unidad": "ZZ",
+                        "cantidad": 1,
+                        "precio_unitario": 20,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "ND envío manual",
+            "method": "POST",
+            "url": "/api/v1/notas-debito",
+            "body": {
+                "serie": "FD01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20512345678",
+                    "razon_social": "CLIENTE SAC"
+                },
+                "doc_afectado_tipo": "01",
+                "doc_afectado_serie": "F001",
+                "doc_afectado_correlativo": "4",
+                "cod_motivo": "01",
+                "des_motivo": "Intereses por mora",
+                "items": [
+                    {
+                        "codigo": "INT001",
+                        "descripcion": "Intereses por mora 30 días",
+                        "unidad": "ZZ",
+                        "cantidad": 1,
+                        "precio_unitario": 118,
+                        "tip_afe_igv": "10"
+                    }
+                ],
+                "enviar_automatico": false
+            }
+        },
+        {
+            "name": "Crear factura crédito (con cuotas)",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "fecha_vencimiento": "2026-10-04",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "forma_pago": "Credito",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20512345678",
+                    "razon_social": "CLIENTE SAC",
+                    "direccion": "AV. AREQUIPA 1234, LIMA"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "Producto",
+                        "unidad": "NIU",
+                        "cantidad": 10,
+                        "precio_unitario": 118,
+                        "tip_afe_igv": "10"
+                    }
+                ],
+                "cuotas": [
+                    {
+                        "monto": 590,
+                        "fecha_pago": "2026-09-04"
+                    },
+                    {
+                        "monto": 590,
+                        "fecha_pago": "2026-11-04"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Crear factura exonerada (servicios médicos)",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "forma_pago": "Contado",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20512345678",
+                    "razon_social": "CLIENTE SAC",
+                    "direccion": "AV. AREQUIPA 1234, LIMA"
+                },
+                "items": [
+                    {
+                        "codigo": "SERV001",
+                        "descripcion": "Consulta médica especializada",
+                        "unidad": "ZZ",
+                        "cantidad": 1,
+                        "precio_unitario": 200,
+                        "tip_afe_igv": "20"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Crear factura exportación (tipo 0200)",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0200",
+                "tipo_moneda": "USD",
+                "forma_pago": "Contado",
+                "cliente": {
+                    "tipo_doc": "0",
+                    "num_doc": "0",
+                    "razon_social": "FOREIGN CLIENT INC",
+                    "direccion": "5TH AVENUE 1000, NEW YORK, USA"
+                },
+                "items": [
+                    {
+                        "codigo": "EXP001",
+                        "descripcion": "Producto exportación",
+                        "unidad": "NIU",
+                        "cantidad": 12,
+                        "precio_unitario": 50,
+                        "tip_afe_igv": "40"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Factura gratuita",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC",
+                    "direccion": "AV. AREQUIPA 1234, LIMA"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "Mause Razer",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 0,
+                        "mto_valor_unitario": 100,
+                        "tip_afe_igv": "11",
+                        "porcentaje_igv": 18
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Factura con detracción",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC",
+                    "direccion": "AV. AREQUIPA 1234, LIMA"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "Matenimiento preventivo de PC",
+                        "unidad": "ZZ",
+                        "cantidad": 1,
+                        "precio_unitario": 1000,
+                        "tip_afe_igv": "10"
+                    }
+                ],
+                "detraccion": {
+                    "tipo_operacion": "1001",
+                    "cod_bien": "014",
+                    "cod_medio_pago": "001",
+                    "cta_banco": "0004-3342343243",
+                    "porcentaje": 4,
+                    "monto": 37.76
+                }
+            }
+        },
+        {
+            "name": "Factura descuento global",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "Cuadernos",
+                        "unidad": "NIU",
+                        "cantidad": 10,
+                        "precio_unitario": 2.36,
+                        "tip_afe_igv": "10"
+                    },
+                    {
+                        "codigo": "P002",
+                        "descripcion": "Radio",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 59,
+                        "tip_afe_igv": "10"
+                    }
+                ],
+                "descuentos_globales": [
+                    {
+                        "cod_tipo": "02",
+                        "monto": 3
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Factura descuento por línea",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "Cuadernos",
+                        "unidad": "NIU",
+                        "cantidad": 10,
+                        "precio_unitario": 2.36,
+                        "tip_afe_igv": "10",
+                        "descuentos": [
+                            {
+                                "cod_tipo": "00",
+                                "monto": 4
+                            }
+                        ]
+                    },
+                    {
+                        "codigo": "P002",
+                        "descripcion": "Radio",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 59,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Factura ICBPER (bolsas plásticas)",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "PRODUCTO 1",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 118,
+                        "tip_afe_igv": "10"
+                    },
+                    {
+                        "codigo": "P002",
+                        "descripcion": "BOLSA DE PLASTICO",
+                        "unidad": "NIU",
+                        "cantidad": 4,
+                        "precio_unitario": 0.059,
+                        "tip_afe_igv": "10",
+                        "mto_valor_unitario": 0.05,
+                        "factor_icbper": 0.2
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Factura ISC (impuesto selectivo)",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "PROD CON ISC",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 138.06,
+                        "tip_afe_igv": "10",
+                        "porcentaje_isc": 17,
+                        "tip_sis_isc": "01"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Factura IVAP (arroz pilado)",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC"
+                },
+                "items": [
+                    {
+                        "codigo": "A001",
+                        "descripcion": "SACOS DE ARROZ",
+                        "unidad": "SA",
+                        "cantidad": 900,
+                        "precio_unitario": 104,
+                        "tip_afe_igv": "17",
+                        "porcentaje_igv": 4
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Factura + Guía de Remisión",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "tipo_documento": "01",
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC"
+                },
+                "guias": [
+                    {
+                        "tipo_doc": "09",
+                        "nro_doc": "T001-2"
+                    }
+                ],
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "PROD 1",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 118,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Factura compleja (todos los campos)",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "tipo_documento": "01",
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "PROD 1 - Gravado",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 118,
+                        "tip_afe_igv": "10"
+                    },
+                    {
+                        "codigo": "P002",
+                        "descripcion": "PROD 2 - Exonerado",
+                        "unidad": "KGM",
+                        "cantidad": 2,
+                        "precio_unitario": 50,
+                        "tip_afe_igv": "20"
+                    },
+                    {
+                        "codigo": "P003",
+                        "descripcion": "PROD 3 - Inafecto",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 100,
+                        "tip_afe_igv": "30"
+                    },
+                    {
+                        "codigo": "P004",
+                        "descripcion": "PROD 4 - Gratuita Gravada (Retiro)",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 0,
+                        "mto_valor_unitario": 100,
+                        "tip_afe_igv": "13",
+                        "porcentaje_igv": 18
+                    },
+                    {
+                        "codigo": "P005",
+                        "descripcion": "PROD 5 - Gratuita Inafecta (Retiro)",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 0,
+                        "mto_valor_unitario": 100,
+                        "tip_afe_igv": "32"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Factura con contingencia (modo offline)",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "enviar_automatico": false,
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC"
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "PROD 1",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 118,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Boleta consumidor final (sin DNI)",
+            "method": "POST",
+            "url": "/api/v1/boletas",
+            "body": {
+                "serie": "B001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cliente": {
+                    "tipo_doc": "0",
+                    "num_doc": "99999999",
+                    "razon_social": "CONSUMIDOR FINAL"
+                },
+                "items": [
+                    {
+                        "codigo": "P002",
+                        "descripcion": "Producto varios",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 12,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Boleta MYPE Restaurantes (10.5% en 2026)",
+            "method": "POST",
+            "url": "/api/v1/boletas",
+            "body": {
+                "serie": "B001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cliente": {
+                    "tipo_doc": "1",
+                    "num_doc": "12345678",
+                    "razon_social": "CLIENTE RESTAURANTE"
+                },
+                "items": [
+                    {
+                        "codigo": "PLATO001",
+                        "descripcion": "Almuerzo ejecutivo",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 27.5,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "GRR — Transporte público",
+            "method": "POST",
+            "url": "/api/v1/guias-remision",
+            "body": {
+                "serie": "T001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "destinatario": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA DESTINO SAC"
+                },
+                "cod_traslado": "01",
+                "mod_traslado": "01",
+                "fecha_traslado": "2026-10-24",
+                "fecha_de_entrega_al_transportista": "2026-10-24",
+                "peso_total": 12.5,
+                "und_peso_total": "KGM",
+                "partida_ubigeo": "150203",
+                "partida_direccion": "AV ITALIA 123, RIMAC",
+                "llegada_ubigeo": "150101",
+                "llegada_direccion": "AV LIMA 456, CERCADO",
+                "transportista": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "TRANSPORTES SAC",
+                    "nro_mtc": "0001"
+                },
+                "items": [
+                    {
+                        "codigo": "PROD1",
+                        "descripcion": "Producto de prueba",
+                        "cantidad": 2,
+                        "unidad": "NIU"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "GRR — Transporte privado",
+            "method": "POST",
+            "url": "/api/v1/guias-remision",
+            "body": {
+                "serie": "T001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "destinatario": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA DESTINO SAC"
+                },
+                "cod_traslado": "01",
+                "mod_traslado": "02",
+                "fecha_traslado": "2026-10-24",
+                "peso_total": 50,
+                "und_peso_total": "KGM",
+                "num_bultos": 5,
+                "partida_ubigeo": "150203",
+                "partida_direccion": "AV ITALIA 123, RIMAC",
+                "llegada_ubigeo": "150101",
+                "llegada_direccion": "AV LIMA 456, CERCADO",
+                "vehiculo": {
+                    "placa": "ABC123",
+                    "secundarios": [
+                        {
+                            "placa": "XYZ789"
+                        }
+                    ]
+                },
+                "conductor": {
+                    "tipo": "Principal",
+                    "tipo_doc": "1",
+                    "num_doc": "44004400",
+                    "nombres": "ROBERTO",
+                    "apellidos": "RODRIGUEZ VALENCIA",
+                    "licencia": "0001122020"
+                },
+                "items": [
+                    {
+                        "codigo": "PROD1",
+                        "descripcion": "Laptop HP ProBook 450",
+                        "cantidad": 10,
+                        "unidad": "NIU"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "GRR — Múltiples conductores",
+            "method": "POST",
+            "url": "/api/v1/guias-remision",
+            "body": {
+                "serie": "T001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "destinatario": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "DISTRIBUIDORA NORTE SAC"
+                },
+                "cod_traslado": "01",
+                "mod_traslado": "02",
+                "fecha_traslado": "2026-10-24",
+                "peso_total": 500,
+                "und_peso_total": "KGM",
+                "num_bultos": 30,
+                "partida_ubigeo": "150101",
+                "partida_direccion": "AV ARGENTINA 1500, LIMA",
+                "llegada_ubigeo": "130101",
+                "llegada_direccion": "AV MANSICHE 500, TRUJILLO",
+                "vehiculo": {
+                    "placa": "D4E567"
+                },
+                "conductores": [
+                    {
+                        "tipo": "Principal",
+                        "tipo_doc": "1",
+                        "num_doc": "44004400",
+                        "nombres": "CARLOS",
+                        "apellidos": "GOMEZ TORRES",
+                        "licencia": "Q44004400"
+                    },
+                    {
+                        "tipo": "Secundario",
+                        "tipo_doc": "1",
+                        "num_doc": "55005500",
+                        "nombres": "PEDRO",
+                        "apellidos": "LOPEZ RUIZ",
+                        "licencia": "Q55005500"
+                    }
+                ],
+                "items": [
+                    {
+                        "codigo": "FERT01",
+                        "descripcion": "Fertilizante NPK 50kg",
+                        "cantidad": 100,
+                        "unidad": "NIU"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "GRT — Transporte estándar (atajo)",
+            "method": "POST",
+            "url": "/api/v1/guias-remision-transportista",
+            "body": {
+                "serie": "V001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "remitente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20512345678",
+                    "razon_social": "EMPRESA REMITENTE SAC"
+                },
+                "destinatario": {
+                    "tipo_doc": "6",
+                    "num_doc": "20987654321",
+                    "razon_social": "EMPRESA DESTINATARIA SAC"
+                },
+                "doc_relacionado": {
+                    "tipo_codigo": "09",
+                    "numero": "T001-2",
+                    "ruc_emisor": "20512345678"
+                },
+                "cod_traslado": "01",
+                "mod_traslado": "01",
+                "fecha_traslado": "2026-10-24",
+                "peso_total": 500,
+                "und_peso_total": "KGM",
+                "num_bultos": 5,
+                "partida_ubigeo": "150101",
+                "partida_direccion": "AV. ALMACEN 100, LIMA",
+                "llegada_ubigeo": "040101",
+                "llegada_direccion": "AV. DESTINO 200, AREQUIPA",
+                "vehiculo": {
+                    "placa": "ABC123",
+                    "nro_circulacion": "ABC321981R"
+                },
+                "conductor": [
+                    {
+                        "tipo_doc": "1",
+                        "num_doc": "12345678",
+                        "nombres": "JUAN",
+                        "apellidos": "PEREZ",
+                        "licencia": "Q12345678"
+                    }
+                ],
+                "items": [
+                    {
+                        "codigo": "M001",
+                        "descripcion": "Mercancia transportada",
+                        "unidad": "NIU",
+                        "cantidad": 10
+                    }
+                ]
+            }
+        },
+        {
+            "name": "GRT — Subcontratado (yo subcontraté a otro transportista)",
+            "method": "POST",
+            "url": "/api/v1/guias-remision-transportista",
+            "body": {
+                "serie": "V001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "remitente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20512345678",
+                    "razon_social": "EMPRESA REMITENTE SAC"
+                },
+                "destinatario": {
+                    "tipo_doc": "6",
+                    "num_doc": "20987654321",
+                    "razon_social": "EMPRESA DESTINATARIA SAC"
+                },
+                "doc_relacionado": {
+                    "tipo_codigo": "09",
+                    "numero": "T001-1",
+                    "ruc_emisor": "20512345678"
+                },
+                "cod_traslado": "01",
+                "mod_traslado": "01",
+                "fecha_traslado": "2026-10-24",
+                "peso_total": 500,
+                "und_peso_total": "KGM",
+                "partida_ubigeo": "150101",
+                "partida_direccion": "AV. ALMACEN 100",
+                "llegada_ubigeo": "040101",
+                "llegada_direccion": "AV. DESTINO 200",
+                "vehiculo": {
+                    "placa": "ABC123"
+                },
+                "conductor": [
+                    {
+                        "tipo_doc": "1",
+                        "num_doc": "12345678",
+                        "nombres": "JUAN",
+                        "apellidos": "PEREZ",
+                        "licencia": "Q12345678"
+                    }
+                ],
+                "items": [
+                    {
+                        "codigo": "M001",
+                        "descripcion": "Mercancia",
+                        "unidad": "NIU",
+                        "cantidad": 10
+                    }
+                ],
+                "datos_subcontratador": {
+                    "tipo_doc": "6",
+                    "num_doc": "20111222333",
+                    "razon_social": "TRANSPORTES SUBCONTRATADO SAC"
+                },
+                "datos_pagador_flete": {
+                    "tipo": "subcontratador"
+                }
+            }
+        },
+        {
+            "name": "GRT — Pagador del flete = tercero",
+            "method": "POST",
+            "url": "/api/v1/guias-remision-transportista",
+            "body": {
+                "serie": "V001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "remitente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20512345678",
+                    "razon_social": "EMPRESA REMITENTE SAC"
+                },
+                "destinatario": {
+                    "tipo_doc": "6",
+                    "num_doc": "20987654321",
+                    "razon_social": "EMPRESA DESTINATARIA SAC"
+                },
+                "doc_relacionado": {
+                    "tipo_codigo": "09",
+                    "numero": "T001-1",
+                    "ruc_emisor": "20512345678"
+                },
+                "cod_traslado": "01",
+                "mod_traslado": "01",
+                "fecha_traslado": "2026-10-24",
+                "peso_total": 500,
+                "und_peso_total": "KGM",
+                "partida_ubigeo": "150101",
+                "partida_direccion": "AV. ALMACEN 100",
+                "llegada_ubigeo": "040101",
+                "llegada_direccion": "AV. DESTINO 200",
+                "vehiculo": {
+                    "placa": "ABC123"
+                },
+                "conductor": [
+                    {
+                        "tipo_doc": "1",
+                        "num_doc": "12345678",
+                        "nombres": "JUAN",
+                        "apellidos": "PEREZ",
+                        "licencia": "Q12345678"
+                    }
+                ],
+                "items": [
+                    {
+                        "codigo": "M001",
+                        "descripcion": "Mercancia",
+                        "unidad": "NIU",
+                        "cantidad": 10
+                    }
+                ],
+                "datos_pagador_flete": {
+                    "tipo": "tercero",
+                    "tipo_doc": "6",
+                    "num_doc": "20444555666",
+                    "razon_social": "EMPRESA QUE PAGA EL FLETE SAC"
+                }
+            }
+        },
+        {
+            "name": "GRT — Múltiples conductores y vehículos secundarios",
+            "method": "POST",
+            "url": "/api/v1/guias-remision-transportista",
+            "body": {
+                "serie": "V001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "remitente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20512345678",
+                    "razon_social": "EMPRESA REMITENTE SAC"
+                },
+                "destinatario": {
+                    "tipo_doc": "6",
+                    "num_doc": "20987654321",
+                    "razon_social": "EMPRESA DESTINATARIA SAC"
+                },
+                "doc_relacionado": {
+                    "tipo_codigo": "09",
+                    "numero": "T001-1",
+                    "ruc_emisor": "20512345678"
+                },
+                "cod_traslado": "01",
+                "mod_traslado": "01",
+                "fecha_traslado": "2026-10-24",
+                "peso_total": 1000,
+                "und_peso_total": "KGM",
+                "partida_ubigeo": "150101",
+                "partida_direccion": "AV. ALMACEN 100",
+                "llegada_ubigeo": "040101",
+                "llegada_direccion": "AV. DESTINO 200",
+                "vehiculo": {
+                    "placa": "ABC123",
+                    "nro_circulacion": "ABC321981R",
+                    "secundarios": [
+                        {
+                            "placa": "XYZ456",
+                            "nro_circulacion": "ABC321981R"
+                        }
+                    ]
+                },
+                "conductor": [
+                    {
+                        "tipo_doc": "1",
+                        "num_doc": "12345678",
+                        "nombres": "JUAN",
+                        "apellidos": "PEREZ",
+                        "licencia": "Q12345678"
+                    },
+                    {
+                        "tipo_doc": "1",
+                        "num_doc": "87654321",
+                        "nombres": "PEDRO",
+                        "apellidos": "GOMEZ",
+                        "licencia": "Q87654321"
+                    }
+                ],
+                "items": [
+                    {
+                        "codigo": "M001",
+                        "descripcion": "Mercancia",
+                        "unidad": "NIU",
+                        "cantidad": 20
+                    }
+                ]
+            }
+        },
+        {
+            "name": "GRR con caracteres especiales",
+            "method": "POST",
+            "url": "/api/v1/guias-remision",
+            "body": {
+                "serie": "T001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "observacion": "Entregar en almacén \"Norte\" de O'Brien",
+                "destinatario": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA \"DESTINO\" SAC"
+                },
+                "cod_traslado": "01",
+                "mod_traslado": "02",
+                "fecha_traslado": "2026-10-24",
+                "peso_total": 7.1234,
+                "partida_ubigeo": "150101",
+                "partida_direccion": "JR. O'HIGGINS 123",
+                "llegada_ubigeo": "150203",
+                "llegada_direccion": "AV. \"LA MAR\" 456",
+                "vehiculo": {
+                    "placa": "ABC123"
+                },
+                "conductor": {
+                    "tipo_doc": "1",
+                    "num_doc": "12345678",
+                    "nombres": "JOSE D'ANGELO",
+                    "apellidos": "PEREZ",
+                    "licencia": "Q12345678"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Caja \"grande\" de O'Neil",
+                        "cantidad": 2.5,
+                        "unidad": "KGM",
+                        "cod_prod_sunat": "43211503"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Crear retención (régimen general 3%)",
+            "method": "POST",
+            "url": "/api/v1/retenciones",
+            "body": {
+                "serie": "R001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "regimen": "01",
+                "tasa": 3,
+                "proveedor": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC"
+                },
+                "documentos": [
+                    {
+                        "tipo_doc": "01",
+                        "num_doc": "F001-000034",
+                        "fecha_emision": "2026-04-20",
+                        "moneda": "PEN",
+                        "imp_total": 236,
+                        "fecha_retencion": "2026-04-20",
+                        "imp_retenido": 7.08,
+                        "imp_pagar": 228.92,
+                        "pagos": [
+                            {
+                                "moneda": "PEN",
+                                "importe": 236,
+                                "fecha": "2026-04-20"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Crear retención múltiples documentos",
+            "method": "POST",
+            "url": "/api/v1/retenciones",
+            "body": {
+                "serie": "R001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cod_local": "0000",
+                "proveedor": {
+                    "tipo_doc": "6",
+                    "num_doc": "20987654321",
+                    "razon_social": "PROVEEDOR SAC"
+                },
+                "regimen": "01",
+                "tasa": 3,
+                "documentos": [
+                    {
+                        "tipo_doc": "01",
+                        "num_doc": "F001-100",
+                        "fecha_emision": "2026-04-15",
+                        "imp_total": 590,
+                        "moneda": "PEN",
+                        "pagos": [
+                            {
+                                "fecha": "2026-04-19",
+                                "importe": 590
+                            }
+                        ],
+                        "fecha_retencion": "2026-04-19"
+                    },
+                    {
+                        "tipo_doc": "01",
+                        "num_doc": "F001-101",
+                        "fecha_emision": "2026-04-16",
+                        "imp_total": 1180,
+                        "moneda": "PEN",
+                        "pagos": [
+                            {
+                                "fecha": "2026-04-19",
+                                "importe": 1180
+                            }
+                        ],
+                        "fecha_retencion": "2026-04-19"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "0.5% — Entre agentes de percepción",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC",
+                    "direccion": "AV. AREQUIPA 1234, LIMA"
+                },
+                "percepcion": {
+                    "cod_regimen": "03",
+                    "porcentaje": 0.5,
+                    "base": 236,
+                    "monto": 1.18
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "COMBUSTIBLE",
+                        "unidad": "GLL",
+                        "cantidad": 1,
+                        "precio_unitario": 236,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "1% — Venta de bienes (combustible, consumo masivo)",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_operacion": "0101",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000002",
+                    "razon_social": "EMPRESA X SAC"
+                },
+                "percepcion": {
+                    "cod_regimen": "02",
+                    "porcentaje": 1,
+                    "base": 236,
+                    "monto": 2.36
+                },
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "BIEN DE CONSUMO MASIVO",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 236,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Aceptar y fijar hash",
+            "sql": "UPDATE invoices SET sunat_status = 'aceptado', hash_cpe = 'HASH+de/prueba=12345678901'; UPDATE boletas SET sunat_status = 'aceptado', hash_cpe = 'HASH+de/prueba=12345678901'; UPDATE credit_notes SET sunat_status = 'aceptado', hash_cpe = 'HASH+de/prueba=12345678901'; UPDATE debit_notes SET sunat_status = 'aceptado', hash_cpe = 'HASH+de/prueba=12345678901'; UPDATE dispatch_guides SET sunat_status = 'aceptado', hash_cpe = 'HASH+de/prueba=12345678901'; UPDATE retentions SET sunat_status = 'aceptado', hash_cpe = 'HASH+de/prueba=12345678901'"
+        },
+        {
+            "name": "PDF a4 · Factura base 1",
+            "method": "GET",
+            "url": "/api/v1/facturas/1/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Factura base 1",
+            "method": "GET",
+            "url": "/api/v1/facturas/1/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Factura base 1",
+            "method": "GET",
+            "url": "/api/v1/facturas/1/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Factura base 1",
+            "method": "GET",
+            "url": "/api/v1/facturas/1/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Factura base 2",
+            "method": "GET",
+            "url": "/api/v1/facturas/2/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Factura base 2",
+            "method": "GET",
+            "url": "/api/v1/facturas/2/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Factura base 2",
+            "method": "GET",
+            "url": "/api/v1/facturas/2/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Factura base 2",
+            "method": "GET",
+            "url": "/api/v1/facturas/2/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Factura base 3",
+            "method": "GET",
+            "url": "/api/v1/facturas/3/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Factura base 3",
+            "method": "GET",
+            "url": "/api/v1/facturas/3/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Factura base 3",
+            "method": "GET",
+            "url": "/api/v1/facturas/3/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Factura base 3",
+            "method": "GET",
+            "url": "/api/v1/facturas/3/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Factura base 4",
+            "method": "GET",
+            "url": "/api/v1/facturas/4/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Factura base 4",
+            "method": "GET",
+            "url": "/api/v1/facturas/4/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Factura base 4",
+            "method": "GET",
+            "url": "/api/v1/facturas/4/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Factura base 4",
+            "method": "GET",
+            "url": "/api/v1/facturas/4/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Factura base 5",
+            "method": "GET",
+            "url": "/api/v1/facturas/5/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Factura base 5",
+            "method": "GET",
+            "url": "/api/v1/facturas/5/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Factura base 5",
+            "method": "GET",
+            "url": "/api/v1/facturas/5/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Factura base 5",
+            "method": "GET",
+            "url": "/api/v1/facturas/5/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Factura base 6",
+            "method": "GET",
+            "url": "/api/v1/facturas/6/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Factura base 6",
+            "method": "GET",
+            "url": "/api/v1/facturas/6/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Factura base 6",
+            "method": "GET",
+            "url": "/api/v1/facturas/6/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Factura base 6",
+            "method": "GET",
+            "url": "/api/v1/facturas/6/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Boleta base 1 (solo registro)",
+            "method": "GET",
+            "url": "/api/v1/boletas/1/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Boleta base 1 (solo registro)",
+            "method": "GET",
+            "url": "/api/v1/boletas/1/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Boleta base 1 (solo registro)",
+            "method": "GET",
+            "url": "/api/v1/boletas/1/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Boleta base 1 (solo registro)",
+            "method": "GET",
+            "url": "/api/v1/boletas/1/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Boleta base 2 (solo registro)",
+            "method": "GET",
+            "url": "/api/v1/boletas/2/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Boleta base 2 (solo registro)",
+            "method": "GET",
+            "url": "/api/v1/boletas/2/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Boleta base 2 (solo registro)",
+            "method": "GET",
+            "url": "/api/v1/boletas/2/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Boleta base 2 (solo registro)",
+            "method": "GET",
+            "url": "/api/v1/boletas/2/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Boleta base 3",
+            "method": "GET",
+            "url": "/api/v1/boletas/3/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Boleta base 3",
+            "method": "GET",
+            "url": "/api/v1/boletas/3/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Boleta base 3",
+            "method": "GET",
+            "url": "/api/v1/boletas/3/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Boleta base 3",
+            "method": "GET",
+            "url": "/api/v1/boletas/3/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Boleta base 4",
+            "method": "GET",
+            "url": "/api/v1/boletas/4/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Boleta base 4",
+            "method": "GET",
+            "url": "/api/v1/boletas/4/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Boleta base 4",
+            "method": "GET",
+            "url": "/api/v1/boletas/4/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Boleta base 4",
+            "method": "GET",
+            "url": "/api/v1/boletas/4/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · NC - Anulación total de factura",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/1/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · NC - Anulación total de factura",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/1/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · NC - Anulación total de factura",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/1/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · NC - Anulación total de factura",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/1/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · NC - Descuento parcial",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/2/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · NC - Descuento parcial",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/2/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · NC - Descuento parcial",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/2/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · NC - Descuento parcial",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/2/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · NC - Corrección de precio / devolución parcial",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/3/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · NC - Corrección de precio / devolución parcial",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/3/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · NC - Corrección de precio / devolución parcial",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/3/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · NC - Corrección de precio / devolución parcial",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/3/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · NC - En dólares (USD)",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/4/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · NC - En dólares (USD)",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/4/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · NC - En dólares (USD)",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/4/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · NC - En dólares (USD)",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/4/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · NC - Anulación de boleta",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/5/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · NC - Anulación de boleta",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/5/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · NC - Anulación de boleta",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/5/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · NC - Anulación de boleta",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/5/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · NC envío manual (enviar_automatico=false)",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/6/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · NC envío manual (enviar_automatico=false)",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/6/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · NC envío manual (enviar_automatico=false)",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/6/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · NC envío manual (enviar_automatico=false)",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/6/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · ND — Intereses por mora",
+            "method": "GET",
+            "url": "/api/v1/notas-debito/1/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · ND — Intereses por mora",
+            "method": "GET",
+            "url": "/api/v1/notas-debito/1/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · ND — Intereses por mora",
+            "method": "GET",
+            "url": "/api/v1/notas-debito/1/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · ND — Intereses por mora",
+            "method": "GET",
+            "url": "/api/v1/notas-debito/1/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · ND — Aumento de valor",
+            "method": "GET",
+            "url": "/api/v1/notas-debito/2/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · ND — Aumento de valor",
+            "method": "GET",
+            "url": "/api/v1/notas-debito/2/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · ND — Aumento de valor",
+            "method": "GET",
+            "url": "/api/v1/notas-debito/2/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · ND — Aumento de valor",
+            "method": "GET",
+            "url": "/api/v1/notas-debito/2/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · ND — Penalidad",
+            "method": "GET",
+            "url": "/api/v1/notas-debito/3/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · ND — Penalidad",
+            "method": "GET",
+            "url": "/api/v1/notas-debito/3/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · ND — Penalidad",
+            "method": "GET",
+            "url": "/api/v1/notas-debito/3/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · ND — Penalidad",
+            "method": "GET",
+            "url": "/api/v1/notas-debito/3/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · ND — Sobre boleta",
+            "method": "GET",
+            "url": "/api/v1/notas-debito/4/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · ND — Sobre boleta",
+            "method": "GET",
+            "url": "/api/v1/notas-debito/4/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · ND — Sobre boleta",
+            "method": "GET",
+            "url": "/api/v1/notas-debito/4/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · ND — Sobre boleta",
+            "method": "GET",
+            "url": "/api/v1/notas-debito/4/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · ND envío manual",
+            "method": "GET",
+            "url": "/api/v1/notas-debito/5/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · ND envío manual",
+            "method": "GET",
+            "url": "/api/v1/notas-debito/5/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · ND envío manual",
+            "method": "GET",
+            "url": "/api/v1/notas-debito/5/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · ND envío manual",
+            "method": "GET",
+            "url": "/api/v1/notas-debito/5/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Crear factura crédito (con cuotas)",
+            "method": "GET",
+            "url": "/api/v1/facturas/7/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Crear factura crédito (con cuotas)",
+            "method": "GET",
+            "url": "/api/v1/facturas/7/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Crear factura crédito (con cuotas)",
+            "method": "GET",
+            "url": "/api/v1/facturas/7/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Crear factura crédito (con cuotas)",
+            "method": "GET",
+            "url": "/api/v1/facturas/7/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Crear factura exonerada (servicios médicos)",
+            "method": "GET",
+            "url": "/api/v1/facturas/8/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Crear factura exonerada (servicios médicos)",
+            "method": "GET",
+            "url": "/api/v1/facturas/8/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Crear factura exonerada (servicios médicos)",
+            "method": "GET",
+            "url": "/api/v1/facturas/8/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Crear factura exonerada (servicios médicos)",
+            "method": "GET",
+            "url": "/api/v1/facturas/8/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Crear factura exportación (tipo 0200)",
+            "method": "GET",
+            "url": "/api/v1/facturas/9/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Crear factura exportación (tipo 0200)",
+            "method": "GET",
+            "url": "/api/v1/facturas/9/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Crear factura exportación (tipo 0200)",
+            "method": "GET",
+            "url": "/api/v1/facturas/9/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Crear factura exportación (tipo 0200)",
+            "method": "GET",
+            "url": "/api/v1/facturas/9/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Factura gratuita",
+            "method": "GET",
+            "url": "/api/v1/facturas/10/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Factura gratuita",
+            "method": "GET",
+            "url": "/api/v1/facturas/10/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Factura gratuita",
+            "method": "GET",
+            "url": "/api/v1/facturas/10/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Factura gratuita",
+            "method": "GET",
+            "url": "/api/v1/facturas/10/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Factura con detracción",
+            "method": "GET",
+            "url": "/api/v1/facturas/11/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Factura con detracción",
+            "method": "GET",
+            "url": "/api/v1/facturas/11/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Factura con detracción",
+            "method": "GET",
+            "url": "/api/v1/facturas/11/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Factura con detracción",
+            "method": "GET",
+            "url": "/api/v1/facturas/11/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Factura descuento global",
+            "method": "GET",
+            "url": "/api/v1/facturas/12/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Factura descuento global",
+            "method": "GET",
+            "url": "/api/v1/facturas/12/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Factura descuento global",
+            "method": "GET",
+            "url": "/api/v1/facturas/12/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Factura descuento global",
+            "method": "GET",
+            "url": "/api/v1/facturas/12/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Factura descuento por línea",
+            "method": "GET",
+            "url": "/api/v1/facturas/13/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Factura descuento por línea",
+            "method": "GET",
+            "url": "/api/v1/facturas/13/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Factura descuento por línea",
+            "method": "GET",
+            "url": "/api/v1/facturas/13/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Factura descuento por línea",
+            "method": "GET",
+            "url": "/api/v1/facturas/13/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Factura ICBPER (bolsas plásticas)",
+            "method": "GET",
+            "url": "/api/v1/facturas/14/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Factura ICBPER (bolsas plásticas)",
+            "method": "GET",
+            "url": "/api/v1/facturas/14/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Factura ICBPER (bolsas plásticas)",
+            "method": "GET",
+            "url": "/api/v1/facturas/14/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Factura ICBPER (bolsas plásticas)",
+            "method": "GET",
+            "url": "/api/v1/facturas/14/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Factura ISC (impuesto selectivo)",
+            "method": "GET",
+            "url": "/api/v1/facturas/15/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Factura ISC (impuesto selectivo)",
+            "method": "GET",
+            "url": "/api/v1/facturas/15/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Factura ISC (impuesto selectivo)",
+            "method": "GET",
+            "url": "/api/v1/facturas/15/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Factura ISC (impuesto selectivo)",
+            "method": "GET",
+            "url": "/api/v1/facturas/15/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Factura IVAP (arroz pilado)",
+            "method": "GET",
+            "url": "/api/v1/facturas/16/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Factura IVAP (arroz pilado)",
+            "method": "GET",
+            "url": "/api/v1/facturas/16/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Factura IVAP (arroz pilado)",
+            "method": "GET",
+            "url": "/api/v1/facturas/16/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Factura IVAP (arroz pilado)",
+            "method": "GET",
+            "url": "/api/v1/facturas/16/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Factura + Guía de Remisión",
+            "method": "GET",
+            "url": "/api/v1/facturas/17/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Factura + Guía de Remisión",
+            "method": "GET",
+            "url": "/api/v1/facturas/17/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Factura + Guía de Remisión",
+            "method": "GET",
+            "url": "/api/v1/facturas/17/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Factura + Guía de Remisión",
+            "method": "GET",
+            "url": "/api/v1/facturas/17/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Factura compleja (todos los campos)",
+            "method": "GET",
+            "url": "/api/v1/facturas/18/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Factura compleja (todos los campos)",
+            "method": "GET",
+            "url": "/api/v1/facturas/18/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Factura compleja (todos los campos)",
+            "method": "GET",
+            "url": "/api/v1/facturas/18/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Factura compleja (todos los campos)",
+            "method": "GET",
+            "url": "/api/v1/facturas/18/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Factura con contingencia (modo offline)",
+            "method": "GET",
+            "url": "/api/v1/facturas/19/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Factura con contingencia (modo offline)",
+            "method": "GET",
+            "url": "/api/v1/facturas/19/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Factura con contingencia (modo offline)",
+            "method": "GET",
+            "url": "/api/v1/facturas/19/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Factura con contingencia (modo offline)",
+            "method": "GET",
+            "url": "/api/v1/facturas/19/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Boleta consumidor final (sin DNI)",
+            "method": "GET",
+            "url": "/api/v1/boletas/5/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Boleta consumidor final (sin DNI)",
+            "method": "GET",
+            "url": "/api/v1/boletas/5/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Boleta consumidor final (sin DNI)",
+            "method": "GET",
+            "url": "/api/v1/boletas/5/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Boleta consumidor final (sin DNI)",
+            "method": "GET",
+            "url": "/api/v1/boletas/5/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Boleta MYPE Restaurantes (10.5% en 2026)",
+            "method": "GET",
+            "url": "/api/v1/boletas/6/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Boleta MYPE Restaurantes (10.5% en 2026)",
+            "method": "GET",
+            "url": "/api/v1/boletas/6/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Boleta MYPE Restaurantes (10.5% en 2026)",
+            "method": "GET",
+            "url": "/api/v1/boletas/6/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Boleta MYPE Restaurantes (10.5% en 2026)",
+            "method": "GET",
+            "url": "/api/v1/boletas/6/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · GRR — Transporte público",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/1/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · GRR — Transporte público",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/1/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · GRR — Transporte público",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/1/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · GRR — Transporte público",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/1/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · GRR — Transporte privado",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/2/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · GRR — Transporte privado",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/2/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · GRR — Transporte privado",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/2/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · GRR — Transporte privado",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/2/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · GRR — Múltiples conductores",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/3/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · GRR — Múltiples conductores",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/3/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · GRR — Múltiples conductores",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/3/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · GRR — Múltiples conductores",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/3/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · GRT — Transporte estándar (atajo)",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/4/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · GRT — Transporte estándar (atajo)",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/4/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · GRT — Transporte estándar (atajo)",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/4/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · GRT — Transporte estándar (atajo)",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/4/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · GRT — Subcontratado (yo subcontraté a otro transportista)",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/5/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · GRT — Subcontratado (yo subcontraté a otro transportista)",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/5/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · GRT — Subcontratado (yo subcontraté a otro transportista)",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/5/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · GRT — Subcontratado (yo subcontraté a otro transportista)",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/5/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · GRT — Pagador del flete = tercero",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/6/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · GRT — Pagador del flete = tercero",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/6/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · GRT — Pagador del flete = tercero",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/6/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · GRT — Pagador del flete = tercero",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/6/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · GRT — Múltiples conductores y vehículos secundarios",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/7/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · GRT — Múltiples conductores y vehículos secundarios",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/7/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · GRT — Múltiples conductores y vehículos secundarios",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/7/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · GRT — Múltiples conductores y vehículos secundarios",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/7/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · GRR con caracteres especiales",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/8/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · GRR con caracteres especiales",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/8/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · GRR con caracteres especiales",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/8/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · GRR con caracteres especiales",
+            "method": "GET",
+            "url": "/api/v1/guias-remision/8/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Crear retención (régimen general 3%)",
+            "method": "GET",
+            "url": "/api/v1/retenciones/1/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Crear retención (régimen general 3%)",
+            "method": "GET",
+            "url": "/api/v1/retenciones/1/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Crear retención (régimen general 3%)",
+            "method": "GET",
+            "url": "/api/v1/retenciones/1/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Crear retención (régimen general 3%)",
+            "method": "GET",
+            "url": "/api/v1/retenciones/1/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · Crear retención múltiples documentos",
+            "method": "GET",
+            "url": "/api/v1/retenciones/2/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · Crear retención múltiples documentos",
+            "method": "GET",
+            "url": "/api/v1/retenciones/2/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · Crear retención múltiples documentos",
+            "method": "GET",
+            "url": "/api/v1/retenciones/2/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · Crear retención múltiples documentos",
+            "method": "GET",
+            "url": "/api/v1/retenciones/2/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · 0.5% — Entre agentes de percepción",
+            "method": "GET",
+            "url": "/api/v1/facturas/20/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · 0.5% — Entre agentes de percepción",
+            "method": "GET",
+            "url": "/api/v1/facturas/20/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · 0.5% — Entre agentes de percepción",
+            "method": "GET",
+            "url": "/api/v1/facturas/20/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · 0.5% — Entre agentes de percepción",
+            "method": "GET",
+            "url": "/api/v1/facturas/20/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF a4 · 1% — Venta de bienes (combustible, consumo masivo)",
+            "method": "GET",
+            "url": "/api/v1/facturas/21/pdf?format=a4"
+        },
+        {
+            "name": "PDF a5 · 1% — Venta de bienes (combustible, consumo masivo)",
+            "method": "GET",
+            "url": "/api/v1/facturas/21/pdf?format=a5"
+        },
+        {
+            "name": "PDF ticket-80 · 1% — Venta de bienes (combustible, consumo masivo)",
+            "method": "GET",
+            "url": "/api/v1/facturas/21/pdf?format=ticket-80"
+        },
+        {
+            "name": "PDF ticket-58 · 1% — Venta de bienes (combustible, consumo masivo)",
+            "method": "GET",
+            "url": "/api/v1/facturas/21/pdf?format=ticket-58"
+        },
+        {
+            "name": "PDF formato inválido",
+            "method": "GET",
+            "url": "/api/v1/facturas/1/pdf?formato=carta"
+        },
+        {
+            "name": "PDF por \"format\"",
+            "method": "GET",
+            "url": "/api/v1/boletas/1/pdf?format=a5"
+        },
+        {
+            "name": "PDF inexistente",
+            "method": "GET",
+            "url": "/api/v1/facturas/999/pdf"
+        }
+    ]
+}

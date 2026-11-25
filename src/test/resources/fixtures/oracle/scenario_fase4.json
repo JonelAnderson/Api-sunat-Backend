@@ -1,0 +1,1056 @@
+{
+    "now": "2026-10-24T15:15:30Z",
+    "tenant": {
+        "ruc": "20000000001",
+        "razon_social": "EMPRESA DEMO S.A.C.",
+        "nombre_comercial": "EMPRESA DEMO",
+        "direccion": "AV. DEMO 123",
+        "ubigeo": "150101",
+        "departamento": "LIMA",
+        "provincia": "LIMA",
+        "distrito": "LIMA",
+        "sol_user": "MODDATOS",
+        "sol_pass": "MODDATOS",
+        "api_key": "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",
+        "api_secret": "oracle-secret",
+        "plan": "business",
+        "cert_pem": "C:/laragon/www/API-SUNAT-MULTILENGUAJE/spring-boot/src/test/resources/fixtures/certs/cert-con-clave.pem"
+    },
+    "series": [
+        {
+            "tipo": "01",
+            "serie": "F001"
+        },
+        {
+            "tipo": "03",
+            "serie": "B001"
+        },
+        {
+            "tipo": "07",
+            "serie": "FC01"
+        },
+        {
+            "tipo": "07",
+            "serie": "BC01"
+        },
+        {
+            "tipo": "08",
+            "serie": "FD01"
+        },
+        {
+            "tipo": "08",
+            "serie": "BD01"
+        }
+    ],
+    "steps": [
+        {
+            "name": "Factura base 1",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20601234567",
+                    "razon_social": "CLIENTE PRUEBA S.A.C.",
+                    "direccion": "AV. LIMA 123"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 1180,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": false
+        },
+        {
+            "name": "Factura base 2",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20601234567",
+                    "razon_social": "CLIENTE PRUEBA S.A.C.",
+                    "direccion": "AV. LIMA 123"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 590,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": false
+        },
+        {
+            "name": "Factura base 3",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20601234567",
+                    "razon_social": "CLIENTE PRUEBA S.A.C.",
+                    "direccion": "AV. LIMA 123"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 236,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": false
+        },
+        {
+            "name": "Factura base 4",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20601234567",
+                    "razon_social": "CLIENTE PRUEBA S.A.C.",
+                    "direccion": "AV. LIMA 123"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 118,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": false
+        },
+        {
+            "name": "Factura base 5",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20601234567",
+                    "razon_social": "CLIENTE PRUEBA S.A.C.",
+                    "direccion": "AV. LIMA 123"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 354,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": false
+        },
+        {
+            "name": "Factura base 6",
+            "method": "POST",
+            "url": "/api/v1/facturas",
+            "body": {
+                "serie": "F001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20601234567",
+                    "razon_social": "CLIENTE PRUEBA S.A.C.",
+                    "direccion": "AV. LIMA 123"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 472,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": false
+        },
+        {
+            "name": "Boleta base 1 (solo registro)",
+            "method": "POST",
+            "url": "/api/v1/boletas",
+            "body": {
+                "serie": "B001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "solo_registro": true,
+                "cliente": {
+                    "tipo_doc": "1",
+                    "num_doc": "12345678",
+                    "razon_social": "JUAN PEREZ"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 50,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": false
+        },
+        {
+            "name": "Boleta base 2 (solo registro)",
+            "method": "POST",
+            "url": "/api/v1/boletas",
+            "body": {
+                "serie": "B001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "solo_registro": true,
+                "cliente": {
+                    "tipo_doc": "1",
+                    "num_doc": "12345678",
+                    "razon_social": "JUAN PEREZ"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 30,
+                        "tip_afe_igv": "20"
+                    }
+                ]
+            },
+            "xml": false
+        },
+        {
+            "name": "Boleta base 3",
+            "method": "POST",
+            "url": "/api/v1/boletas",
+            "body": {
+                "serie": "B001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cliente": {
+                    "tipo_doc": "1",
+                    "num_doc": "12345678",
+                    "razon_social": "JUAN PEREZ"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 80,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": false
+        },
+        {
+            "name": "Boleta base 4",
+            "method": "POST",
+            "url": "/api/v1/boletas",
+            "body": {
+                "serie": "B001",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cliente": {
+                    "tipo_doc": "1",
+                    "num_doc": "12345678",
+                    "razon_social": "JUAN PEREZ"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 45,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": false
+        },
+        {
+            "name": "NC - Anulación total de factura",
+            "method": "POST",
+            "url": "/api/v1/notas-credito",
+            "body": {
+                "serie": "FC01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "doc_afectado_tipo": "01",
+                "doc_afectado_serie": "F001",
+                "doc_afectado_correlativo": "1",
+                "cod_motivo": "01",
+                "des_motivo": "Anulación de la operación",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20512345678",
+                    "razon_social": "EMPRESA DEMO SAC",
+                    "direccion": "Av. Los Olivos 123, Lima"
+                },
+                "items": [
+                    {
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 100,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "NC - Descuento parcial",
+            "method": "POST",
+            "url": "/api/v1/notas-credito",
+            "body": {
+                "serie": "FC01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "doc_afectado_tipo": "01",
+                "doc_afectado_serie": "F001",
+                "doc_afectado_correlativo": "2",
+                "cod_motivo": "04",
+                "des_motivo": "Descuento por volumen de compra",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000001",
+                    "razon_social": "CLIENTE PRUEBA S.A.C."
+                },
+                "items": [
+                    {
+                        "descripcion": "Descuento Producto A",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 60,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "NC - Corrección de precio / devolución parcial",
+            "method": "POST",
+            "url": "/api/v1/notas-credito",
+            "body": {
+                "serie": "FC01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "doc_afectado_tipo": "01",
+                "doc_afectado_serie": "F001",
+                "doc_afectado_correlativo": "3",
+                "cod_motivo": "06",
+                "des_motivo": "Devolución parcial de mercadería",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000001",
+                    "razon_social": "CLIENTE PRUEBA S.A.C."
+                },
+                "items": [
+                    {
+                        "descripcion": "Producto devuelto X",
+                        "unidad": "NIU",
+                        "cantidad": 3,
+                        "precio_unitario": 25,
+                        "tip_afe_igv": "10"
+                    },
+                    {
+                        "descripcion": "Producto devuelto Y",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 80,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "NC - En dólares (USD)",
+            "method": "POST",
+            "url": "/api/v1/notas-credito",
+            "body": {
+                "serie": "FC01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_moneda": "USD",
+                "doc_afectado_tipo": "01",
+                "doc_afectado_serie": "F001",
+                "doc_afectado_correlativo": "1",
+                "cod_motivo": "01",
+                "des_motivo": "Anulación de operación en dólares",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000001",
+                    "razon_social": "CLIENTE PRUEBA S.A.C."
+                },
+                "items": [
+                    {
+                        "descripcion": "Consultoría internacional",
+                        "unidad": "ZZ",
+                        "cantidad": 1,
+                        "precio_unitario": 500,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "NC - Anulación de boleta",
+            "method": "POST",
+            "url": "/api/v1/notas-credito",
+            "body": {
+                "serie": "BC01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "doc_afectado_tipo": "03",
+                "doc_afectado_serie": "B001",
+                "doc_afectado_correlativo": "3",
+                "cod_motivo": "01",
+                "des_motivo": "Anulación de la operación",
+                "cliente": {
+                    "tipo_doc": "1",
+                    "num_doc": "12345678",
+                    "razon_social": "JUAN PEREZ"
+                },
+                "items": [
+                    {
+                        "descripcion": "Producto vendido",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 50,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "NC envío manual (enviar_automatico=false)",
+            "method": "POST",
+            "url": "/api/v1/notas-credito",
+            "body": {
+                "serie": "FC01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20512345678",
+                    "razon_social": "CLIENTE SAC"
+                },
+                "doc_afectado_tipo": "01",
+                "doc_afectado_serie": "F001",
+                "doc_afectado_correlativo": "4",
+                "cod_motivo": "01",
+                "des_motivo": "Anulación de la operación",
+                "items": [
+                    {
+                        "codigo": "P001",
+                        "descripcion": "Producto a anular",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 118,
+                        "tip_afe_igv": "10"
+                    }
+                ],
+                "enviar_automatico": false
+            },
+            "xml": true
+        },
+        {
+            "name": "ND — Intereses por mora",
+            "method": "POST",
+            "url": "/api/v1/notas-debito",
+            "body": {
+                "serie": "FD01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "doc_afectado_tipo": "01",
+                "doc_afectado_serie": "F001",
+                "doc_afectado_correlativo": "1",
+                "cod_motivo": "01",
+                "des_motivo": "Intereses por mora",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000001",
+                    "razon_social": "CLIENTE PRUEBA S.A.C."
+                },
+                "items": [
+                    {
+                        "descripcion": "Interés por pago fuera de plazo",
+                        "unidad": "ZZ",
+                        "cantidad": 1,
+                        "precio_unitario": 150,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "ND — Aumento de valor",
+            "method": "POST",
+            "url": "/api/v1/notas-debito",
+            "body": {
+                "serie": "FD01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "doc_afectado_tipo": "01",
+                "doc_afectado_serie": "F001",
+                "doc_afectado_correlativo": "2",
+                "cod_motivo": "02",
+                "des_motivo": "Aumento en el valor por servicio adicional",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000001",
+                    "razon_social": "CLIENTE PRUEBA S.A.C."
+                },
+                "items": [
+                    {
+                        "descripcion": "Servicio de instalación adicional",
+                        "unidad": "ZZ",
+                        "cantidad": 1,
+                        "precio_unitario": 120,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "ND — Penalidad",
+            "method": "POST",
+            "url": "/api/v1/notas-debito",
+            "body": {
+                "serie": "FD01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "doc_afectado_tipo": "01",
+                "doc_afectado_serie": "F001",
+                "doc_afectado_correlativo": "3",
+                "cod_motivo": "02",
+                "des_motivo": "Aumento en el valor por servicio adicional",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20000000001",
+                    "razon_social": "CLIENTE PRUEBA S.A.C."
+                },
+                "items": [
+                    {
+                        "descripcion": "Servicio de instalación adicional",
+                        "unidad": "ZZ",
+                        "cantidad": 1,
+                        "precio_unitario": 200,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "ND — Sobre boleta",
+            "method": "POST",
+            "url": "/api/v1/notas-debito",
+            "body": {
+                "serie": "BD01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "doc_afectado_tipo": "03",
+                "doc_afectado_serie": "B001",
+                "doc_afectado_correlativo": "3",
+                "cod_motivo": "01",
+                "des_motivo": "Intereses por mora",
+                "cliente": {
+                    "tipo_doc": "1",
+                    "num_doc": "12345678",
+                    "razon_social": "JUAN PEREZ"
+                },
+                "items": [
+                    {
+                        "descripcion": "Interés por pago tardío",
+                        "unidad": "ZZ",
+                        "cantidad": 1,
+                        "precio_unitario": 20,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "ND envío manual",
+            "method": "POST",
+            "url": "/api/v1/notas-debito",
+            "body": {
+                "serie": "FD01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "tipo_moneda": "PEN",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20512345678",
+                    "razon_social": "CLIENTE SAC"
+                },
+                "doc_afectado_tipo": "01",
+                "doc_afectado_serie": "F001",
+                "doc_afectado_correlativo": "4",
+                "cod_motivo": "01",
+                "des_motivo": "Intereses por mora",
+                "items": [
+                    {
+                        "codigo": "INT001",
+                        "descripcion": "Intereses por mora 30 días",
+                        "unidad": "ZZ",
+                        "cantidad": 1,
+                        "precio_unitario": 118,
+                        "tip_afe_igv": "10"
+                    }
+                ],
+                "enviar_automatico": false
+            },
+            "xml": true
+        },
+        {
+            "name": "NC mayor que la factura (ERR-3286)",
+            "method": "POST",
+            "url": "/api/v1/notas-credito",
+            "body": {
+                "serie": "FC01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "doc_afectado_tipo": "01",
+                "doc_afectado_serie": "F001",
+                "doc_afectado_correlativo": "4",
+                "cod_motivo": "07",
+                "des_motivo": "Devolución",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20601234567",
+                    "razon_social": "CLIENTE PRUEBA S.A.C.",
+                    "direccion": "AV. LIMA 123"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 500,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": false
+        },
+        {
+            "name": "NC con descuento por línea e ISC",
+            "method": "POST",
+            "url": "/api/v1/notas-credito",
+            "body": {
+                "serie": "FC01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "doc_afectado_tipo": "01",
+                "doc_afectado_serie": "F001",
+                "doc_afectado_correlativo": "1",
+                "cod_motivo": "07",
+                "des_motivo": "Devolución <parcial> & ajuste",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20601234567",
+                    "razon_social": "CLIENTE PRUEBA S.A.C.",
+                    "direccion": "AV. LIMA 123"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 2,
+                        "precio_unitario": 100,
+                        "tip_afe_igv": "10",
+                        "descuentos": [
+                            {
+                                "cod_tipo": "00",
+                                "porcentaje": 10
+                            }
+                        ]
+                    },
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 50,
+                        "tip_afe_igv": "10",
+                        "porcentaje_isc": 10
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "ND penalidad sin documento (motivo 13)",
+            "method": "POST",
+            "url": "/api/v1/notas-debito",
+            "body": {
+                "serie": "FD01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cod_motivo": "13",
+                "des_motivo": "Penalidad por incumplimiento",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20601234567",
+                    "razon_social": "CLIENTE PRUEBA S.A.C.",
+                    "direccion": "AV. LIMA 123"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 100,
+                        "tip_afe_igv": "30"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "ND penalidad con IGV (ERR-3507)",
+            "method": "POST",
+            "url": "/api/v1/notas-debito",
+            "body": {
+                "serie": "FD01",
+                "fecha_emision": "2026-10-24 10:15:30",
+                "cod_motivo": "13",
+                "des_motivo": "Penalidad",
+                "cliente": {
+                    "tipo_doc": "6",
+                    "num_doc": "20601234567",
+                    "razon_social": "CLIENTE PRUEBA S.A.C.",
+                    "direccion": "AV. LIMA 123"
+                },
+                "items": [
+                    {
+                        "codigo": "P1",
+                        "descripcion": "Producto de prueba",
+                        "unidad": "NIU",
+                        "cantidad": 1,
+                        "precio_unitario": 118,
+                        "tip_afe_igv": "10"
+                    }
+                ]
+            },
+            "xml": false
+        },
+        {
+            "name": "NC validación (faltan campos)",
+            "method": "POST",
+            "url": "/api/v1/notas-credito",
+            "body": {
+                "serie": "XX",
+                "items": []
+            },
+            "xml": false
+        },
+        {
+            "name": "Aceptar F001-2, F001-3, B001-3 y FC01-2",
+            "sql": "UPDATE invoices SET sunat_status='aceptado' WHERE correlativo IN (2,3,5,6); UPDATE boletas SET sunat_status='aceptado' WHERE correlativo IN (3,4); UPDATE credit_notes SET sunat_status='aceptado' WHERE serie='FC01' AND correlativo=2"
+        },
+        {
+            "name": "Crear resumen diario (envío de boletas pendientes)",
+            "method": "POST",
+            "url": "/api/v1/resumenes",
+            "body": {
+                "fecha_resumen": "2026-10-24"
+            },
+            "xml": true
+        },
+        {
+            "name": "Crear resumen ANULACIÓN (anular boletas aceptadas)",
+            "method": "POST",
+            "url": "/api/v1/resumenes",
+            "body": {
+                "fecha_resumen": "2026-10-24",
+                "anular": [
+                    {
+                        "id": 4,
+                        "motivo": "Error en el monto del item"
+                    },
+                    {
+                        "id": 99,
+                        "motivo": "No existe"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Resumen envío manual (enviar_automatico=false)",
+            "method": "POST",
+            "url": "/api/v1/resumenes",
+            "body": {
+                "fecha_resumen": "2026-10-24",
+                "enviar_automatico": false
+            },
+            "xml": true
+        },
+        {
+            "name": "Resumen fuera de plazo",
+            "method": "POST",
+            "url": "/api/v1/resumenes",
+            "body": {
+                "fecha_resumen": "2026-10-01"
+            },
+            "xml": false
+        },
+        {
+            "name": "Resumen anulación de boleta no aceptada",
+            "method": "POST",
+            "url": "/api/v1/resumenes",
+            "body": {
+                "fecha_resumen": "2026-10-24",
+                "anular": [
+                    {
+                        "id": 1,
+                        "motivo": "x"
+                    }
+                ]
+            },
+            "xml": false
+        },
+        {
+            "name": "Anular factura (RA estándar)",
+            "method": "POST",
+            "url": "/api/v1/anulaciones",
+            "body": {
+                "fecha_generacion": "2026-10-24",
+                "fecha_comunicacion": "2026-10-24",
+                "detalles": [
+                    {
+                        "tipo_documento": "01",
+                        "serie": "F001",
+                        "correlativo": "5",
+                        "motivo": "Error en datos del cliente"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Anular múltiples documentos en lote",
+            "method": "POST",
+            "url": "/api/v1/anulaciones",
+            "body": {
+                "fecha_generacion": "2026-10-24",
+                "fecha_comunicacion": "2026-10-24",
+                "detalles": [
+                    {
+                        "tipo_documento": "01",
+                        "serie": "F001",
+                        "correlativo": "6",
+                        "motivo": "Error cliente"
+                    },
+                    {
+                        "tipo_documento": "01",
+                        "serie": "F001",
+                        "correlativo": "6",
+                        "motivo": "Anulación solicitada"
+                    },
+                    {
+                        "tipo_documento": "07",
+                        "serie": "FC01",
+                        "correlativo": "2",
+                        "motivo": "NC errónea"
+                    },
+                    {
+                        "tipo_documento": "08",
+                        "serie": "FD01",
+                        "correlativo": "1",
+                        "motivo": "ND errónea"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Anular nota de crédito",
+            "method": "POST",
+            "url": "/api/v1/anulaciones",
+            "body": {
+                "fecha_generacion": "2026-10-24",
+                "detalles": [
+                    {
+                        "tipo_documento": "07",
+                        "serie": "FC01",
+                        "correlativo": "2",
+                        "motivo": "NC duplicada"
+                    }
+                ]
+            },
+            "xml": true
+        },
+        {
+            "name": "Anular envío manual (enviar_automatico=false)",
+            "method": "POST",
+            "url": "/api/v1/anulaciones",
+            "body": {
+                "fecha_generacion": "2026-10-24",
+                "detalles": [
+                    {
+                        "tipo_documento": "01",
+                        "serie": "F001",
+                        "correlativo": "6",
+                        "motivo": "Error"
+                    }
+                ],
+                "enviar_automatico": false
+            },
+            "xml": true
+        },
+        {
+            "name": "Baja de boleta (no soportada)",
+            "method": "POST",
+            "url": "/api/v1/anulaciones",
+            "body": {
+                "fecha_generacion": "2026-10-24",
+                "detalles": [
+                    {
+                        "tipo_documento": "03",
+                        "serie": "B001",
+                        "correlativo": "3",
+                        "motivo": "x"
+                    }
+                ]
+            },
+            "xml": false
+        },
+        {
+            "name": "Baja duplicada",
+            "method": "POST",
+            "url": "/api/v1/anulaciones",
+            "body": {
+                "fecha_generacion": "2026-10-24",
+                "detalles": [
+                    {
+                        "tipo_documento": "01",
+                        "serie": "F001",
+                        "correlativo": "5",
+                        "motivo": "otra vez"
+                    }
+                ]
+            },
+            "xml": false
+        },
+        {
+            "name": "Listar NC",
+            "method": "GET",
+            "url": "/api/v1/notas-credito?por_pagina=15"
+        },
+        {
+            "name": "Filtrar NC por serie",
+            "method": "GET",
+            "url": "/api/v1/notas-credito?serie=BC01"
+        },
+        {
+            "name": "Ver NC 1",
+            "method": "GET",
+            "url": "/api/v1/notas-credito/1"
+        },
+        {
+            "name": "Listar ND",
+            "method": "GET",
+            "url": "/api/v1/notas-debito"
+        },
+        {
+            "name": "Ver ND 1",
+            "method": "GET",
+            "url": "/api/v1/notas-debito/1"
+        },
+        {
+            "name": "Listar resúmenes",
+            "method": "GET",
+            "url": "/api/v1/resumenes?por_pagina=15"
+        },
+        {
+            "name": "Resúmenes del mes",
+            "method": "GET",
+            "url": "/api/v1/resumenes?mes=2026-10"
+        },
+        {
+            "name": "Solo anulaciones",
+            "method": "GET",
+            "url": "/api/v1/resumenes?tipo=anulacion"
+        },
+        {
+            "name": "Estado resumen 1",
+            "method": "GET",
+            "url": "/api/v1/resumenes/1/estado"
+        },
+        {
+            "name": "XML resumen 1 (pendiente)",
+            "method": "GET",
+            "url": "/api/v1/resumenes/1/xml"
+        },
+        {
+            "name": "Listar bajas",
+            "method": "GET",
+            "url": "/api/v1/anulaciones?per_page=15"
+        },
+        {
+            "name": "Bajas aceptadas",
+            "method": "GET",
+            "url": "/api/v1/anulaciones?estado=aceptado"
+        },
+        {
+            "name": "Ver baja 1",
+            "method": "GET",
+            "url": "/api/v1/anulaciones/1"
+        },
+        {
+            "name": "Estado baja 1",
+            "method": "GET",
+            "url": "/api/v1/anulaciones/1/estado"
+        },
+        {
+            "name": "XML baja (no disponible)",
+            "method": "GET",
+            "url": "/api/v1/anulaciones/1/xml"
+        },
+        {
+            "name": "Facturas tras la baja",
+            "method": "GET",
+            "url": "/api/v1/facturas?por_pagina=15"
+        },
+        {
+            "name": "Boletas tras el resumen",
+            "method": "GET",
+            "url": "/api/v1/boletas?por_pagina=15"
+        }
+    ]
+}
