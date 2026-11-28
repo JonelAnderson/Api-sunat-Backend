@@ -58,6 +58,7 @@ public class DatabaseSeeder implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         if (!props.seed()) {
+            ensureUbigeo();
             return;
         }
         tx.executeWithoutResult(s -> seedPlans());
@@ -170,6 +171,22 @@ public class DatabaseSeeder implements ApplicationRunner {
         }
         total += flush("INSERT INTO unspsc_taxonomy (nivel, codigo, nombre, parent) VALUES (?, ?, ?, ?)", batch);
         log.info("UNSPSC taxonomía: {} niveles cargados.", total);
+    }
+
+    /**
+     * El ubigeo es un catálogo, no un dato de prueba: con {@code APP_SEED=false} (producción) también se carga si las tablas
+     * están vacías, porque el alta de empresas, las sucursales y las guías lo necesitan. Si ya tienen datos no toca nada.
+     */
+    private void ensureUbigeo() {
+        try {
+            Integer count = jdbc.queryForObject("SELECT count(*) FROM ubigeo_distritos", Integer.class);
+            if (count == null || count == 0) {
+                seedUbigeo();
+            }
+        } catch (Exception e) {
+            // Sin catálogo los selectores quedan vacíos, pero la API debe arrancar igual.
+            log.warn("Ubigeo: no se pudo cargar el catálogo ({}).", e.getClass().getSimpleName());
+        }
     }
 
     private void seedUbigeo() throws IOException {
