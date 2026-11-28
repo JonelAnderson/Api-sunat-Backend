@@ -152,7 +152,9 @@ app:
     api-secret: ${DEMO_API_SECRET:}
   # Consulta RUC/DNI (GET /buscar-documento)
   lookup:
-    base-url: ${LOOKUP_BASE_URL:https://api.apis.net.pe}
+    # perudevs (el mismo proveedor del ERP) o apisnetpe; la base queda vacía para usar la de cada proveedor.
+    provider: ${LOOKUP_PROVIDER:perudevs}
+    base-url: ${LOOKUP_BASE_URL:}
     token: ${LOOKUP_API_TOKEN:}
     timeout: ${LOOKUP_TIMEOUT:8}
   pdf:
