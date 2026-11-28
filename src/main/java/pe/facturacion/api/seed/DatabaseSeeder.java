@@ -58,6 +58,7 @@ public class DatabaseSeeder implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         if (!props.seed()) {
+            ensurePlans();
             ensureUbigeo();
             return;
         }
@@ -171,6 +172,22 @@ public class DatabaseSeeder implements ApplicationRunner {
         }
         total += flush("INSERT INTO unspsc_taxonomy (nivel, codigo, nombre, parent) VALUES (?, ?, ?, ?)", batch);
         log.info("UNSPSC taxonomía: {} niveles cargados.", total);
+    }
+
+    /**
+     * Los planes (free, pro, business) son datos base: sin ellos no se puede dar de alta una empresa. Con
+     * {@code APP_SEED=false} se crean solo si la tabla está vacía (nunca pisan un plan editado desde el panel).
+     */
+    private void ensurePlans() {
+        try {
+            Integer count = jdbc.queryForObject("SELECT count(*) FROM plans", Integer.class);
+            if (count == null || count == 0) {
+                tx.executeWithoutResult(s -> seedPlans());
+                log.info("Planes base creados (la tabla estaba vacía).");
+            }
+        } catch (Exception e) {
+            log.warn("Planes: no se pudieron crear los planes base ({}).", e.getClass().getSimpleName());
+        }
     }
 
     /**

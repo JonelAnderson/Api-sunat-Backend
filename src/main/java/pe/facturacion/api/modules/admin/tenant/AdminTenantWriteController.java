@@ -183,7 +183,16 @@ public class AdminTenantWriteController {
                 return updated;
             });
         } catch (DataIntegrityViolationException e) {
-            throw AdminException.status(409, "Ya existe una empresa con el RUC " + ruc + ".");
+            // La transacción se deshizo. Solo es un RUC repetido si ahora existe (otro alta a la vez); cualquier otra
+            // restricción (p. ej. planes sin cargar) no debe decir "ya existe".
+            Long duplicate = jdbc.queryForObject("SELECT count(*) FROM tenants WHERE ruc = ?", Long.class, ruc);
+            if (duplicate != null && duplicate > 0) {
+                throw AdminException.status(409, "Ya existe una empresa con el RUC " + ruc + ".");
+            }
+            org.slf4j.LoggerFactory.getLogger(AdminTenantWriteController.class)
+                    .warn("admin.empresa.alta restricción de la base: {}", e.getMostSpecificCause().getMessage());
+            throw AdminException.status(500, "No se pudo registrar la empresa por una restricción de la base de datos. "
+                    + "Revise que los planes estén cargados y avise a soporte si continúa.");
         }
         Tenant fresh = tenantService.fresh(created);
         Map<String, Object> empresaData = AdminTenantConfigController.empresaSinSecretos(tenantService.resource(fresh));
