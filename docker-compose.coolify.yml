@@ -97,6 +97,7 @@ services:
       SUNAT_BETA_GRE_CLIENT_SECRET: ${SUNAT_BETA_GRE_CLIENT_SECRET:-}
       # Consulta RUC / DNI (proveedor externo) y correo de recuperación de credenciales.
       LOOKUP_API_TOKEN: ${LOOKUP_API_TOKEN:-}
+      LOOKUP_PROVIDER: ${LOOKUP_PROVIDER:-perudevs}
       MAIL_HOST: ${MAIL_HOST:-}
       MAIL_PORT: ${MAIL_PORT:-587}
       MAIL_USERNAME: ${MAIL_USERNAME:-}
