@@ -334,7 +334,7 @@ public class AdminTenantWriteController {
         if (!adminLimit.allowSunatQuery(AdminPrincipal.require(request).userId())) {
             throw AdminException.status(429, "Alcanzaste el límite de consultas por minuto. Intenta de nuevo en un momento.");
         }
-        Map<String, Object> found = lookup.lookup("6", ruc);
+        Map<String, Object> found = lookup.lookupWithLocation("6", ruc);
         if (found == null) {
             return AdminResponse.fail("No se encontró información del RUC (o el servicio de consulta no respondió). Completa los datos a mano.");
         }
